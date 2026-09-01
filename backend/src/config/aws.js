@@ -9,4 +9,10 @@ export const IAM_PROFILE = process.env.IAM_PROFILE ||
 export const LAMBDA_ENV = process.env.LAMBDA_ENV || 'qa'
 export const LAMBDA_PROFILE = process.env.LAMBDA_PROFILE ||
   (LAMBDA_ENV === 'prod' ? 'claude-lambda-prd' : 'claude-lambda-qa')
+export const SECRETS_ENV = process.env.SECRETS_ENV || 'qa'
+export const SECRETS_PROFILE = process.env.SECRETS_PROFILE ||
+  (SECRETS_ENV === 'prod' ? 'claude-secrets-manager-prd' : 'claude-secrets-manager-qa')
+export const RDS_ENV = process.env.RDS_ENV || 'qa'
+export const RDS_PROFILE = process.env.RDS_PROFILE ||
+  (RDS_ENV === 'prod' ? 'claude-rds-prd' : 'claude-rds-qa')
 export const AWS_REGION = process.env.AWS_REGION || 'eu-west-1'

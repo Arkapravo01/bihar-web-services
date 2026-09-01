@@ -1,0 +1,1 @@
+export { rdsRoutes } from './routes'

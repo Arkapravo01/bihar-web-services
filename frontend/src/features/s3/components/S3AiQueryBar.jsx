@@ -31,12 +31,15 @@ export function S3AiQueryBar({ bucketName = null, prefix = '' }) {
     if (!input.trim() || loading) return
 
     const userText = input.trim()
+    const queryForAgent = bucketName
+      ? `[Context: the user is currently viewing S3 bucket "${bucketName}"${prefix ? ` at path "${prefix}"` : ''} — assume questions refer to it unless they name a different bucket.]\n${userText}`
+      : userText
     setInput('')
     setMessages((m) => [...m, { role: 'user', text: userText }])
     setLoading(true)
 
     try {
-      const data = await runS3Investigation(userText, history)
+      const data = await runS3Investigation(queryForAgent, history)
       setMessages((m) => [...m, { role: 'assistant', text: data.reply }])
       setHistory(data.history)
     } catch (err) {
@@ -84,7 +87,7 @@ export function S3AiQueryBar({ bucketName = null, prefix = '' }) {
     <div className="rounded-xl border border-border/50 bg-gradient-to-br from-card/80 to-card/50 backdrop-blur-sm ring-1 ring-white/5 flex flex-col overflow-hidden min-h-[120px] hover-lift">
       {/* Header */}
       <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-gradient-to-r from-primary/5 to-transparent">
-        <span className="text-base float-icon">🤖</span>
+        <span className="text-base float-icon">🪣</span>
         <span className="text-sm font-semibold">S3 AI Analyzer</span>
         {bucketName && (
           <span className="text-xs text-muted-foreground font-mono bg-primary/10 rounded-lg px-2.5 py-0.5 ml-auto mr-auto ring-1 ring-primary/20">

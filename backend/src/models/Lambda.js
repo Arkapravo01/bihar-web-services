@@ -30,12 +30,29 @@ export function toFunctionConfig(config) {
   }
 }
 
+function decodePayload(payload) {
+  if (!payload) return null
+  const text = Buffer.from(payload).toString('utf8')
+  try { return JSON.parse(text) } catch { return text }
+}
+
 export function toInvocation(result) {
   return {
     statusCode: result.StatusCode,
     executedVersion: result.ExecutedVersion,
     functionError: result.FunctionError || null,
-    logResult: result.LogResult || null,
-    payload: result.Payload ? JSON.parse(result.Payload) : null,
+    logResult: result.LogResult ? Buffer.from(result.LogResult, 'base64').toString('utf8') : null,
+    payload: decodePayload(result.Payload),
+  }
+}
+
+export function toLayer(layer) {
+  const latest = layer.LatestMatchingVersion || {}
+  return {
+    name: layer.LayerName,
+    versionArn: latest.LayerVersionArn,
+    version: latest.Version,
+    compatibleRuntimes: latest.CompatibleRuntimes || [],
+    description: latest.Description || '',
   }
 }

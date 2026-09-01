@@ -10,6 +10,7 @@ import { useEnv } from '../hooks/useEnv'
 import { IAMTable } from '@/features/iam/components/IAMTable'
 import { ActivityTimeline } from '@/components/data-display/ActivityTimeline'
 import { useActivity } from '@/app/providers/ActivityProvider'
+import { LambdaAiQueryBar } from '../components/LambdaAiQueryBar'
 import { Code2, Play, CheckCircle2, AlertCircle } from 'lucide-react'
 
 const containerVariants = {
@@ -84,6 +85,11 @@ export function LambdaOverviewPage() {
               </div>
             </div>
           </div>
+        </motion.div>
+
+        {/* AI Query Bar */}
+        <motion.div variants={itemVariants}>
+          <LambdaAiQueryBar />
         </motion.div>
 
         {/* Functions List */}

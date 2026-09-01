@@ -457,6 +457,36 @@ export async function runNewInvestigation(query, history = []) {
 
 The response from agent endpoints is `{ success: true, data: { reply, tool_calls_made, history } }`. After `.then((r) => r.data)` you get `{ reply, history, ... }` directly. The AI query bar component reads `data.reply` and `data.history`.
 
+### AI query bars must be page-aware
+
+Every `<Service>AiQueryBar` component must know what entity the user is currently looking at (bucket, function, user, log group/stream, etc.) and pass that as context to the agent — **the agent never sees which page it's being called from unless the frontend tells it.** Passing a name prop only for display (a header badge) is not enough; it must also be injected into the query text sent to the backend.
+
+Pattern, applied in `handleSubmit`:
+
+```js
+export function NewAiQueryBar({ thingName = null }) {
+  // ...
+  async function handleSubmit(e) {
+    e.preventDefault()
+    const userText = input.trim()
+    const queryForAgent = thingName
+      ? `[Context: the user is currently viewing <service> thing "${thingName}" — assume questions refer to it unless they name a different one.]\n${userText}`
+      : userText
+
+    setMessages((m) => [...m, { role: 'user', text: userText }])   // show the CLEAN text
+    const data = await runNewInvestigation(queryForAgent, history)  // send the CONTEXTED text
+    // ...
+  }
+}
+```
+
+Rules:
+- The chat bubble always displays the raw `userText` the user typed — never the context-prefixed version.
+- Only the string sent to `runNewInvestigation`/`apiClient.post` carries the `[Context: ...]` prefix.
+- On the entity's detail page, pass the resolved name/id down from the page (it already has it from its route param or query hook) — don't make the agent re-resolve or ask for it.
+- On overview/list pages with no single entity in scope, pass no context prop — the agent behaves generically (list everything, ask which one if ambiguous).
+- Every new service's detail page must render its `<Service>AiQueryBar` with this prop, even if the checklist below doesn't call it out per-service.
+
 ### Adding a new page
 
 1. Create `src/features/<service>/pages/<Service>Page.jsx`
@@ -493,6 +523,7 @@ Use this checklist every time. Do not skip steps.
 - [ ] **Hooks** — create one `useThings.js` per resource in `src/features/new/hooks/`
 - [ ] **Components** — create feature-specific components in `src/features/new/components/`
 - [ ] **Page** — create `src/features/new/pages/NewOverviewPage.jsx`; use `useMemo(() => data.things ?? [], [data])` to unpack hook data
+- [ ] **AI query bar** — create `src/features/new/components/NewAiQueryBar.jsx`, accept a `thingName` (or equivalent) prop, inject it as `[Context: ...]` into the query sent to the agent (see "AI query bars must be page-aware" above). Render it unscoped on the overview page and scoped (with the resolved name) on the detail page.
 - [ ] **Routes** — create `src/features/new/routes.jsx` and `src/features/new/index.js`
 - [ ] **Router** — import and spread new routes in `src/app/router.jsx`
 - [ ] **Nav** — add entry to `NAV_MODULES` in `src/constants/nav.js` with `enabled: true`
@@ -517,6 +548,11 @@ Use this checklist every time. Do not skip steps.
 
 **CloudWatch service uses `getClient()`**
 - Never use a module-level variable name like `logsClient` — use `getClient()` so env switching works.
+
+**AI query bars must inject page context, not just display it**
+- A `<Service>AiQueryBar` that accepts a name prop (`bucketName`, `functionName`, `userName`, `logGroupName`, …) only for a header badge or placeholder text is NOT page-aware — the agent backend has no idea what page the request came from.
+- The prop must also be turned into a `[Context: ...]` prefix prepended to the string sent to `runNewInvestigation`, while the chat bubble keeps showing the user's original, un-prefixed text.
+- This was missed initially on the S3 and IAM query bars (props existed, were displayed, but never reached the agent) — check both halves (display AND injection) when adding or reviewing one of these components.
 
 **Agent route lives in `agent.routes.js`**
 - Not in the service route file. All `POST /api/agent/*/investigate` endpoints are centralised there.

@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo } from 'react'
+import { toast } from 'sonner'
 import { PageContainer } from '@/components/layout/PageContainer'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -8,10 +9,11 @@ import { Button } from '@/components/ui/button'
 import { useFunction } from '../hooks/useFunction'
 import { useInvokeFunction } from '../hooks/useInvokeFunction'
 import { useUpdateFunctionConfig } from '../hooks/useUpdateFunctionConfig'
-import { getFunctionCode } from '../api/lambdaApi'
+import { LambdaAiQueryBar } from '../components/LambdaAiQueryBar'
+import { FunctionCodeExplorer } from '../components/FunctionCodeExplorer'
+import { EnvVarsDialog } from '../components/EnvVarsDialog'
+import { LayersDialog } from '../components/LayersDialog'
 import { ArrowLeft, Code2, Settings, Play, Copy, CheckCircle2, Edit2 } from 'lucide-react'
-import hljs from 'highlight.js'
-import 'highlight.js/styles/atom-one-dark.css'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -49,49 +51,36 @@ export function LambdaFunctionDetailPage() {
   const { mutate: invokeFunc, isPending: isInvoking, data: invocationResult } = useInvokeFunction()
   const { mutate: updateConfig, isPending: isUpdating } = useUpdateFunctionConfig()
   const [testPayload, setTestPayload] = useState('{}')
-  const [functionCode, setFunctionCode] = useState(null)
-  const [codeLoading, setCodeLoading] = useState(false)
   const [editMode, setEditMode] = useState({})
   const [editValues, setEditValues] = useState({})
+  const [envVarsOpen, setEnvVarsOpen] = useState(false)
+  const [layersOpen, setLayersOpen] = useState(false)
 
   const config = useMemo(() => data?.config, [data])
-  const codeLocation = useMemo(() => data?.codeLocation, [data])
-
-  useEffect(() => {
-    if (functionName && !functionCode && !codeLoading && !isLoading) {
-      setCodeLoading(true)
-      getFunctionCode(functionName)
-        .then((data) => setFunctionCode(data.code || 'Unable to fetch code'))
-        .catch(() => setFunctionCode('Unable to fetch code'))
-        .finally(() => setCodeLoading(false))
-    }
-  }, [functionName, functionCode, codeLoading, isLoading])
-
-  const getLanguage = () => {
-    if (functionCode?.includes('def ') || functionCode?.includes('import ')) return 'python'
-    if (functionCode?.includes('exports.') || functionCode?.includes('async ')) return 'javascript'
-    if (functionCode?.includes('package ')) return 'java'
-    if (functionCode?.includes('func ')) return 'go'
-    return 'plaintext'
-  }
-
-  const highlightedCode = useMemo(() => {
-    if (!functionCode || functionCode.startsWith('Unable')) return null
-    try {
-      return hljs.highlight(functionCode, { language: getLanguage(), ignoreIllegals: true }).value
-    } catch {
-      return hljs.highlightAuto(functionCode).value
-    }
-  }, [functionCode])
 
   const handleInvoke = () => {
+    let payload
     try {
-      const payload = JSON.parse(testPayload)
-      console.log('Invoking with payload:', payload)
-      invokeFunc({ functionName, payload })
+      payload = JSON.parse(testPayload)
     } catch (e) {
-      alert('Invalid JSON payload')
+      toast.error('Invalid JSON payload')
+      return
     }
+    invokeFunc(
+      { functionName, payload },
+      {
+        onSuccess: (result) => {
+          if (result.functionError) {
+            toast.error(`Invocation returned ${result.functionError}`, { description: 'See response panel below for details.' })
+          } else {
+            toast.success('Invocation succeeded')
+          }
+        },
+        onError: (error) => {
+          toast.error('Invoke failed', { description: error.message })
+        },
+      }
+    )
   }
 
   const toggleEdit = (field) => {
@@ -107,15 +96,13 @@ export function LambdaFunctionDetailPage() {
     if (field === 'memorySize') updates.memorySize = parseInt(editValues.memorySize)
     if (field === 'description') updates.description = editValues.description
 
-    console.log('Saving config:', { functionName, updates })
     updateConfig({ functionName, updates }, {
-      onSuccess: (data) => {
-        console.log('Config updated successfully:', data)
+      onSuccess: () => {
+        toast.success('Configuration updated')
         setEditMode((prev) => ({ ...prev, [field]: false }))
       },
       onError: (error) => {
-        console.error('Config update failed:', error)
-        alert('Failed to update: ' + error.message)
+        toast.error('Failed to update', { description: error.message })
       },
     })
   }
@@ -170,37 +157,14 @@ export function LambdaFunctionDetailPage() {
           </motion.div>
         )}
 
-        {/* Code Viewer - TOP SECTION */}
+        {/* AI Query Bar */}
         <motion.div variants={itemVariants}>
-          <Card className="rounded-xl border border-border/50 bg-card/40 overflow-hidden">
-            <CardHeader className="pb-2 border-b border-border/40">
-              <CardTitle className="text-sm text-muted-foreground font-medium flex items-center gap-2">
-                <Code2 className="w-4 h-4" />
-                Source Code
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="pt-0 p-0">
-              {codeLoading ? (
-                <div className="p-4 space-y-2 bg-black/40">
-                  <Skeleton className="h-6 w-full" />
-                  <Skeleton className="h-6 w-full" />
-                  <Skeleton className="h-6 w-3/4" />
-                </div>
-              ) : functionCode ? (
-                <div className="overflow-auto max-h-96 bg-[#282c34] p-4">
-                  <pre className="font-mono text-sm leading-relaxed text-[#abb2bf]">
-                    {highlightedCode ? (
-                      <code dangerouslySetInnerHTML={{ __html: highlightedCode }} />
-                    ) : (
-                      functionCode
-                    )}
-                  </pre>
-                </div>
-              ) : (
-                <div className="p-4 text-xs text-muted-foreground bg-black/40">Unable to fetch code</div>
-              )}
-            </CardContent>
-          </Card>
+          <LambdaAiQueryBar functionName={functionName} />
+        </motion.div>
+
+        {/* Code Explorer - TOP SECTION */}
+        <motion.div variants={itemVariants}>
+          <FunctionCodeExplorer functionName={functionName} />
         </motion.div>
 
         {/* Two-column layout */}
@@ -304,12 +268,26 @@ export function LambdaFunctionDetailPage() {
                 {isInvoking ? 'Invoking…' : 'Invoke Function'}
               </Button>
 
-              {(invocationResult || data?.statusCode) && (
-                <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-4">
-                  <div className="text-xs font-medium mb-2 text-emerald-600">✓ Invocation Response</div>
+              {invocationResult && (
+                <div className={`rounded-lg border p-4 ${
+                  invocationResult.functionError
+                    ? 'border-destructive/30 bg-destructive/5'
+                    : 'border-emerald-500/30 bg-emerald-500/5'
+                }`}>
+                  <div className={`text-xs font-medium mb-2 ${invocationResult.functionError ? 'text-destructive' : 'text-emerald-600'}`}>
+                    {invocationResult.functionError ? `✕ ${invocationResult.functionError}` : '✓ Invocation Response'}
+                  </div>
                   <pre className="text-xs overflow-auto max-h-40 text-foreground font-mono bg-black/20 p-2 rounded">
-                    {JSON.stringify(invocationResult || data, null, 2)}
+                    {JSON.stringify(invocationResult.payload, null, 2)}
                   </pre>
+                  {invocationResult.logResult && (
+                    <details className="mt-2">
+                      <summary className="text-xs text-muted-foreground cursor-pointer">Logs</summary>
+                      <pre className="text-xs overflow-auto max-h-40 text-foreground/80 font-mono bg-black/20 p-2 rounded mt-1 whitespace-pre-wrap">
+                        {invocationResult.logResult}
+                      </pre>
+                    </details>
+                  )}
                 </div>
               )}
             </div>
@@ -325,16 +303,32 @@ export function LambdaFunctionDetailPage() {
               </CardHeader>
               <CardContent className="pt-4">
                 <dl className="grid grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3">
-                  {[
-                    { label: 'Description', value: config.description || '(none)' },
-                    { label: 'Environment Vars', value: Object.keys(config.environment || {}).length },
-                    { label: 'Layers', value: config.layers?.length || 0 },
-                  ].map(({ label, value }) => (
-                    <div key={label}>
-                      <dt className="text-[11px] text-muted-foreground uppercase tracking-wider mb-0.5">{label}</dt>
-                      <dd className="text-sm">{value ?? '—'}</dd>
-                    </div>
-                  ))}
+                  <div>
+                    <dt className="text-[11px] text-muted-foreground uppercase tracking-wider mb-0.5">Description</dt>
+                    <dd className="text-sm">{config.description || '(none)'}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[11px] text-muted-foreground uppercase tracking-wider mb-0.5">Environment Vars</dt>
+                    <dd>
+                      <button
+                        onClick={() => setEnvVarsOpen(true)}
+                        className="text-sm text-primary hover:underline underline-offset-2"
+                      >
+                        {Object.keys(config.environment || {}).length}
+                      </button>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-[11px] text-muted-foreground uppercase tracking-wider mb-0.5">Layers</dt>
+                    <dd>
+                      <button
+                        onClick={() => setLayersOpen(true)}
+                        className="text-sm text-primary hover:underline underline-offset-2"
+                      >
+                        {config.layers?.length || 0}
+                      </button>
+                    </dd>
+                  </div>
                 </dl>
               </CardContent>
             </Card>
@@ -342,6 +336,14 @@ export function LambdaFunctionDetailPage() {
         )}
 
       </motion.div>
+
+      <EnvVarsDialog open={envVarsOpen} onOpenChange={setEnvVarsOpen} environment={config?.environment} />
+      <LayersDialog
+        open={layersOpen}
+        onOpenChange={setLayersOpen}
+        functionName={functionName}
+        currentLayerArns={config?.layers?.map((l) => l.arn) ?? []}
+      />
     </PageContainer>
   )
 }

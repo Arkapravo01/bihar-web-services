@@ -7,7 +7,7 @@ function applyTheme(theme) {
   const root = document.documentElement
 
   if (theme === 'redblack') {
-    root.classList.remove('dark', 'theme-deepspace', 'theme-forest')
+    root.classList.remove('dark', 'theme-deepspace', 'theme-claude', 'theme-forest')
     root.classList.add('theme-redblack')
     return
   }

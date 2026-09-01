@@ -6,6 +6,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
 import { useUserDetail } from '../hooks/useUserDetail'
 import { useDeleteUser } from '../hooks/useDeleteUser'
+import { IAMAiQueryBar } from '../components/IAMAiQueryBar'
 import {
   ArrowLeft,
   User,
@@ -228,6 +229,11 @@ export function IAMUserDetailPage() {
             Failed to load user details.
           </motion.div>
         )}
+
+        {/* AI Query Bar */}
+        <motion.div variants={itemVariants}>
+          <IAMAiQueryBar userName={userName} />
+        </motion.div>
 
         {/* Two-column layout */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">

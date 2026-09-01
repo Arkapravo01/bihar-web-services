@@ -13,11 +13,12 @@ import {
 import { NAV_AI_MODULES, NAV_MODULES } from '@/constants/nav'
 import {
   Shield, Database, Activity, Zap, Server, Cpu, Container, Globe, MessageSquare, Calendar,
-  GitBranch, Bot, CheckSquare, BarChart2
+  GitBranch, Bot, CheckSquare, BarChart2, KeyRound
 } from 'lucide-react'
 
 const SERVICE_ICONS = {
   iam: Shield,
+  secrets: KeyRound,
   s3: Database,
   cloudwatch: Activity,
   lambda: Zap,
@@ -55,8 +56,8 @@ function NavGroup({ label, items }) {
                 >
                   {item.enabled ? (
                     <Link to={item.href} className="flex items-center gap-2.5 px-3 py-2 rounded-lg">
-                      <Icon className={`size-4 shrink-0 transition-colors duration-200 ${isActive ? 'text-primary' : 'text-muted-foreground group-hover/btn:text-foreground'}`} />
-                      <span className={`text-sm transition-colors duration-200 ${isActive ? 'font-medium text-foreground' : 'text-muted-foreground group-hover/btn:text-foreground'}`}>
+                      <Icon className={`size-4 shrink-0 transition-colors duration-200 ${isActive ? 'text-sidebar-primary' : 'text-sidebar-foreground/50 group-hover/btn:text-sidebar-foreground'}`} />
+                      <span className={`text-sm transition-colors duration-200 ${isActive ? 'font-medium text-sidebar-foreground' : 'text-sidebar-foreground/50 group-hover/btn:text-sidebar-foreground'}`}>
                         {item.label}
                       </span>
                       {isActive && (

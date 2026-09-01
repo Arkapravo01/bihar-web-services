@@ -531,6 +531,75 @@
   color: var(--foreground);
 }
 
+/* ── Code editor syntax highlighting (VS Code–inspired, theme-aware) ── */
+.code-editor-syntax {
+  --syn-comment: #8a8f98;
+  --syn-keyword: #9333ea;
+  --syn-string: #15803d;
+  --syn-number: #b45309;
+  --syn-title: #1d4ed8;
+  --syn-type: #0891b2;
+  --syn-meta: #6b7280;
+  --syn-attr: #b45309;
+}
+
+:is(.dark, .theme-deepspace, .theme-redblack, .theme-forest) .code-editor-syntax {
+  --syn-comment: #6a9955;
+  --syn-keyword: #c586c0;
+  --syn-string: #ce9178;
+  --syn-number: #b5cea8;
+  --syn-title: #dcdcaa;
+  --syn-type: #4ec9b0;
+  --syn-meta: #569cd6;
+  --syn-attr: #9cdcfe;
+}
+
+.code-editor-syntax .hljs-comment,
+.code-editor-syntax .hljs-quote {
+  color: var(--syn-comment);
+  font-style: italic;
+}
+.code-editor-syntax .hljs-keyword,
+.code-editor-syntax .hljs-selector-tag,
+.code-editor-syntax .hljs-literal,
+.code-editor-syntax .hljs-doctag {
+  color: var(--syn-keyword);
+}
+.code-editor-syntax .hljs-string,
+.code-editor-syntax .hljs-template-string,
+.code-editor-syntax .hljs-regexp {
+  color: var(--syn-string);
+}
+.code-editor-syntax .hljs-number {
+  color: var(--syn-number);
+}
+.code-editor-syntax .hljs-title,
+.code-editor-syntax .hljs-title.function_,
+.code-editor-syntax .hljs-section {
+  color: var(--syn-title);
+  font-weight: 600;
+}
+.code-editor-syntax .hljs-type,
+.code-editor-syntax .hljs-built_in,
+.code-editor-syntax .hljs-class .hljs-title {
+  color: var(--syn-type);
+}
+.code-editor-syntax .hljs-meta,
+.code-editor-syntax .hljs-symbol {
+  color: var(--syn-meta);
+}
+.code-editor-syntax .hljs-attr,
+.code-editor-syntax .hljs-attribute,
+.code-editor-syntax .hljs-params {
+  color: var(--syn-attr);
+}
+.code-editor-syntax .hljs-deletion {
+  color: var(--destructive);
+}
+.code-editor-syntax .hljs-addition {
+  color: var(--positive);
+}
+
 /* ── Scrollbar styling ──────────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;

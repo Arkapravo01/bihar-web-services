@@ -32,13 +32,15 @@ export function CloudWatchAiBar({ logGroupName = null, logStreamName = null, eve
 
     const userText = input.trim()
 
-    // Enhance query with context if we're in a specific stream
+    // Enhance query with context if we're in a specific log group / stream
     let enhancedQuery = userText
     if (logStreamName) {
       const eventSummary = events.length
         ? `Current stream has ${events.length} events. Recent events: ${events.slice(0, 3).map(e => e.message.slice(0, 80)).join(' | ')}`
         : ''
-      enhancedQuery = `[Stream: ${logStreamName}] ${userText}${eventSummary ? ` (${eventSummary})` : ''}`
+      enhancedQuery = `[Context: the user is currently viewing log stream "${logStreamName}" in log group "${logGroupName}" — assume questions refer to it unless they name a different log group.${eventSummary ? ` ${eventSummary}` : ''}]\n${userText}`
+    } else if (logGroupName) {
+      enhancedQuery = `[Context: the user is currently viewing log group "${logGroupName}" — assume questions refer to it unless they name a different log group.]\n${userText}`
     }
 
     setInput('')
@@ -94,7 +96,7 @@ export function CloudWatchAiBar({ logGroupName = null, logStreamName = null, eve
     <div className="rounded-xl border border-border/50 bg-gradient-to-br from-card/80 to-card/50 backdrop-blur-sm ring-1 ring-white/5 flex flex-col overflow-hidden min-h-[120px] hover-lift">
       {/* Header */}
       <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-gradient-to-r from-primary/5 to-transparent">
-        <span className="text-base float-icon">🤖</span>
+        <span className="text-base float-icon">🔍</span>
         <span className="text-sm font-semibold">CloudWatch AI</span>
         {logStreamName && (
           <span className="text-xs text-muted-foreground font-mono bg-primary/10 rounded-lg px-2.5 py-0.5 ml-auto mr-auto ring-1 ring-primary/20">

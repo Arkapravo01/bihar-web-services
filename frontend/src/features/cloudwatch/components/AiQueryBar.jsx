@@ -44,7 +44,7 @@ export function AiQueryBar() {
     <div className="rounded-lg border bg-card flex flex-col overflow-hidden min-h-[120px]">
       {/* Header */}
       <div className="flex items-center gap-2 px-4 py-3 border-b">
-        <span className="text-base">🤖</span>
+        <span className="text-base">🔍</span>
         <span className="text-sm font-medium">AI Investigation</span>
         <span className="text-xs text-muted-foreground rounded-full border px-2 py-0.5 ml-1">Phase 2</span>
         {messages.length > 0 && (

@@ -7,7 +7,7 @@ import { AgentMessage } from '@/components/chat/AgentMessage'
 
 const STORAGE_KEY = 'iam-ai-conversation'
 
-export function IAMAiQueryBar() {
+export function IAMAiQueryBar({ userName = null }) {
   const { activeEnvKey } = useActiveEnv()
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -31,12 +31,15 @@ export function IAMAiQueryBar() {
     if (!input.trim() || loading) return
 
     const userText = input.trim()
+    const queryForAgent = userName
+      ? `[Context: the user is currently viewing IAM user "${userName}" — assume questions refer to them unless a different user/role/policy is named.]\n${userText}`
+      : userText
     setInput('')
     setMessages((m) => [...m, { role: 'user', text: userText }])
     setLoading(true)
 
     try {
-      const data = await runIAMInvestigation(userText, history)
+      const data = await runIAMInvestigation(queryForAgent, history)
       setMessages((m) => [...m, { role: 'assistant', text: data.reply }])
       setHistory(data.history)
     } catch (err) {
@@ -82,6 +85,11 @@ export function IAMAiQueryBar() {
       <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-gradient-to-r from-primary/5 to-transparent">
         <span className="text-base float-icon">🔐</span>
         <span className="text-sm font-semibold">IAM AI Advisor</span>
+        {userName && (
+          <span className="text-xs text-muted-foreground font-mono bg-primary/10 rounded-lg px-2.5 py-0.5 ml-auto mr-auto ring-1 ring-primary/20">
+            {userName}
+          </span>
+        )}
         <span className="text-[10px] text-primary font-bold rounded-full border border-primary/30 bg-primary/5 px-2.5 py-0.5 ml-1 uppercase tracking-widest">New</span>
         {messages.length > 0 && (
           <Button variant="ghost" size="sm" className="ml-auto text-xs h-7 px-2 text-muted-foreground hover:text-foreground transition-colors" onClick={handleClear}>
@@ -122,7 +130,9 @@ export function IAMAiQueryBar() {
         <Input
           placeholder={
             messages.length === 0
-              ? 'Ask about IAM — e.g. "List all users", "Find unused roles"'
+              ? userName
+                ? `Ask about this user — e.g. "What can they access?", "Any unused keys?"`
+                : 'Ask about IAM — e.g. "List all users", "Find unused roles"'
               : 'Follow up…'
           }
           value={input}
@@ -144,7 +154,9 @@ export function IAMAiQueryBar() {
 
       {messages.length === 0 && (
         <p className="text-xs text-muted-foreground px-4 pb-3">
-          Analyze your IAM users, roles, policies, and permissions with natural language.
+          {userName
+            ? `Analyze ${userName} — ask about their policies, access keys, or group memberships.`
+            : 'Analyze your IAM users, roles, policies, and permissions with natural language.'}
         </p>
       )}
     </div>

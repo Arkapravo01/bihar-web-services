@@ -1,6 +1,9 @@
 import { runInvestigation as runCloudwatchInvestigation } from '../agents/cloudwatch-agent/agent.js'
 import { runInvestigation as runS3Investigation } from '../agents/s3-agent/agent.js'
 import { runInvestigation as runIAMInvestigation } from '../agents/iam-agent/agent.js'
+import { runInvestigation as runLambdaInvestigation } from '../agents/lambda-agent/agent.js'
+import { runInvestigation as runSecretsInvestigation } from '../agents/secrets-agent/agent.js'
+import { runInvestigation as runRdsInvestigation } from '../agents/rds-agent/agent.js'
 import * as s3Service from '../services/s3.service.js'
 
 function resolveEnv(req) {
@@ -34,5 +37,32 @@ export async function investigateIAM(req, res) {
     return res.status(400).json({ success: false, error: { message: 'query is required' } })
   }
   const result = await runIAMInvestigation(query.trim(), history ?? [])
+  res.json({ success: true, data: result })
+}
+
+export async function investigateLambda(req, res) {
+  const { query, history } = req.body
+  if (!query || typeof query !== 'string' || !query.trim()) {
+    return res.status(400).json({ success: false, error: { message: 'query is required' } })
+  }
+  const result = await runLambdaInvestigation(query.trim(), history ?? [])
+  res.json({ success: true, data: result })
+}
+
+export async function investigateSecrets(req, res) {
+  const { query, history } = req.body
+  if (!query || typeof query !== 'string' || !query.trim()) {
+    return res.status(400).json({ success: false, error: { message: 'query is required' } })
+  }
+  const result = await runSecretsInvestigation(query.trim(), history ?? [])
+  res.json({ success: true, data: result })
+}
+
+export async function investigateRds(req, res) {
+  const { query, history } = req.body
+  if (!query || typeof query !== 'string' || !query.trim()) {
+    return res.status(400).json({ success: false, error: { message: 'query is required' } })
+  }
+  const result = await runRdsInvestigation(query.trim(), history ?? [])
   res.json({ success: true, data: result })
 }

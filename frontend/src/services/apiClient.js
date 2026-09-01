@@ -62,10 +62,23 @@ export const apiClient = {
       body: JSON.stringify(body),
     })
   },
+  put(path, body) {
+    return request(path, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    })
+  },
   postForm(path, formData) {
     return request(path, { method: 'POST', body: formData })
   },
-  delete(path) {
-    return request(path, { method: 'DELETE' })
+  delete(path, body) {
+    return request(path, {
+      method: 'DELETE',
+      ...(body !== undefined && {
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      }),
+    })
   },
 }

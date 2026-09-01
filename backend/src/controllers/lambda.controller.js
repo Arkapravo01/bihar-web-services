@@ -1,5 +1,11 @@
 import * as lambdaService from '../services/lambda.service.js'
-import { assertFunctionName, assertInvocationPayload } from '../validators/lambda.validator.js'
+import {
+  assertFunctionName,
+  assertInvocationPayload,
+  assertDeployEdits,
+  assertLayerArns,
+  assertLayerUpload,
+} from '../validators/lambda.validator.js'
 
 function resolveEnv(req) {
   const env = req.query.env || 'qa'
@@ -93,6 +99,84 @@ export async function updateFunctionConfig(req, res) {
     const { functionName } = req.params
     const { timeout, memorySize, description, environment } = req.body
     const config = await lambdaService.updateFunctionConfig(functionName, { timeout, memorySize, description, environment })
+    res.json({ success: true, data: config })
+  } catch (err) {
+    res.status(500).json({ success: false, error: { message: err.message } })
+  }
+}
+
+export async function getFunctionFiles(req, res) {
+  try {
+    const env = resolveEnv(req)
+    lambdaService.setClientForEnv(env)
+    const { functionName } = req.params
+    const result = await lambdaService.getFunctionFiles(functionName)
+    if (!result) {
+      return res.json({ success: true, data: { files: [] } })
+    }
+    res.json({ success: true, data: result })
+  } catch (err) {
+    console.error(`[lambda] getFunctionFiles error for ${functionName}:`, err.message)
+    res.status(500).json({ success: false, error: { message: err.message } })
+  }
+}
+
+export async function deployFunctionCode(req, res) {
+  try {
+    const env = resolveEnv(req)
+    lambdaService.setClientForEnv(env)
+    const { functionName } = req.params
+    const { edits } = req.body
+    assertDeployEdits(edits)
+    console.log(`[lambda] deploying ${functionName} with ${Object.keys(edits).length} edited file(s)`)
+    const result = await lambdaService.deployFunctionCode(functionName, edits)
+    res.json({ success: true, data: result })
+  } catch (err) {
+    console.error(`[lambda] deploy error:`, err.message)
+    res.status(500).json({ success: false, error: { message: err.message } })
+  }
+}
+
+export async function listLayers(req, res) {
+  try {
+    const env = resolveEnv(req)
+    lambdaService.setClientForEnv(env)
+    const layers = await lambdaService.listAvailableLayers()
+    res.json({ success: true, data: { layers } })
+  } catch (err) {
+    res.status(500).json({ success: false, error: { message: err.message } })
+  }
+}
+
+export async function publishLayer(req, res) {
+  try {
+    const env = resolveEnv(req)
+    lambdaService.setClientForEnv(env)
+    assertLayerUpload(req.body, req.file)
+    const { layerName, description } = req.body
+    const compatibleRuntimes = req.body.compatibleRuntimes
+      ? req.body.compatibleRuntimes.split(',').map((r) => r.trim()).filter(Boolean)
+      : []
+    const result = await lambdaService.publishLayer({
+      layerName,
+      description,
+      compatibleRuntimes,
+      zipBuffer: req.file.buffer,
+    })
+    res.json({ success: true, data: result })
+  } catch (err) {
+    res.status(500).json({ success: false, error: { message: err.message } })
+  }
+}
+
+export async function setFunctionLayers(req, res) {
+  try {
+    const env = resolveEnv(req)
+    lambdaService.setClientForEnv(env)
+    const { functionName } = req.params
+    const { layerArns } = req.body
+    assertLayerArns(layerArns)
+    const config = await lambdaService.setFunctionLayers(functionName, layerArns)
     res.json({ success: true, data: config })
   } catch (err) {
     res.status(500).json({ success: false, error: { message: err.message } })
