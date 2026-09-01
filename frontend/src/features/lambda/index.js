@@ -1,0 +1,1 @@
+export { lambdaRoutes } from './routes'

@@ -1,0 +1,29 @@
+{
+  "name": "bihar-web-services-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "node --watch --env-file=.env.qa src/app.js",
+    "dev:prod": "node --watch --env-file=.env.prod src/app.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.122.0",
+    "@aws-sdk/client-cloudwatch": "^3.1119.0",
+    "@aws-sdk/client-cloudwatch-logs": "^3.1119.0",
+    "@aws-sdk/client-iam": "^3.1121.0",
+    "@aws-sdk/client-lambda": "^3.1121.0",
+    "@aws-sdk/client-s3": "^3.1119.0",
+    "@aws-sdk/client-sts": "^3.1121.0",
+    "@aws-sdk/credential-providers": "^3.1119.0",
+    "@aws-sdk/lib-storage": "^3.1119.0",
+    "@aws-sdk/s3-request-presigner": "^3.1121.0",
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "jszip": "^3.10.1",
+    "multer": "^2.2.0",
+    "openai": "^7.8.0",
+    "unzipper": "^0.12.5"
+  }
+}

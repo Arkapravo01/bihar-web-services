@@ -1,0 +1,550 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/jetbrains-mono";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Bihar Web Services — Enterprise Edition, visual direction.
+
+  Subject: a personal AWS ops command center that treats itself with the
+  self-important gravity of "enterprise software" (see the app's own name),
+  while actually being a solo tool. Console-dense, not marketing-spacious.
+
+  Palette (named): ink (dark base/surface), sandstone (warm light base),
+  marigold (primary accent — deliberately not AWS orange, not generic
+  vermilion/neon), teal (secondary/positive status), rose (destructive).
+
+  Type: Geist Variable for UI/headings, JetBrains Mono Variable for anything
+  that IS data — sizes, timestamps, keys, request IDs, stat numbers. Mono-for-
+  data is a real command-center convention, not decoration.
+
+  Signature element: the environment badge (see EnvironmentBadge) renders as
+  an official-looking "seal" — double ring, uppercase mono, small mark — the
+  one place the "Enterprise Edition" joke gets a wink. Everything else stays
+  quiet and disciplined.
+*/
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    --font-sans: 'Geist Variable', sans-serif;
+    --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --color-positive: var(--positive);
+    --color-positive-foreground: var(--positive-foreground);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    /* Page background: cool blue-grey so cards lift off it */
+    --background: #E8ECF2;
+    --foreground: #0D1117;
+    /* Cards: warm parchment tint — clearly not the same as background */
+    --card: #F5F3EF;
+    --card-foreground: #0D1117;
+    --popover: #F5F3EF;
+    --popover-foreground: #0D1117;
+    --primary: #0057A8;
+    --primary-foreground: #FFFFFF;
+    --secondary: #EBE8E3;
+    --secondary-foreground: #0D1117;
+    --muted: #EBE8E3;
+    --muted-foreground: #4B5563;
+    --accent: #E8E4DE;
+    --accent-foreground: #0D1117;
+    --destructive: #C0392B;
+    --positive: #166534;
+    --positive-foreground: #FFFFFF;
+    --border: #C8C3BA;
+    --input: #C8C3BA;
+    --ring: #0057A8;
+    --chart-1: #0057A8;
+    --chart-2: #166534;
+    --chart-3: #C0392B;
+    --chart-4: #4B5563;
+    --chart-5: #0D1117;
+    --radius: 0.375rem;
+    /* Sidebar + header: warm linen tone — clearly distinct from both bg and cards */
+    --sidebar: #EDE9E3;
+    --sidebar-foreground: #0D1117;
+    --sidebar-primary: #0057A8;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #E0DCD5;
+    --sidebar-accent-foreground: #0D1117;
+    --sidebar-border: #C8C3BA;
+    --sidebar-ring: #0057A8;
+}
+
+.dark {
+    --background: #212121;
+    --foreground: #ECECEC;
+    --card: #2A2A2A;
+    --card-foreground: #ECECEC;
+    --popover: #2A2A2A;
+    --popover-foreground: #ECECEC;
+    --primary: #ECECEC;
+    --primary-foreground: #212121;
+    --secondary: #2F2F2F;
+    --secondary-foreground: #ECECEC;
+    --muted: #2F2F2F;
+    --muted-foreground: #8A8A8A;
+    --accent: #383838;
+    --accent-foreground: #ECECEC;
+    --destructive: #E05252;
+    --positive: #4CAF7D;
+    --positive-foreground: #0A1F13;
+    --border: #383838;
+    --input: #383838;
+    --ring: #ECECEC;
+    --chart-1: #ECECEC;
+    --chart-2: #4CAF7D;
+    --chart-3: #E05252;
+    --chart-4: #8A8A8A;
+    --chart-5: #FFFFFF;
+    --sidebar: #171717;
+    --sidebar-foreground: #ECECEC;
+    --sidebar-primary: #ECECEC;
+    --sidebar-primary-foreground: #212121;
+    --sidebar-accent: #2A2A2A;
+    --sidebar-accent-foreground: #ECECEC;
+    --sidebar-border: #2F2F2F;
+    --sidebar-ring: #ECECEC;
+}
+
+/* ── Deep Space theme ────────────────────────────────────── */
+.theme-deepspace {
+    --background: #0F1117;
+    --foreground: #E2E8F8;
+    --card: #161B27;
+    --card-foreground: #E2E8F8;
+    --popover: #161B27;
+    --popover-foreground: #E2E8F8;
+    --primary: #7C6AF7;
+    --primary-foreground: #FFFFFF;
+    --secondary: #1A2035;
+    --secondary-foreground: #E2E8F8;
+    --muted: #1A2035;
+    --muted-foreground: #8B97B8;
+    --accent: #1F2840;
+    --accent-foreground: #E2E8F8;
+    --destructive: #F87171;
+    --positive: #34D399;
+    --positive-foreground: #022C22;
+    --border: #252D45;
+    --input: #252D45;
+    --ring: #7C6AF7;
+    --chart-1: #7C6AF7;
+    --chart-2: #34D399;
+    --chart-3: #F87171;
+    --chart-4: #8B97B8;
+    --chart-5: #E2E8F8;
+    --sidebar: #0A0D16;
+    --sidebar-foreground: #E2E8F8;
+    --sidebar-primary: #7C6AF7;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #161B27;
+    --sidebar-accent-foreground: #E2E8F8;
+    --sidebar-border: #252D45;
+    --sidebar-ring: #7C6AF7;
+}
+
+.theme-redblack {
+    --background: #0A0A0A;
+    --foreground: #F2F2F2;
+    --card: #141414;
+    --card-foreground: #F2F2F2;
+    --popover: #141414;
+    --popover-foreground: #F2F2F2;
+    --primary: #E30613;
+    --primary-foreground: #FFFFFF;
+    --secondary: #1F1F1F;
+    --secondary-foreground: #F2F2F2;
+    --muted: #1A1A1A;
+    --muted-foreground: #9A9A9A;
+    --accent: #241414;
+    --accent-foreground: #F2F2F2;
+    --destructive: #FF3B3B;
+    --positive: #22C55E;
+    --positive-foreground: #04120F;
+    --border: #262020;
+    --input: #262020;
+    --ring: #E30613;
+    --chart-1: #E30613;
+    --chart-2: #FF6B6B;
+    --chart-3: #9A9A9A;
+    --chart-4: #4D4D4D;
+    --chart-5: #F2F2F2;
+    --sidebar: #050505;
+    --sidebar-foreground: #F2F2F2;
+    --sidebar-primary: #E30613;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #1A1010;
+    --sidebar-accent-foreground: #F2F2F2;
+    --sidebar-border: #1F1515;
+    --sidebar-ring: #E30613;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans;
+    }
+}
+
+/* ── Logo pulse (all themes) ─────────────────────────────── */
+@keyframes logo-pulse {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 0px currentColor); }
+  50%       { opacity: 0.7; filter: drop-shadow(0 0 4px currentColor); }
+}
+.logo-pulse {
+  animation: logo-pulse 3s ease-in-out infinite;
+}
+
+/* ── Witcher / Red-Black theme animations ────────────────── */
+@keyframes witcher-flicker {
+  0%, 92%, 100% { opacity: 1;   filter: drop-shadow(0 0 4px #E30613) drop-shadow(0 0 8px #E30613); }
+  93%           { opacity: 0.4; filter: none; }
+  95%           { opacity: 1;   filter: drop-shadow(0 0 6px #E30613); }
+  97%           { opacity: 0.6; filter: none; }
+}
+
+@keyframes witcher-title-glow {
+  0%, 100% { text-shadow: 0 0 6px rgba(227,6,19,0.4), 0 0 12px rgba(227,6,19,0.2); }
+  50%      { text-shadow: 0 0 10px rgba(227,6,19,0.7), 0 0 20px rgba(227,6,19,0.3); }
+}
+
+@keyframes rgb-wave {
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 50% 50%; }
+  50%  { background-position: 100% 50%; }
+  75%  { background-position: 50% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.witcher-icon {
+  animation: witcher-flicker 5s ease-in-out infinite;
+}
+
+.witcher-title {
+  animation: witcher-title-glow 2.5s ease-in-out infinite;
+}
+
+.theme-redblack header {
+  background: linear-gradient(
+    90deg,
+    #0a0a0a,
+    #1a0005,
+    #0d000d,
+    #00050d,
+    #0a0a0a,
+    #1a0005,
+    #0d000d
+  );
+  background-size: 400% 100%;
+  animation: rgb-wave 14s linear infinite;
+  border-bottom: none;
+}
+
+.theme-redblack header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #E30613, #7B00FF, #0066FF, #E30613, #7B00FF, #0066FF);
+  background-size: 400% 100%;
+  animation: rgb-wave 8s linear infinite;
+}
+
+.theme-redblack [data-sidebar] {
+  background-image: linear-gradient(180deg, #0a0a0a 0%, #0d0505 100%);
+}
+
+/* ── Modern Card Entrance Animation ──────────────────────────── */
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.card-enter {
+  animation: card-enter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Gradient Shimmer ──────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.shimmer {
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ── Floating Icon Animation ───────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+.float-icon {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ── Glow Pulse ────────────────────────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(var(--color-primary), 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(var(--color-primary), 0);
+  }
+}
+
+.glow-pulse {
+  animation: glow-pulse 2s infinite;
+}
+
+/* ── Smooth Gradient Border ────────────────────────────────────── */
+@keyframes gradient-border {
+  0% { border-image-source: linear-gradient(90deg, transparent, var(--color-primary), transparent); }
+  50% { border-image-source: linear-gradient(90deg, transparent, var(--color-primary), transparent); }
+  100% { border-image-source: linear-gradient(90deg, transparent, var(--color-primary), transparent); }
+}
+
+.gradient-border {
+  animation: gradient-border 2s ease-in-out infinite;
+}
+
+/* ── Professional Glass Morphism ───────────────────────────────── */
+.glass {
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ── Smooth Hover Lift ─────────────────────────────────────────── */
+.hover-lift {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.dark .hover-lift:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.theme-deepspace .hover-lift:hover {
+  box-shadow: 0 8px 32px rgba(124, 106, 247, 0.18), 0 0 0 1px rgba(124, 106, 247, 0.14);
+}
+
+.theme-forest .hover-lift:hover {
+  box-shadow: 0 8px 32px rgba(74, 222, 128, 0.12), 0 0 0 1px rgba(74, 222, 128, 0.10);
+}
+
+/* ── Deep Space: topbar scan-line ──────────────────────────────── */
+@keyframes scanline {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(800%); opacity: 0; }
+}
+
+@keyframes deepspace-header-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.theme-deepspace header {
+  background: linear-gradient(90deg, #0A0D16 0%, #161B27 40%, #121830 60%, #0A0D16 100%);
+  border-bottom: 1px solid #252D45;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-deepspace header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(124,106,247,0.04) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: deepspace-header-shimmer 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.theme-deepspace header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124,106,247,0.7), rgba(139,92,246,0.5), rgba(124,106,247,0.7), transparent);
+  background-size: 200% 100%;
+  animation: deepspace-header-shimmer 4s ease-in-out infinite;
+}
+
+/* ── Deep Space: sidebar nebula gradient ───────────────────────── */
+.theme-deepspace [data-sidebar] {
+  background: linear-gradient(180deg, #0A0D16 0%, #0D1220 50%, #0A0D16 100%);
+}
+
+/* ── Deep Space: sidebar active item glow ──────────────────────── */
+.theme-deepspace [data-active="true"] {
+  background: linear-gradient(90deg, rgba(124,106,247,0.15) 0%, rgba(124,106,247,0.05) 100%) !important;
+  box-shadow: inset 3px 0 0 #7C6AF7;
+}
+
+/* ── Deep Space: card subtle glow border on hover ──────────────── */
+.theme-deepspace .rounded-xl:hover {
+  border-color: rgba(124,106,247,0.2);
+  transition: border-color 0.3s ease;
+}
+
+/* ── Number count-up shimmer (applied to stat values) ──────────── */
+@keyframes value-reveal {
+  0%   { opacity: 0; transform: translateY(6px) scale(0.92); filter: blur(4px); }
+  60%  { filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.value-reveal {
+  animation: value-reveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Stagger children helper ───────────────────────────────────── */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+
+/* ── Ping dot (live indicator) ─────────────────────────────────── */
+@keyframes ping-ring {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  70%  { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.ping-dot {
+  position: relative;
+  display: inline-flex;
+}
+
+.ping-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: currentColor;
+  animation: ping-ring 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* ── Sidebar nav item: slide-in underline on active ────────────── */
+@keyframes nav-slide-in {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+/* ── Table row: sharper hover state ────────────────────────────── */
+.theme-deepspace tr:hover td {
+  background: rgba(124,106,247,0.04);
+}
+
+/* ── Page transition: clip-path reveal ─────────────────────────── */
+@keyframes page-reveal {
+  from { clip-path: inset(0 0 100% 0); opacity: 0.6; }
+  to   { clip-path: inset(0 0 0% 0);   opacity: 1; }
+}
+
+/* ── Focus ring upgrade ─────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+/* ── Selection highlight ────────────────────────────────────────── */
+::selection {
+  background: color-mix(in srgb, var(--primary) 25%, transparent);
+  color: var(--foreground);
+}
+
+/* ── Scrollbar styling ──────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+

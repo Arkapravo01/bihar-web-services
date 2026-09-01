@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Environment files — contain secrets, never commit
+backend/.env.qa
+backend/.env.prod
+
+# Agent incidents and knowledge base (runtime-generated, local only)
+backend/src/agents/**/incidents/
+backend/src/agents/**/knowledge.md
+
+# Build output
+frontend/dist/
+frontend/build/
+
+# Vite cache
+frontend/.vite/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.user
+
+# Logs
+*.log
+npm-debug.log*
+
+# Claude / Bob agent settings
+**/.claude/

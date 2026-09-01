@@ -1,0 +1,1 @@
+export { iamRoutes } from './routes'
