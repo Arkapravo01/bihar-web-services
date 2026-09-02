@@ -15,4 +15,10 @@ export const SECRETS_PROFILE = process.env.SECRETS_PROFILE ||
 export const RDS_ENV = process.env.RDS_ENV || 'qa'
 export const RDS_PROFILE = process.env.RDS_PROFILE ||
   (RDS_ENV === 'prod' ? 'claude-rds-prd' : 'claude-rds-qa')
+export const ECS_ENV = process.env.ECS_ENV || 'qa'
+export const ECS_PROFILE = process.env.ECS_PROFILE ||
+  (ECS_ENV === 'prod' ? 'claude-ecs-prd' : 'claude-ecs-qa')
+export const EVENTBRIDGE_ENV = process.env.EVENTBRIDGE_ENV || 'qa'
+export const EVENTBRIDGE_PROFILE = process.env.EVENTBRIDGE_PROFILE ||
+  (EVENTBRIDGE_ENV === 'prod' ? 'claude-eventbridge-prd' : 'claude-eventbridge-qa')
 export const AWS_REGION = process.env.AWS_REGION || 'eu-west-1'

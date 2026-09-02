@@ -5,6 +5,8 @@ import { runInvestigation as runIAMInvestigation } from '../agents/iam-agent/age
 import { runInvestigation as runLambdaInvestigation } from '../agents/lambda-agent/agent.js'
 import { runInvestigation as runSecretsInvestigation } from '../agents/secrets-agent/agent.js'
 import { runInvestigation as runRdsInvestigation } from '../agents/rds-agent/agent.js'
+import { runInvestigation as runEcsInvestigation } from '../agents/ecs-agent/agent.js'
+import { runInvestigation as runEventBridgeInvestigation } from '../agents/eventbridge-agent/agent.js'
 import * as s3Service from '../services/s3.service.js'
 
 function resolveEnv(req) {
@@ -74,5 +76,23 @@ export async function investigateRds(req, res) {
     return res.status(400).json({ success: false, error: { message: 'query is required' } })
   }
   const result = await runRdsInvestigation(query.trim(), history ?? [])
+  res.json({ success: true, data: result })
+}
+
+export async function investigateEcs(req, res) {
+  const { query, history } = req.body
+  if (!query || typeof query !== 'string' || !query.trim()) {
+    return res.status(400).json({ success: false, error: { message: 'query is required' } })
+  }
+  const result = await runEcsInvestigation(query.trim(), history ?? [])
+  res.json({ success: true, data: result })
+}
+
+export async function investigateEventBridge(req, res) {
+  const { query, history } = req.body
+  if (!query || typeof query !== 'string' || !query.trim()) {
+    return res.status(400).json({ success: false, error: { message: 'query is required' } })
+  }
+  const result = await runEventBridgeInvestigation(query.trim(), history ?? [])
   res.json({ success: true, data: result })
 }

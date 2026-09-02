@@ -4,3 +4,5 @@ export { getLogsClientForEnv, createLogsClient } from './aws/cloudwatch.client.j
 export { getLambdaClientForEnv, createLambdaClient } from './aws/lambda.client.js'
 export { getSecretsClientForEnv, createSecretsClient } from './aws/secrets.client.js'
 export { getRdsClientForEnv, createRdsClient } from './aws/rds.client.js'
+export { getEcsClientForEnv, createEcsClient } from './aws/ecs.client.js'
+export { getEventBridgeClientForEnv, createEventBridgeClient } from './aws/eventbridge.client.js'

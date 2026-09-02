@@ -1,0 +1,1 @@
+export { eventbridgeRoutes } from './routes'

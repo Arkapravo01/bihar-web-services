@@ -6,9 +6,9 @@ export const NAV_MODULES = [
   { id: "cloudwatch", label: "CloudWatch", href: "/cloudwatch", enabled: true },
   { id: "lambda", label: "Lambda", href: "/lambda", enabled: true },
   { id: "rds", label: "RDS", href: "/rds", enabled: true },
-  { id: "ecs", label: "ECS / ECR", href: "#", enabled: false },
+  { id: "ecs", label: "ECS", href: "/ecs", enabled: true },
+  { id: "eventbridge", label: "EventBridge", href: "/eventbridge", enabled: true },
   { id: "api-gateway", label: "API Gateway", href: "#", enabled: false },
-  { id: "eventbridge", label: "EventBridge", href: "#", enabled: false },
 ];
 
 export const NAV_AI_MODULES = [
