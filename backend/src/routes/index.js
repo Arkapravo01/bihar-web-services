@@ -7,6 +7,7 @@ import { secretsRouter } from "./secrets.routes.js";
 import { rdsRouter } from "./rds.routes.js";
 import { ecsRouter } from "./ecs.routes.js";
 import { eventbridgeRouter } from "./eventbridge.routes.js";
+import { glueRouter } from "./glue.routes.js";
 import { agentRouter } from "./agent.routes.js";
 
 export const apiRouter = Router();
@@ -19,4 +20,5 @@ apiRouter.use("/secrets", secretsRouter);
 apiRouter.use("/rds", rdsRouter);
 apiRouter.use("/ecs", ecsRouter);
 apiRouter.use("/eventbridge", eventbridgeRouter);
+apiRouter.use("/glue", glueRouter);
 apiRouter.use("/agent", agentRouter);

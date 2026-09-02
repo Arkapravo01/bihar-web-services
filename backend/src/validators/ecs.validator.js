@@ -15,3 +15,9 @@ export function assertTaskArn(arn) {
 export function assertTaskDefinitionArn(arn) {
   if (!arn) throw new ApiError(400, 'ECS_TASK_DEF_ARN_REQUIRED', 'A task definition ARN is required')
 }
+
+export function assertDesiredCount(count) {
+  if (typeof count !== 'number' || !Number.isInteger(count) || count < 0) {
+    throw new ApiError(400, 'ECS_DESIRED_COUNT_INVALID', 'desiredCount must be a non-negative integer')
+  }
+}

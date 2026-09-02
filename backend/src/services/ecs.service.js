@@ -3,8 +3,10 @@ import {
   DescribeClustersCommand,
   ListServicesCommand,
   DescribeServicesCommand,
+  UpdateServiceCommand,
   ListTasksCommand,
   DescribeTasksCommand,
+  StopTaskCommand,
   ListTaskDefinitionsCommand,
   DescribeTaskDefinitionCommand,
   ListContainerInstancesCommand,
@@ -72,6 +74,22 @@ export async function listServices(clusterName) {
   return (described.services ?? []).map(toService)
 }
 
+export async function describeService(clusterName, serviceName) {
+  const result = await getClient().send(new DescribeServicesCommand({ cluster: clusterName, services: [serviceName] }))
+  const service = result.services?.[0]
+  return service ? toService(service) : null
+}
+
+export async function updateServiceDesiredCount(clusterName, serviceName, desiredCount) {
+  const out = await getClient().send(new UpdateServiceCommand({ cluster: clusterName, service: serviceName, desiredCount }))
+  return toService(out.service)
+}
+
+export async function forceNewDeployment(clusterName, serviceName) {
+  const out = await getClient().send(new UpdateServiceCommand({ cluster: clusterName, service: serviceName, forceNewDeployment: true }))
+  return toService(out.service)
+}
+
 export async function listTasks(clusterName, serviceName = null) {
   const tasks = []
   let nextToken
@@ -89,19 +107,26 @@ export async function listTasks(clusterName, serviceName = null) {
   return (described.tasks ?? []).map(toTask)
 }
 
+export async function stopTask(clusterName, taskArn, reason) {
+  const out = await getClient().send(new StopTaskCommand({ cluster: clusterName, task: taskArn, reason }))
+  return out.task ? toTask(out.task) : null
+}
+
 export async function listTaskDefinitions() {
   const taskDefs = []
   let nextToken
   do {
-    const out = await getClient().send(new ListTaskDefinitionsCommand({ nextToken, maxResults: 100 }))
+    const out = await getClient().send(new ListTaskDefinitionsCommand({ nextToken, maxResults: 100, sort: 'DESC' }))
     taskDefs.push(...(out.taskDefinitionArns ?? []))
     nextToken = out.nextToken
   } while (nextToken)
 
   if (taskDefs.length === 0) return []
 
-  const described = await getClient().send(new DescribeTaskDefinitionCommand({ taskDefinition: taskDefs[0] }))
-  return described.taskDefinition ? [toTaskDefinition(described.taskDefinition)] : []
+  const described = await Promise.all(
+    taskDefs.map((arn) => getClient().send(new DescribeTaskDefinitionCommand({ taskDefinition: arn })))
+  )
+  return described.map((d) => d.taskDefinition).filter(Boolean).map(toTaskDefinition)
 }
 
 export async function describeTaskDefinition(taskDefinitionArn) {

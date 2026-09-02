@@ -21,4 +21,7 @@ export const ECS_PROFILE = process.env.ECS_PROFILE ||
 export const EVENTBRIDGE_ENV = process.env.EVENTBRIDGE_ENV || 'qa'
 export const EVENTBRIDGE_PROFILE = process.env.EVENTBRIDGE_PROFILE ||
   (EVENTBRIDGE_ENV === 'prod' ? 'claude-eventbridge-prd' : 'claude-eventbridge-qa')
+export const GLUE_ENV = process.env.GLUE_ENV || 'qa'
+export const GLUE_PROFILE = process.env.GLUE_PROFILE ||
+  (GLUE_ENV === 'prod' ? 'claude-glue-prd' : 'claude-glue-qa')
 export const AWS_REGION = process.env.AWS_REGION || 'eu-west-1'

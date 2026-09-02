@@ -26,6 +26,23 @@ export function toService(awsService) {
     platformVersion: awsService.platformVersion,
     createdAt: awsService.createdAt?.toISOString?.(),
     updatedAt: awsService.updatedAt?.toISOString?.(),
+    deployments: (awsService.deployments || []).map((d) => ({
+      id: d.id,
+      status: d.status,
+      taskDefinition: d.taskDefinition,
+      desiredCount: d.desiredCount || 0,
+      runningCount: d.runningCount || 0,
+      pendingCount: d.pendingCount || 0,
+      rolloutState: d.rolloutState,
+      rolloutStateReason: d.rolloutStateReason,
+      createdAt: d.createdAt?.toISOString?.(),
+      updatedAt: d.updatedAt?.toISOString?.(),
+    })),
+    events: (awsService.events || []).slice(0, 20).map((e) => ({
+      id: e.id,
+      message: e.message,
+      createdAt: e.createdAt?.toISOString?.(),
+    })),
   }
 }
 
@@ -34,13 +51,17 @@ export function toTask(awsTask) {
     arn: awsTask.taskArn,
     clusterArn: awsTask.clusterArn,
     taskDefinitionArn: awsTask.taskDefinitionArn,
+    group: awsTask.group,
     status: awsTask.lastStatus,
     desiredStatus: awsTask.desiredStatus,
     launchType: awsTask.launchType,
     platformVersion: awsTask.platformVersion,
+    cpu: awsTask.cpu,
+    memory: awsTask.memory,
     createdAt: awsTask.createdAt?.toISOString?.(),
     startedAt: awsTask.startedAt?.toISOString?.(),
     stoppedAt: awsTask.stoppedAt?.toISOString?.(),
+    stoppedReason: awsTask.stoppedReason,
     containers: (awsTask.containers || []).map((c) => ({
       name: c.name,
       image: c.image,

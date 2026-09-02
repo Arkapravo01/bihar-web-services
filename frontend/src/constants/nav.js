@@ -8,6 +8,7 @@ export const NAV_MODULES = [
   { id: "rds", label: "RDS", href: "/rds", enabled: true },
   { id: "ecs", label: "ECS", href: "/ecs", enabled: true },
   { id: "eventbridge", label: "EventBridge", href: "/eventbridge", enabled: true },
+  { id: "glue", label: "Glue", href: "/glue", enabled: true },
   { id: "api-gateway", label: "API Gateway", href: "#", enabled: false },
 ];
 

@@ -1,0 +1,1 @@
+export { glueRoutes } from './routes'

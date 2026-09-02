@@ -9,12 +9,36 @@ export function describeCluster(clusterName) {
 }
 
 export function listServices(clusterName) {
-  return apiClient.get(`/api/ecs/clusters/${clusterName}/services`).then((r) => r.data)
+  return apiClient.get(`/api/ecs/clusters/${encodeURIComponent(clusterName)}/services`).then((r) => r.data)
+}
+
+export function describeService(clusterName, serviceName) {
+  return apiClient
+    .get(`/api/ecs/clusters/${encodeURIComponent(clusterName)}/services/${encodeURIComponent(serviceName)}`)
+    .then((r) => r.data)
+}
+
+export function updateDesiredCount(clusterName, serviceName, desiredCount) {
+  return apiClient
+    .patch(`/api/ecs/clusters/${encodeURIComponent(clusterName)}/services/${encodeURIComponent(serviceName)}/desired-count`, { desiredCount })
+    .then((r) => r.data)
+}
+
+export function forceNewDeployment(clusterName, serviceName) {
+  return apiClient
+    .post(`/api/ecs/clusters/${encodeURIComponent(clusterName)}/services/${encodeURIComponent(serviceName)}/force-deployment`, {})
+    .then((r) => r.data)
 }
 
 export function listTasks(clusterName, serviceName = null) {
-  const params = serviceName ? `?serviceName=${serviceName}` : ''
-  return apiClient.get(`/api/ecs/clusters/${clusterName}/tasks${params}`).then((r) => r.data)
+  const params = serviceName ? `?serviceName=${encodeURIComponent(serviceName)}` : ''
+  return apiClient.get(`/api/ecs/clusters/${encodeURIComponent(clusterName)}/tasks${params}`).then((r) => r.data)
+}
+
+export function stopTask(clusterName, taskArn, reason) {
+  return apiClient
+    .post(`/api/ecs/clusters/${encodeURIComponent(clusterName)}/tasks/stop`, { taskArn, reason })
+    .then((r) => r.data)
 }
 
 export function listTaskDefinitions() {

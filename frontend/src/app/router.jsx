@@ -9,6 +9,7 @@ import { lambdaRoutes } from "@/features/lambda";
 import { rdsRoutes } from "@/features/rds";
 import { ecsRoutes } from "@/features/ecs";
 import { eventbridgeRoutes } from "@/features/eventbridge";
+import { glueRoutes } from "@/features/glue";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([
       ...rdsRoutes,
       ...ecsRoutes,
       ...eventbridgeRoutes,
+      ...glueRoutes,
     ],
   },
 ]);

@@ -6,3 +6,4 @@ export { getSecretsClientForEnv, createSecretsClient } from './aws/secrets.clien
 export { getRdsClientForEnv, createRdsClient } from './aws/rds.client.js'
 export { getEcsClientForEnv, createEcsClient } from './aws/ecs.client.js'
 export { getEventBridgeClientForEnv, createEventBridgeClient } from './aws/eventbridge.client.js'
+export { getGlueClientForEnv, createGlueClient } from './aws/glue.client.js'
