@@ -8,6 +8,7 @@ import { runInvestigation as runRdsInvestigation } from '../agents/rds-agent/age
 import { runInvestigation as runEcsInvestigation } from '../agents/ecs-agent/agent.js'
 import { runInvestigation as runEventBridgeInvestigation } from '../agents/eventbridge-agent/agent.js'
 import { runInvestigation as runGlueInvestigation } from '../agents/glue-agent/agent.js'
+import { runInvestigation as runReportInvestigation } from '../agents/report-agent/agent.js'
 import * as s3Service from '../services/s3.service.js'
 
 function resolveEnv(req) {
@@ -104,5 +105,15 @@ export async function investigateGlue(req, res) {
     return res.status(400).json({ success: false, error: { message: 'query is required' } })
   }
   const result = await runGlueInvestigation(query.trim(), history ?? [])
+  res.json({ success: true, data: result })
+}
+
+export async function investigateReport(req, res) {
+  const env = resolveEnv(req)
+  const { query, history } = req.body
+  if (!query || typeof query !== 'string' || !query.trim()) {
+    return res.status(400).json({ success: false, error: { message: 'query is required' } })
+  }
+  const result = await runReportInvestigation(query.trim(), history ?? [], env)
   res.json({ success: true, data: result })
 }

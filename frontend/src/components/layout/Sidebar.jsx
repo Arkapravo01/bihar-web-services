@@ -13,7 +13,7 @@ import {
 import { NAV_AI_MODULES, NAV_MODULES } from '@/constants/nav'
 import {
   Shield, Database, Activity, Zap, Server, Cpu, Container, Globe, MessageSquare, Calendar,
-  GitBranch, Bot, CheckSquare, BarChart2, KeyRound
+  GitBranch, Bot, CheckSquare, BarChart2, KeyRound, ScrollText
 } from 'lucide-react'
 
 const SERVICE_ICONS = {
@@ -25,6 +25,7 @@ const SERVICE_ICONS = {
   rds: Server,
   ec2: Cpu,
   'ecs': Container,
+  'log-intelligence': ScrollText,
   'api-gateway': Globe,
   messaging: MessageSquare,
   eventbridge: Calendar,

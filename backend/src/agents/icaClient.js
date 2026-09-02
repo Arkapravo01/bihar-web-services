@@ -7,9 +7,9 @@
 const ICA_BASE = 'https://api.nextgen-beta.ica.ibm.com/ica/v1'
 export const MODEL = 'claude-haiku-4-5'
 
-export async function icaChat(messages, tools = []) {
+export async function icaChat(messages, tools = [], opts = {}) {
   const ICA_KEY = process.env.ICA_API_KEY
-  const body = { model: MODEL, max_tokens: 1024, messages }
+  const body = { model: MODEL, max_tokens: opts.max_tokens ?? 1024, messages }
   if (tools.length) body.tools = tools
   const res = await fetch(`${ICA_BASE}/chat/completions`, {
     method:  'POST',

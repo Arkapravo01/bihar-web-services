@@ -1,0 +1,2047 @@
+{
+  "id": "f964a3f6-9e0c-42d9-bdb0-103893c80b93",
+  "env": "qa",
+  "timeRange": "7d",
+  "status": "complete",
+  "startedAt": "2026-09-02T11:31:22.550Z",
+  "completedAt": "2026-09-02T11:32:01.393Z",
+  "logGroupsDiscovered": 69,
+  "collectorsCompleted": 69,
+  "collectorsFailed": 0,
+  "workersSpawned": 8,
+  "workersCompleted": 8,
+  "workersFailed": 0,
+  "findingCount": 27,
+  "findings": [
+    {
+      "id": "28d2f5bd-bb08-48d7-bc97-9f13f25a826a",
+      "category": "application",
+      "severity": "critical",
+      "title": "Application Error",
+      "summary": "27 occurrences in /aws-glue/python-jobs/error",
+      "count": 27,
+      "firstSeen": "2026-08-26T15:45:56.824Z",
+      "lastSeen": "2026-08-28T15:59:28.097Z",
+      "logGroupName": "/aws-glue/python-jobs/error",
+      "logStreamName": "jr_72a78d0d3cdb0893cddf2abad5d852cbfe13d143bcfabe3a727e18839f1c3ca1",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "ERROR: requests 2.22.0 has requirement urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1, but you'll have urllib3 1.26.20 which is incompatible.\n",
+          "timestamp": "2026-08-28T15:59:28.097Z",
+          "logStreamName": "jr_72a78d0d3cdb0893cddf2abad5d852cbfe13d143bcfabe3a727e18839f1c3ca1",
+          "eventId": "39872233093434738852629761074615670786889131113303310336"
+        },
+        {
+          "message": "ERROR: requests 2.22.0 has requirement urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1, but you'll have urllib3 1.26.20 which is incompatible.\n",
+          "timestamp": "2026-08-28T15:57:59.017Z",
+          "logStreamName": "jr_769e701b098aa171335fb65db85eeeb767d7e4bcb95e24f59c76b528c5acfc92",
+          "eventId": "39872231106884356567521851518538495201920472334786625536"
+        },
+        {
+          "message": "ERROR: requests 2.22.0 has requirement urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1, but you'll have urllib3 1.26.20 which is incompatible.\n",
+          "timestamp": "2026-08-28T15:46:07.669Z",
+          "logStreamName": "jr_188df2bcbdc45b751be782911d146d58d157cfc259b53fe6a6f29d6010bf9f8b",
+          "eventId": "39872215243293861083160140174259026041714596431126790144"
+        },
+        {
+          "message": "ERROR: requests 2.22.0 has requirement urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1, but you'll have urllib3 1.26.20 which is incompatible.\n",
+          "timestamp": "2026-08-28T09:56:27.403Z",
+          "logStreamName": "jr_a7be27cb5484782520a007c128548d74b3e292d18b89b2cd8efd375f1d74aea3",
+          "eventId": "39871747367727597687877459635493963942070528571934965760"
+        },
+        {
+          "message": "ERROR: requests 2.22.0 has requirement urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1, but you'll have urllib3 1.26.20 which is incompatible.\n",
+          "timestamp": "2026-08-28T09:55:23.188Z",
+          "logStreamName": "jr_aa1f7b51e1c520d20c85bf86e2bfbb322a3fb1679a7472d10790576f889284b9",
+          "eventId": "39871745935685244764233494523201202702093225821058629632"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fpython-jobs%252Ferror/log-events/jr_72a78d0d3cdb0893cddf2abad5d852cbfe13d143bcfabe3a727e18839f1c3ca1",
+      "sourceAgentId": "worker-/aws-glue/python-jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 27,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null,
+        "meanIntervalMs": 6677356.653846154,
+        "coefficientOfVariation": 1.9626598235866828
+      }
+    },
+    {
+      "id": "92e47312-5d3a-45d9-8ba3-71e09c88ac62",
+      "category": "application",
+      "severity": "high",
+      "title": "Application Error",
+      "summary": "19 occurrences in /aws-glue/python-jobs/error",
+      "count": 19,
+      "firstSeen": "2026-08-26T15:45:56.824Z",
+      "lastSeen": "2026-08-28T15:59:28.098Z",
+      "logGroupName": "/aws-glue/python-jobs/error",
+      "logStreamName": "jr_72a78d0d3cdb0893cddf2abad5d852cbfe13d143bcfabe3a727e18839f1c3ca1",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement s3transfer<0.3.0,>=0.2.0, but you'll have s3transfer 0.5.2 which is incompatible.\n",
+          "timestamp": "2026-08-28T15:59:28.098Z",
+          "logStreamName": "jr_72a78d0d3cdb0893cddf2abad5d852cbfe13d143bcfabe3a727e18839f1c3ca1",
+          "eventId": "39872233093457039597828291697757206505161779474809290754"
+        },
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement s3transfer<0.3.0,>=0.2.0, but you'll have s3transfer 0.5.2 which is incompatible.\n",
+          "timestamp": "2026-08-28T15:57:59.018Z",
+          "logStreamName": "jr_769e701b098aa171335fb65db85eeeb767d7e4bcb95e24f59c76b528c5acfc92",
+          "eventId": "39872231106906657312720382141680030920193120696292605954"
+        },
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement s3transfer<0.3.0,>=0.2.0, but you'll have s3transfer 0.5.2 which is incompatible.\n",
+          "timestamp": "2026-08-28T15:48:16.434Z",
+          "logStreamName": "jr_0698e23d745ef65dded13d98bb9ade45a6867c18701c273ccb076fb87645164a",
+          "eventId": "39872218114849316571955829149726932451515330553383157761"
+        },
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement s3transfer<0.3.0,>=0.2.0, but you'll have s3transfer 0.5.2 which is incompatible.\n",
+          "timestamp": "2026-08-28T15:46:07.670Z",
+          "logStreamName": "jr_188df2bcbdc45b751be782911d146d58d157cfc259b53fe6a6f29d6010bf9f8b",
+          "eventId": "39872215243316161828358670797400561759987244792632770562"
+        },
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement s3transfer<0.3.0,>=0.2.0, but you'll have s3transfer 0.5.2 which is incompatible.\n",
+          "timestamp": "2026-08-28T09:56:27.404Z",
+          "logStreamName": "jr_a7be27cb5484782520a007c128548d74b3e292d18b89b2cd8efd375f1d74aea3",
+          "eventId": "39871747367749898433075990258635499660343176933440946178"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fpython-jobs%252Ferror/log-events/jr_72a78d0d3cdb0893cddf2abad5d852cbfe13d143bcfabe3a727e18839f1c3ca1",
+      "sourceAgentId": "worker-/aws-glue/python-jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 19,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null,
+        "meanIntervalMs": 9645070.777777778,
+        "coefficientOfVariation": 1.5642881190711266
+      }
+    },
+    {
+      "id": "04415c07-c6fb-4feb-8120-73e7875dece4",
+      "category": "application",
+      "severity": "high",
+      "title": "Application Error",
+      "summary": "14 occurrences in /aws-glue/python-jobs/error",
+      "count": 14,
+      "firstSeen": "2026-08-26T15:45:56.824Z",
+      "lastSeen": "2026-08-28T15:59:28.097Z",
+      "logGroupName": "/aws-glue/python-jobs/error",
+      "logStreamName": "jr_72a78d0d3cdb0893cddf2abad5d852cbfe13d143bcfabe3a727e18839f1c3ca1",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\n",
+          "timestamp": "2026-08-28T15:59:28.097Z",
+          "logStreamName": "jr_72a78d0d3cdb0893cddf2abad5d852cbfe13d143bcfabe3a727e18839f1c3ca1",
+          "eventId": "39872233093434738852629761074615670786889131113303310337"
+        },
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\n",
+          "timestamp": "2026-08-28T15:57:59.018Z",
+          "logStreamName": "jr_769e701b098aa171335fb65db85eeeb767d7e4bcb95e24f59c76b528c5acfc92",
+          "eventId": "39872231106906657312720382141680030920193120696292605953"
+        },
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\n",
+          "timestamp": "2026-08-28T15:46:07.669Z",
+          "logStreamName": "jr_188df2bcbdc45b751be782911d146d58d157cfc259b53fe6a6f29d6010bf9f8b",
+          "eventId": "39872215243293861083160140174259026041714596431126790145"
+        },
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\n",
+          "timestamp": "2026-08-28T09:56:27.403Z",
+          "logStreamName": "jr_a7be27cb5484782520a007c128548d74b3e292d18b89b2cd8efd375f1d74aea3",
+          "eventId": "39871747367727597687877459635493963942070528571934965761"
+        },
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\n",
+          "timestamp": "2026-08-28T09:45:52.830Z",
+          "logStreamName": "jr_93b778bc1f04dec3822e05dc2f7d2358407c3fc7ea314083205c8c1891dab13b",
+          "eventId": "39871733216276814820704340074062760498515804802082275329"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fpython-jobs%252Ferror/log-events/jr_72a78d0d3cdb0893cddf2abad5d852cbfe13d143bcfabe3a727e18839f1c3ca1",
+      "sourceAgentId": "worker-/aws-glue/python-jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 14,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null,
+        "meanIntervalMs": 13354713.307692308,
+        "coefficientOfVariation": 1.224535812062325
+      }
+    },
+    {
+      "id": "38b7fe41-f9b7-4a7e-81a8-0c816b1de56d",
+      "category": "application",
+      "severity": "high",
+      "title": "Application Error",
+      "summary": "13 occurrences in /aws-glue/python-jobs/error",
+      "count": 13,
+      "firstSeen": "2026-08-26T15:57:53.438Z",
+      "lastSeen": "2026-08-28T09:55:23.188Z",
+      "logGroupName": "/aws-glue/python-jobs/error",
+      "logStreamName": "jr_aa1f7b51e1c520d20c85bf86e2bfbb322a3fb1679a7472d10790576f889284b9",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\nERROR: awscli 1.16.242 has requirement s3transfer<0.3.0,>=0.2.0, but you'll have s3transfer 0.5.2 which is incompatible.\n",
+          "timestamp": "2026-08-28T09:55:23.188Z",
+          "logStreamName": "jr_aa1f7b51e1c520d20c85bf86e2bfbb322a3fb1679a7472d10790576f889284b9",
+          "eventId": "39871745935685244764233494523201202702093225821058629633"
+        },
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\nERROR: awscli 1.16.242 has requirement s3transfer<0.3.0,>=0.2.0, but you'll have s3transfer 0.5.2 which is incompatible.\n",
+          "timestamp": "2026-08-28T09:47:00.115Z",
+          "logStreamName": "jr_75b881d13f7de8e6f0ceab7a2137a7e0b9c6fc631ce99b6aa33218da22d27828",
+          "eventId": "39871734716782455503837318233690281562761581013772009473"
+        },
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\nERROR: awscli 1.16.242 has requirement s3transfer<0.3.0,>=0.2.0, but you'll have s3transfer 0.5.2 which is incompatible.\n",
+          "timestamp": "2026-08-28T03:00:52.913Z",
+          "logStreamName": "jr_aa33233135c397b23805301fda6a1bbcbcfa73c4b1bc7478b1b00e86238845d5",
+          "eventId": "39871191310019452378040013100449609050424667238460948481"
+        },
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\nERROR: awscli 1.16.242 has requirement s3transfer<0.3.0,>=0.2.0, but you'll have s3transfer 0.5.2 which is incompatible.\n",
+          "timestamp": "2026-08-27T15:57:34.772Z",
+          "logStreamName": "jr_0bef0ff3d0ffbedb234b915fbf4b4e89d8b4f18d6f01e8b9d4c650db2c1b9519",
+          "eventId": "39870303781817636183307360285600635174128707505730027521"
+        },
+        {
+          "message": "ERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\nERROR: awscli 1.16.242 has requirement s3transfer<0.3.0,>=0.2.0, but you'll have s3transfer 0.5.2 which is incompatible.\n",
+          "timestamp": "2026-08-27T15:56:29.999Z",
+          "logStreamName": "jr_228c8088f572bfcd4a3878097c476f5003bc9e862872aa90993e63f019fba2ad",
+          "eventId": "39870302337331467438883307460403786247063208430600454145"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fpython-jobs%252Ferror/log-events/jr_aa1f7b51e1c520d20c85bf86e2bfbb322a3fb1679a7472d10790576f889284b9",
+      "sourceAgentId": "worker-/aws-glue/python-jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 13,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null,
+        "meanIntervalMs": 12587479.166666666,
+        "coefficientOfVariation": 1.321422969607413
+      }
+    },
+    {
+      "id": "f4dea0e0-00bd-44e0-8a22-14e599d49bd0",
+      "category": "exception",
+      "severity": "medium",
+      "title": "Exception",
+      "summary": "5 occurrences in /aws/lambda/OLAP-RDS-STOP",
+      "count": 5,
+      "firstSeen": "2026-08-26T13:30:34.886Z",
+      "lastSeen": "2026-08-30T13:30:35.043Z",
+      "logGroupName": "/aws/lambda/OLAP-RDS-STOP",
+      "logStreamName": "2026/08/30/[$LATEST]f6d08468517946f9a12b636e3458ba01",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "Error: 'db_instance_id' must be provided in the event payload\n",
+          "timestamp": "2026-08-30T13:30:35.043Z",
+          "logStreamName": "2026/08/30/[$LATEST]f6d08468517946f9a12b636e3458ba01",
+          "eventId": "39875887448443946229531639561367856418774063575569465346"
+        },
+        {
+          "message": "Error: 'db_instance_id' must be provided in the event payload\n",
+          "timestamp": "2026-08-29T13:30:34.717Z",
+          "logStreamName": "2026/08/29/[$LATEST]272e7e8103264defb0ba76c0639ab288",
+          "eventId": "39873960656788750248971123282449017905266920933179981826"
+        },
+        {
+          "message": "Error: 'db_instance_id' must be provided in the event payload\n",
+          "timestamp": "2026-08-28T13:30:34.683Z",
+          "logStreamName": "2026/08/28/[$LATEST]377d9b01a5de4119bcdecc719930dc89",
+          "eventId": "39872033871645371866381548959276515613327221211162935298"
+        },
+        {
+          "message": "Error: 'db_instance_id' must be provided in the event payload\n",
+          "timestamp": "2026-08-27T13:30:34.876Z",
+          "logStreamName": "2026/08/27/[$LATEST]efc0cba1f75742058e6df6cc95e12a9c",
+          "eventId": "39870107091564262643858426087982150294372934266533183490"
+        },
+        {
+          "message": "Error: 'db_instance_id' must be provided in the event payload\n",
+          "timestamp": "2026-08-26T13:30:34.886Z",
+          "logStreamName": "2026/08/26/[$LATEST]61ee516f8cec49afaf63cbd17761f2de",
+          "eventId": "39868180307402117050004199186082732560275064644682579970"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws%252Flambda%252FOLAP-RDS-STOP/log-events/2026%252F08%252F30%252F%255B%2524LATEST%255Df6d08468517946f9a12b636e3458ba01",
+      "sourceAgentId": "worker-/aws/lambda/OLAP-RDS-STOP",
+      "confidence": "medium",
+      "affectedStreams": 5,
+      "recurrence": {
+        "isRecurring": true,
+        "description": "roughly every 1440 minutes",
+        "meanIntervalMs": 86400039.25,
+        "coefficientOfVariation": 0.0000021546019754600182
+      }
+    },
+    {
+      "id": "628f303a-1660-44c3-82b3-564b46b0c15c",
+      "category": "application",
+      "severity": "medium",
+      "title": "Application Error",
+      "summary": "5 occurrences in /aws-glue/python-jobs/error",
+      "count": 5,
+      "firstSeen": "2026-08-27T05:47:05.015Z",
+      "lastSeen": "2026-08-28T15:48:16.434Z",
+      "logGroupName": "/aws-glue/python-jobs/error",
+      "logStreamName": "jr_0698e23d745ef65dded13d98bb9ade45a6867c18701c273ccb076fb87645164a",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "ERROR: requests 2.22.0 has requirement urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1, but you'll have urllib3 1.26.20 which is incompatible.\nERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\n",
+          "timestamp": "2026-08-28T15:48:16.434Z",
+          "logStreamName": "jr_0698e23d745ef65dded13d98bb9ade45a6867c18701c273ccb076fb87645164a",
+          "eventId": "39872218114849316571955829149726932451515330553383157760"
+        },
+        {
+          "message": "ERROR: requests 2.22.0 has requirement urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1, but you'll have urllib3 1.26.20 which is incompatible.\nERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\n",
+          "timestamp": "2026-08-28T03:01:58.014Z",
+          "logStreamName": "jr_0d99caf7caa2766e569b3e72a9813013b25e3939d5e3f87d33a10c5d2004b39c",
+          "eventId": "39871192761820265547582110315632393244771648037725143040"
+        },
+        {
+          "message": "ERROR: requests 2.22.0 has requirement urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1, but you'll have urllib3 1.26.20 which is incompatible.\nERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\n",
+          "timestamp": "2026-08-27T09:46:56.424Z",
+          "logStreamName": "jr_d745d3ab315756361d1b99f166dc92dbb09bfefe65ff72e9954944b2d6f47dc5",
+          "eventId": "39869807850085251930221255076228098282292544070726909952"
+        },
+        {
+          "message": "ERROR: requests 2.22.0 has requirement urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1, but you'll have urllib3 1.26.20 which is incompatible.\nERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\n",
+          "timestamp": "2026-08-27T05:49:25.624Z",
+          "logStreamName": "jr_ab74a27481016390375e7f2e49e22ce94e25dc453e9c3d5001e94dc216051d3a",
+          "eventId": "39869490046625576710016972451638488240592917480658763776"
+        },
+        {
+          "message": "ERROR: requests 2.22.0 has requirement urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1, but you'll have urllib3 1.26.20 which is incompatible.\nERROR: awscli 1.16.242 has requirement botocore==1.12.232, but you'll have botocore 1.21.65 which is incompatible.\n",
+          "timestamp": "2026-08-27T05:47:05.015Z",
+          "logStreamName": "jr_6b2a96523e2602951acbe58e0ff5ca72e9bcdcd2b4b3e2c29c80ceeb316f5b55",
+          "eventId": "39869486910940095089824582972656783822474907421388832768"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fpython-jobs%252Ferror/log-events/jr_0698e23d745ef65dded13d98bb9ade45a6867c18701c273ccb076fb87645164a",
+      "sourceAgentId": "worker-/aws-glue/python-jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 5,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null,
+        "meanIntervalMs": 30617854.75,
+        "coefficientOfVariation": 0.8039961838359551
+      }
+    },
+    {
+      "id": "3fffa21f-8efa-4f96-8ac9-884f4f468d64",
+      "category": "timeout",
+      "severity": "medium",
+      "title": "Timeout",
+      "summary": "4 occurrences in /aws-glue/jobs/error",
+      "count": 4,
+      "firstSeen": "2026-08-26T12:16:54.619Z",
+      "lastSeen": "2026-08-26T12:16:59.278Z",
+      "logGroupName": "/aws-glue/jobs/error",
+      "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-fd25dfec5008d0550842dc8dc7ec49abd44c3b3f",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "/usr/bin/java -cp /tmp:/opt/amazon/conf:/opt/amazon/glue-manifest.jar com.amazonaws.services.glue.PrepareLaunch --conf spark.dynamicAllocation.enabled=true --conf spark.shuffle.service.enabled=true --conf spark.dynamicAllocation.minExecutors=1 --conf spark.dynamicAllocation.maxExecutors=-1 --conf spark.executor.memory=10g --conf spark.driver.memory=10g --conf spark.network.timeout=600 --driver-url",
+          "timestamp": "2026-08-26T12:16:59.278Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-fd25dfec5008d0550842dc8dc7ec49abd44c3b3f",
+          "eventId": "39868081836053212456596405090909698707720617524625932290"
+        },
+        {
+          "message": "/usr/bin/java -cp /tmp:/opt/amazon/conf:/opt/amazon/glue-manifest.jar com.amazonaws.services.glue.PrepareLaunch --conf spark.dynamicAllocation.enabled=true --conf spark.shuffle.service.enabled=true --conf spark.dynamicAllocation.minExecutors=1 --conf spark.dynamicAllocation.maxExecutors=-1 --conf spark.executor.memory=10g --conf spark.driver.memory=10g --conf spark.network.timeout=600 --driver-url",
+          "timestamp": "2026-08-26T12:16:58.074Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-bf96c886917ffc91cbb974908c51dd08997bbe2a",
+          "eventId": "39868081809203115237565534827052402148638837339950219266"
+        },
+        {
+          "message": "/usr/bin/java -cp /tmp:/opt/amazon/conf:/opt/amazon/glue-manifest.jar com.amazonaws.services.glue.PrepareLaunch --conf spark.dynamicAllocation.enabled=true --conf spark.shuffle.service.enabled=true --conf spark.dynamicAllocation.minExecutors=1 --conf spark.dynamicAllocation.maxExecutors=-1 --conf spark.executor.memory=10g --conf spark.driver.memory=10g --conf spark.network.timeout=600 --driver-url",
+          "timestamp": "2026-08-26T12:16:55.250Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-2303db2fd14e05b603155670cafbf81df32200cf",
+          "eventId": "39868081746225810796915055071959485659351726450569248770"
+        },
+        {
+          "message": "/usr/bin/java -cp /tmp:/opt/amazon/conf:/opt/amazon/glue-manifest.jar com.amazonaws.services.glue.PrepareLaunch --conf spark.dynamicAllocation.enabled=true --conf spark.shuffle.service.enabled=true --conf spark.dynamicAllocation.minExecutors=1 --conf spark.dynamicAllocation.maxExecutors=-1 --conf spark.executor.memory=10g --conf spark.driver.memory=10g --conf spark.network.timeout=600 --driver-url",
+          "timestamp": "2026-08-26T12:16:54.619Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-72e5720ec111b212b1e8c966ca30d069221a6bbc",
+          "eventId": "39868081732154040576642231868655443974615830070965633026"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fjobs%252Ferror/log-events/jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-fd25dfec5008d0550842dc8dc7ec49abd44c3b3f",
+      "sourceAgentId": "worker-/aws-glue/jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 4,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null,
+        "meanIntervalMs": 1553,
+        "coefficientOfVariation": 0.597989410415349
+      }
+    },
+    {
+      "id": "96888668-e509-47bf-a3c0-addb6c34af7d",
+      "category": "exception",
+      "severity": "medium",
+      "title": "Exception",
+      "summary": "4 occurrences in /aws-glue/jobs/error",
+      "count": 4,
+      "firstSeen": "2026-08-26T12:17:14.444Z",
+      "lastSeen": "2026-08-26T12:17:19.031Z",
+      "logGroupName": "/aws-glue/jobs/error",
+      "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-72e5720ec111b212b1e8c966ca30d069221a6bbc",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "2026-08-26 12:17:19,030 ERROR [main] glue.ProcessLauncher (Logging.scala:logError(73)): Exception in User Class: java.lang.reflect.UndeclaredThrowableException\norg.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1748)\norg.apache.spark.deploy.SparkHadoopUtil.runAsSparkUser(SparkHadoopUtil.scala:61)\norg.apache.spark.executor.CoarseGrainedExecutorBackend$.run(CoarseGrainedE",
+          "timestamp": "2026-08-26T12:17:19.031Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-72e5720ec111b212b1e8c966ca30d069221a6bbc",
+          "eventId": "39868082276559832363171804028741962159921999826159009794"
+        },
+        {
+          "message": "2026-08-26 12:17:18,558 ERROR [main] glue.ProcessLauncher (Logging.scala:logError(73)): Exception in User Class: java.lang.reflect.UndeclaredThrowableException\norg.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1748)\norg.apache.spark.deploy.SparkHadoopUtil.runAsSparkUser(SparkHadoopUtil.scala:61)\norg.apache.spark.executor.CoarseGrainedExecutorBackend$.run(CoarseGrainedE",
+          "timestamp": "2026-08-26T12:17:18.559Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-fd25dfec5008d0550842dc8dc7ec49abd44c3b3f",
+          "eventId": "39868082266033880629465349905727877954136097853831774215"
+        },
+        {
+          "message": "2026-08-26 12:17:18,099 ERROR [main] glue.ProcessLauncher (Logging.scala:logError(73)): Exception in User Class: java.lang.reflect.UndeclaredThrowableException\norg.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1748)\norg.apache.spark.deploy.SparkHadoopUtil.runAsSparkUser(SparkHadoopUtil.scala:61)\norg.apache.spark.executor.CoarseGrainedExecutorBackend$.run(CoarseGrainedE",
+          "timestamp": "2026-08-26T12:17:18.100Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-bf96c886917ffc91cbb974908c51dd08997bbe2a",
+          "eventId": "39868082255797838583339793883502041591970416837686460418"
+        },
+        {
+          "message": "2026-08-26 12:17:14,444 ERROR [main] glue.ProcessLauncher (Logging.scala:logError(73)): Exception in User Class: java.lang.reflect.UndeclaredThrowableException\norg.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1748)\norg.apache.spark.deploy.SparkHadoopUtil.runAsSparkUser(SparkHadoopUtil.scala:61)\norg.apache.spark.executor.CoarseGrainedExecutorBackend$.run(CoarseGrainedE",
+          "timestamp": "2026-08-26T12:17:14.444Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-2303db2fd14e05b603155670cafbf81df32200cf",
+          "eventId": "39868082174266314137511835673460413773435737553445584898"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fjobs%252Ferror/log-events/jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-72e5720ec111b212b1e8c966ca30d069221a6bbc",
+      "sourceAgentId": "worker-/aws-glue/jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 4,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null,
+        "meanIntervalMs": 1529,
+        "coefficientOfVariation": 0.9836661133895964
+      }
+    },
+    {
+      "id": "d1dcfcf3-eaee-4128-8dea-c9223b37f3e4",
+      "category": "application",
+      "severity": "medium",
+      "title": "Application Error",
+      "summary": "4 occurrences in /aws-glue/jobs/error",
+      "count": 4,
+      "firstSeen": "2026-08-26T12:17:14.440Z",
+      "lastSeen": "2026-08-26T12:17:19.013Z",
+      "logGroupName": "/aws-glue/jobs/error",
+      "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-72e5720ec111b212b1e8c966ca30d069221a6bbc",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "2026-08-26 12:17:19,013 ERROR [main] glue.ProcessLauncher (Logging.scala:logError(73)): InvocationTargetException java.lang.reflect.InvocationTargetException\n",
+          "timestamp": "2026-08-26T12:17:19.013Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-72e5720ec111b212b1e8c966ca30d069221a6bbc",
+          "eventId": "39868082276158418949598252812194319231014329319051362304"
+        },
+        {
+          "message": "2026-08-26 12:17:18,553 ERROR [main] glue.ProcessLauncher (Logging.scala:logError(73)): InvocationTargetException java.lang.reflect.InvocationTargetException\n",
+          "timestamp": "2026-08-26T12:17:18.554Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-fd25dfec5008d0550842dc8dc7ec49abd44c3b3f",
+          "eventId": "39868082265922376903472696790020199362772856046301872133"
+        },
+        {
+          "message": "2026-08-26 12:17:18,095 ERROR [main] glue.ProcessLauncher (Logging.scala:logError(73)): InvocationTargetException java.lang.reflect.InvocationTargetException\n",
+          "timestamp": "2026-08-26T12:17:18.095Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-bf96c886917ffc91cbb974908c51dd08997bbe2a",
+          "eventId": "39868082255686334857347140767794363000607175030156558336"
+        },
+        {
+          "message": "2026-08-26 12:17:14,440 ERROR [main] glue.ProcessLauncher (Logging.scala:logError(73)): InvocationTargetException java.lang.reflect.InvocationTargetException\n",
+          "timestamp": "2026-08-26T12:17:14.440Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-2303db2fd14e05b603155670cafbf81df32200cf",
+          "eventId": "39868082174177111156717713180894270900345144107421663232"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fjobs%252Ferror/log-events/jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-72e5720ec111b212b1e8c966ca30d069221a6bbc",
+      "sourceAgentId": "worker-/aws-glue/jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 4,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null,
+        "meanIntervalMs": 1524.3333333333333,
+        "coefficientOfVariation": 0.988372303814654
+      }
+    },
+    {
+      "id": "83b4ae2b-614e-45e5-a692-fef10962d68f",
+      "category": "network",
+      "severity": "medium",
+      "title": "Network Error",
+      "summary": "4 occurrences in /aws-glue/jobs/error",
+      "count": 4,
+      "firstSeen": "2026-08-26T12:17:14.443Z",
+      "lastSeen": "2026-08-26T12:17:19.029Z",
+      "logGroupName": "/aws-glue/jobs/error",
+      "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-72e5720ec111b212b1e8c966ca30d069221a6bbc",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "2026-08-26 12:17:19,015 ERROR [main] glue.ProcessLauncher (Logging.scala:logError(94)): Exception in User Class\njava.lang.reflect.UndeclaredThrowableException\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1748)\n\tat org.apache.spark.deploy.SparkHadoopUtil.runAsSparkUser(SparkHadoopUtil.scala:61)\n\tat org.apache.spark.executor.CoarseGrainedExecutorBackend$.run(Coa",
+          "timestamp": "2026-08-26T12:17:19.029Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-72e5720ec111b212b1e8c966ca30d069221a6bbc",
+          "eventId": "39868082276515230872774742782458890723376703103147048961"
+        },
+        {
+          "message": "2026-08-26 12:17:18,554 ERROR [main] glue.ProcessLauncher (Logging.scala:logError(94)): Exception in User Class\njava.lang.reflect.UndeclaredThrowableException\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1748)\n\tat org.apache.spark.deploy.SparkHadoopUtil.runAsSparkUser(SparkHadoopUtil.scala:61)\n\tat org.apache.spark.executor.CoarseGrainedExecutorBackend$.run(Coa",
+          "timestamp": "2026-08-26T12:17:18.557Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-fd25dfec5008d0550842dc8dc7ec49abd44c3b3f",
+          "eventId": "39868082265989279139068288659444806517590801130819813382"
+        },
+        {
+          "message": "2026-08-26 12:17:18,096 ERROR [main] glue.ProcessLauncher (Logging.scala:logError(94)): Exception in User Class\njava.lang.reflect.UndeclaredThrowableException\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1748)\n\tat org.apache.spark.deploy.SparkHadoopUtil.runAsSparkUser(SparkHadoopUtil.scala:61)\n\tat org.apache.spark.executor.CoarseGrainedExecutorBackend$.run(Coa",
+          "timestamp": "2026-08-26T12:17:18.099Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-bf96c886917ffc91cbb974908c51dd08997bbe2a",
+          "eventId": "39868082255775537838141263260360505873697768476180480001"
+        },
+        {
+          "message": "2026-08-26 12:17:14,441 ERROR [main] glue.ProcessLauncher (Logging.scala:logError(94)): Exception in User Class\njava.lang.reflect.UndeclaredThrowableException\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1748)\n\tat org.apache.spark.deploy.SparkHadoopUtil.runAsSparkUser(SparkHadoopUtil.scala:61)\n\tat org.apache.spark.executor.CoarseGrainedExecutorBackend$.run(Coa",
+          "timestamp": "2026-08-26T12:17:14.443Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-2303db2fd14e05b603155670cafbf81df32200cf",
+          "eventId": "39868082174244013392313305050318878055163089191939604481"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fjobs%252Ferror/log-events/jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-72e5720ec111b212b1e8c966ca30d069221a6bbc",
+      "sourceAgentId": "worker-/aws-glue/jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 4,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null,
+        "meanIntervalMs": 1528.6666666666667,
+        "coefficientOfVariation": 0.9840357722956943
+      }
+    },
+    {
+      "id": "97000a6e-7d23-4972-8f62-dca11bb9c427",
+      "category": "timeout",
+      "severity": "medium",
+      "title": "Timeout",
+      "summary": "3 occurrences in /aws-glue/jobs/error",
+      "count": 3,
+      "firstSeen": "2026-08-26T12:15:39.723Z",
+      "lastSeen": "2026-08-26T14:15:38.912Z",
+      "logGroupName": "/aws-glue/jobs/error",
+      "logStreamName": "jr_256a2d5445cc00c4fa0fc25c4a54a6c2ecb13317521d9d6dfd8e695e7423948a",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "/usr/bin/java -cp /tmp:/opt/amazon/conf:/opt/amazon/glue-manifest.jar com.amazonaws.services.glue.PrepareLaunch --conf spark.dynamicAllocation.enabled=true --conf spark.shuffle.service.enabled=true --conf spark.dynamicAllocation.minExecutors=1 --conf spark.dynamicAllocation.maxExecutors=4 --conf spark.executor.memory=10g --conf spark.driver.memory=10g --conf spark.network.timeout=600  --connection",
+          "timestamp": "2026-08-26T14:15:38.912Z",
+          "logStreamName": "jr_256a2d5445cc00c4fa0fc25c4a54a6c2ecb13317521d9d6dfd8e695e7423948a",
+          "eventId": "39868240609196953251970973361638819365916641151224643585"
+        },
+        {
+          "message": "/usr/bin/java -cp /tmp:/opt/amazon/conf:/opt/amazon/glue-manifest.jar com.amazonaws.services.glue.PrepareLaunch --conf spark.dynamicAllocation.enabled=true --conf spark.shuffle.service.enabled=true --conf spark.dynamicAllocation.minExecutors=1 --conf spark.dynamicAllocation.maxExecutors=4 --conf spark.executor.memory=10g --conf spark.driver.memory=10g --conf spark.network.timeout=600 --OLTP_DB_INF",
+          "timestamp": "2026-08-26T14:15:35.195Z",
+          "logStreamName": "jr_44227e20ea85b69c33e6936b64b1da5b07b858ac7a707ec9398875d59f4020b9",
+          "eventId": "39868240526305083349032647141037681995141055220540571650"
+        },
+        {
+          "message": "/usr/bin/java -cp /tmp:/opt/amazon/conf:/opt/amazon/glue-manifest.jar com.amazonaws.services.glue.PrepareLaunch --conf spark.dynamicAllocation.enabled=true --conf spark.shuffle.service.enabled=true --conf spark.dynamicAllocation.minExecutors=1 --conf spark.dynamicAllocation.maxExecutors=4 --conf spark.executor.memory=10g --conf spark.driver.memory=10g --conf spark.network.timeout=600  --connection",
+          "timestamp": "2026-08-26T12:15:39.723Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104",
+          "eventId": "39868080061917428187492680969592372044071325427663765506"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fjobs%252Ferror/log-events/jr_256a2d5445cc00c4fa0fc25c4a54a6c2ecb13317521d9d6dfd8e695e7423948a",
+      "sourceAgentId": "worker-/aws-glue/jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 3,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null,
+        "meanIntervalMs": 3599594.5,
+        "coefficientOfVariation": 0.9989673836872459
+      }
+    },
+    {
+      "id": "8fec3505-820d-49ea-a257-a8bf88453520",
+      "category": "timeout",
+      "severity": "medium",
+      "title": "Timeout",
+      "summary": "3 occurrences in /aws-glue/jobs/error",
+      "count": 3,
+      "firstSeen": "2026-08-26T12:16:32.645Z",
+      "lastSeen": "2026-08-26T14:15:53.756Z",
+      "logGroupName": "/aws-glue/jobs/error",
+      "logStreamName": "jr_256a2d5445cc00c4fa0fc25c4a54a6c2ecb13317521d9d6dfd8e695e7423948a",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "/usr/bin/java -cp /tmp:/opt/amazon/conf:/opt/amazon/glue-manifest.jar:/opt/aws_glue_connectors/selected/datalake/*:/opt/aws_glue_connectors/selected/marketplace/*:/tmp/* -Dlog4j.configuration=log4j -server -Xmx10g -XX:+UseG1GC -XX:MaxHeapFreeRatio=70 -XX:InitiatingHeapOccupancyPercent=45 -XX:OnOutOfMemoryError=kill -9 %p -XX:+UseCompressedOops -Djavax.net.ssl.trustStore=/opt/amazon/certs/InternalA",
+          "timestamp": "2026-08-26T14:15:53.756Z",
+          "logStreamName": "jr_256a2d5445cc00c4fa0fc25c4a54a6c2ecb13317521d9d6dfd8e695e7423948a",
+          "eventId": "39868240940229214978959543292597014324950910797267664904"
+        },
+        {
+          "message": "/usr/bin/java -cp /tmp:/opt/amazon/conf:/opt/amazon/glue-manifest.jar:/opt/aws_glue_connectors/selected/datalake/*:/opt/aws_glue_connectors/selected/marketplace/*:/tmp/* -Dlog4j.configuration=log4j -server -Xmx10g -XX:+UseG1GC -XX:MaxHeapFreeRatio=70 -XX:InitiatingHeapOccupancyPercent=45 -XX:OnOutOfMemoryError=kill -9 %p -XX:+UseCompressedOops -Djavax.net.ssl.trustStore=/opt/amazon/certs/InternalA",
+          "timestamp": "2026-08-26T14:15:49.644Z",
+          "logStreamName": "jr_44227e20ea85b69c33e6936b64b1da5b07b858ac7a707ec9398875d59f4020b9",
+          "eventId": "39868240848528550722601620929900657341870694807360569351"
+        },
+        {
+          "message": "/usr/bin/java -cp /tmp:/opt/amazon/conf:/opt/amazon/glue-manifest.jar:/opt/aws_glue_connectors/selected/datalake/*:/opt/aws_glue_connectors/selected/marketplace/*:/tmp/* -Dlog4j.configuration=log4j -server -Xmx10g -XX:+UseG1GC -XX:MaxHeapFreeRatio=70 -XX:InitiatingHeapOccupancyPercent=45 -XX:OnOutOfMemoryError=kill -9 %p -XX:+UseCompressedOops -Djavax.net.ssl.trustStore=/opt/amazon/certs/InternalA",
+          "timestamp": "2026-08-26T12:16:32.645Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104",
+          "eventId": "39868081242117465584130318929912284710148910661540446214"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fjobs%252Ferror/log-events/jr_256a2d5445cc00c4fa0fc25c4a54a6c2ecb13317521d9d6dfd8e695e7423948a",
+      "sourceAgentId": "worker-/aws-glue/jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 3,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null,
+        "meanIntervalMs": 3580555.5,
+        "coefficientOfVariation": 0.998851574846417
+      }
+    },
+    {
+      "id": "8989cd76-082d-43df-b313-b377e7329803",
+      "category": "application",
+      "severity": "low",
+      "title": "Application Error",
+      "summary": "2 occurrences in /aws/lambda/posis-geocode-lambda-qa",
+      "count": 2,
+      "firstSeen": "2026-08-27T07:00:29.583Z",
+      "lastSeen": "2026-08-28T07:00:29.911Z",
+      "logGroupName": "/aws/lambda/posis-geocode-lambda-qa",
+      "logStreamName": "2026/08/28/[$LATEST]35cef3c13fb346eb81dc28b5b26c6217",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "2026-08-28T07:00:29.911Z\tundefined\tERROR\t(node:2) [SEQUELIZE0003] DeprecationWarning: String based operators are deprecated. Please use Symbol based operators for better security, read more at https://sequelize.org/master/manual/querying.html#operators\n(Use `node --trace-deprecation ...` to show where the warning was created)\n",
+          "timestamp": "2026-08-28T07:00:29.911Z",
+          "logStreamName": "2026/08/28/[$LATEST]35cef3c13fb346eb81dc28b5b26c6217",
+          "eventId": "39871511927788570162411875094423420793695731702142861313"
+        },
+        {
+          "message": "2026-08-27T07:00:29.583Z\tundefined\tERROR\t(node:2) [SEQUELIZE0003] DeprecationWarning: String based operators are deprecated. Please use Symbol based operators for better security, read more at https://sequelize.org/master/manual/querying.html#operators\n(Use `node --trace-deprecation ...` to show where the warning was created)\n",
+          "timestamp": "2026-08-27T07:00:29.583Z",
+          "logStreamName": "2026/08/27/[$LATEST]501ed2652d6841ae8a9f1a7ec7784906",
+          "eventId": "39869585136088772691454297566052529915926961813193359361"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws%252Flambda%252Fposis-geocode-lambda-qa/log-events/2026%252F08%252F28%252F%255B%2524LATEST%255D35cef3c13fb346eb81dc28b5b26c6217",
+      "sourceAgentId": "worker-/aws/lambda/posis-geocode-lambda-qa",
+      "confidence": "medium",
+      "affectedStreams": 2,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "5ab44455-3fed-461c-9071-be73c9217cca",
+      "category": "application",
+      "severity": "low",
+      "title": "Application Error",
+      "summary": "1 occurrence in /aws/lambda/posis-pos-polygon-qa",
+      "count": 1,
+      "firstSeen": "2026-08-27T07:00:28.638Z",
+      "lastSeen": "2026-08-27T07:00:28.638Z",
+      "logGroupName": "/aws/lambda/posis-pos-polygon-qa",
+      "logStreamName": "2026/08/27/[$LATEST]54eb3204d804414f9f81aa685e97967f",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "2026-08-27T07:00:28.638Z\tundefined\tERROR\t(node:2) [SEQUELIZE0003] DeprecationWarning: String based operators are deprecated. Please use Symbol based operators for better security, read more at https://sequelize.org/master/manual/querying.html#operators\n(Use `node --trace-deprecation ...` to show where the warning was created)\n",
+          "timestamp": "2026-08-27T07:00:28.638Z",
+          "logStreamName": "2026/08/27/[$LATEST]54eb3204d804414f9f81aa685e97967f",
+          "eventId": "39869585115014568478842858698175294503692606690190688257"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws%252Flambda%252Fposis-pos-polygon-qa/log-events/2026%252F08%252F27%252F%255B%2524LATEST%255D54eb3204d804414f9f81aa685e97967f",
+      "sourceAgentId": "worker-/aws/lambda/posis-pos-polygon-qa",
+      "confidence": "medium",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "addc1b02-a3ad-4f8a-b62b-425590fa0140",
+      "category": "application",
+      "severity": "low",
+      "title": "Application Error",
+      "summary": "1 occurrence in /ecs/posis-ar-webui",
+      "count": 1,
+      "firstSeen": "2026-08-26T19:27:34.441Z",
+      "lastSeen": "2026-08-26T19:27:34.441Z",
+      "logGroupName": "/ecs/posis-ar-webui",
+      "logStreamName": "posis-ar-webui-log/posis-ar-webui/e19d6168935144e78a9620fb13352d20",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "URIError: Failed to decode param '/static/js%c0%a7%c0%a2%252527%252522\\'\\\"/main.chunk.js'\n    at decodeURIComponent (<anonymous>)\n    at decode_param (/usr/src/app/node_modules/express/lib/router/layer.js:172:12)\n    at Layer.match (/usr/src/app/node_modules/express/lib/router/layer.js:123:27)\n    at matchLayer (/usr/src/app/node_modules/express/lib/router/index.js:574:18)\n    at next (/usr/src/ap",
+          "timestamp": "2026-08-26T19:27:34.441Z",
+          "logStreamName": "posis-ar-webui-log/posis-ar-webui/e19d6168935144e78a9620fb13352d20",
+          "eventId": "39868657979440437962605877822967080051834817834795859968"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Fecs%252Fposis-ar-webui/log-events/posis-ar-webui-log%252Fposis-ar-webui%252Fe19d6168935144e78a9620fb13352d20",
+      "sourceAgentId": "worker-/ecs/posis-ar-webui",
+      "confidence": "medium",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "96e10a7f-d5ca-4d3c-a3fe-9aa6fa5a3ac5",
+      "category": "application",
+      "severity": "low",
+      "title": "Application Error",
+      "summary": "1 occurrence in /ecs/posis-ar-webui",
+      "count": 1,
+      "firstSeen": "2026-08-26T19:27:34.441Z",
+      "lastSeen": "2026-08-26T19:27:34.441Z",
+      "logGroupName": "/ecs/posis-ar-webui",
+      "logStreamName": "posis-ar-webui-log/posis-ar-webui/e19d6168935144e78a9620fb13352d20",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "URIError: Failed to decode param '/static/js%c0%a7%c0%a2%252527%252522\\'\\\"/bundle.js'\n    at decodeURIComponent (<anonymous>)\n    at decode_param (/usr/src/app/node_modules/express/lib/router/layer.js:172:12)\n    at Layer.match (/usr/src/app/node_modules/express/lib/router/layer.js:123:27)\n    at matchLayer (/usr/src/app/node_modules/express/lib/router/index.js:574:18)\n    at next (/usr/src/app/no",
+          "timestamp": "2026-08-26T19:27:34.441Z",
+          "logStreamName": "posis-ar-webui-log/posis-ar-webui/e19d6168935144e78a9620fb13352d20",
+          "eventId": "39868657979440437962605877859221807825940900310990716928"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Fecs%252Fposis-ar-webui/log-events/posis-ar-webui-log%252Fposis-ar-webui%252Fe19d6168935144e78a9620fb13352d20",
+      "sourceAgentId": "worker-/ecs/posis-ar-webui",
+      "confidence": "medium",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "02b16f5f-eedb-4a96-9203-b205a6e051c5",
+      "category": "application",
+      "severity": "low",
+      "title": "Application Error",
+      "summary": "1 occurrence in /ecs/posis-ar-webui",
+      "count": 1,
+      "firstSeen": "2026-08-26T19:27:34.441Z",
+      "lastSeen": "2026-08-26T19:27:34.441Z",
+      "logGroupName": "/ecs/posis-ar-webui",
+      "logStreamName": "posis-ar-webui-log/posis-ar-webui/e19d6168935144e78a9620fb13352d20",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "URIError: Failed to decode param '/static/js%c0%a7%c0%a2%252527%252522\\'\\\"/vendors~main.chunk.js'\n    at decodeURIComponent (<anonymous>)\n    at decode_param (/usr/src/app/node_modules/express/lib/router/layer.js:172:12)\n    at Layer.match (/usr/src/app/node_modules/express/lib/router/layer.js:123:27)\n    at matchLayer (/usr/src/app/node_modules/express/lib/router/index.js:574:18)\n    at next (/us",
+          "timestamp": "2026-08-26T19:27:34.441Z",
+          "logStreamName": "posis-ar-webui-log/posis-ar-webui/e19d6168935144e78a9620fb13352d20",
+          "eventId": "39868657979440437962605877871309463234474225097395142656"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Fecs%252Fposis-ar-webui/log-events/posis-ar-webui-log%252Fposis-ar-webui%252Fe19d6168935144e78a9620fb13352d20",
+      "sourceAgentId": "worker-/ecs/posis-ar-webui",
+      "confidence": "medium",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "528cc40f-a277-4641-bfa9-cbd389881a48",
+      "category": "application",
+      "severity": "low",
+      "title": "Application Error",
+      "summary": "1 occurrence in /ecs/posis-ar-webui",
+      "count": 1,
+      "firstSeen": "2026-08-26T19:27:34.441Z",
+      "lastSeen": "2026-08-26T19:27:34.441Z",
+      "logGroupName": "/ecs/posis-ar-webui",
+      "logStreamName": "posis-ar-webui-log/posis-ar-webui/e19d6168935144e78a9620fb13352d20",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "URIError: Failed to decode param '/sockjs-node%c0%a7%c0%a2%252527%252522\\'\\\"'\n    at decodeURIComponent (<anonymous>)\n    at decode_param (/usr/src/app/node_modules/express/lib/router/layer.js:172:12)\n    at Layer.match (/usr/src/app/node_modules/express/lib/router/layer.js:123:27)\n    at matchLayer (/usr/src/app/node_modules/express/lib/router/index.js:574:18)\n    at next (/usr/src/app/node_modul",
+          "timestamp": "2026-08-26T19:27:34.441Z",
+          "logStreamName": "posis-ar-webui-log/posis-ar-webui/e19d6168935144e78a9620fb13352d20",
+          "eventId": "39868657979440437962605877889449497303184040543688916992"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Fecs%252Fposis-ar-webui/log-events/posis-ar-webui-log%252Fposis-ar-webui%252Fe19d6168935144e78a9620fb13352d20",
+      "sourceAgentId": "worker-/ecs/posis-ar-webui",
+      "confidence": "medium",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "4ac125dd-1b7f-47ba-8259-647e8c0e6a29",
+      "category": "application",
+      "severity": "low",
+      "title": "Application Error",
+      "summary": "1 occurrence in /ecs/posis-ar-webui",
+      "count": 1,
+      "firstSeen": "2026-08-27T11:27:21.678Z",
+      "lastSeen": "2026-08-27T11:27:21.678Z",
+      "logGroupName": "/ecs/posis-ar-webui",
+      "logStreamName": "posis-ar-webui-log/posis-ar-webui/026978ef9e7e400d9152893cb25cb225",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "URIError: Failed to decode param '/static/js/main.chunk.js%c0%a7%c0%a2%252527%252522\\'\\\"'\n    at decodeURIComponent (<anonymous>)\n    at decode_param (/usr/src/app/node_modules/express/lib/router/layer.js:172:12)\n    at Layer.match (/usr/src/app/node_modules/express/lib/router/layer.js:123:27)\n    at matchLayer (/usr/src/app/node_modules/express/lib/router/index.js:574:18)\n    at next (/usr/src/ap",
+          "timestamp": "2026-08-27T11:27:21.678Z",
+          "logStreamName": "posis-ar-webui-log/posis-ar-webui/026978ef9e7e400d9152893cb25cb225",
+          "eventId": "39869942217739462357652487127668181524174957429708554240"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Fecs%252Fposis-ar-webui/log-events/posis-ar-webui-log%252Fposis-ar-webui%252F026978ef9e7e400d9152893cb25cb225",
+      "sourceAgentId": "worker-/ecs/posis-ar-webui",
+      "confidence": "medium",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "d2c4a1f8-13d3-452f-a66d-3337364f29ff",
+      "category": "access_denied",
+      "severity": "low",
+      "title": "Access Denied",
+      "summary": "1 occurrence in /aws-glue/jobs/error",
+      "count": 1,
+      "firstSeen": "2026-08-26T12:16:22.583Z",
+      "lastSeen": "2026-08-26T12:16:22.583Z",
+      "logGroupName": "/aws-glue/jobs/error",
+      "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "Warn: Failed to download analyzer rules from glue assets s3 path to /tmp/glue_app_analyzer_rules, Error: Access Denied (Service: Amazon S3; Status Code: 403; Error Code: AccessDenied; Request ID: CFPVKKB5MAPCSHRQ; S3 Extended Request ID: 4QCeck6EGz+KoVicUNaIK+B01SWONah2DbJ3zyqIktK6DgtOrTFenWaYQRUL0SJy6bmaEgWomxE=; Proxy: null)\n",
+          "timestamp": "2026-08-26T12:16:22.583Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104",
+          "eventId": "39868081017727367396515188867690304329008078908069445632"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fjobs%252Ferror/log-events/jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104",
+      "sourceAgentId": "worker-/aws-glue/jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "ff9fcc1e-7bcb-4630-9188-82bc08c28441",
+      "category": "access_denied",
+      "severity": "low",
+      "title": "Access Denied",
+      "summary": "1 occurrence in /aws-glue/jobs/error",
+      "count": 1,
+      "firstSeen": "2026-08-26T14:15:46.284Z",
+      "lastSeen": "2026-08-26T14:15:46.284Z",
+      "logGroupName": "/aws-glue/jobs/error",
+      "logStreamName": "jr_44227e20ea85b69c33e6936b64b1da5b07b858ac7a707ec9398875d59f4020b9",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "Warn: Failed to download analyzer rules from glue assets s3 path to /tmp/glue_app_analyzer_rules, Error: Access Denied (Service: Amazon S3; Status Code: 403; Error Code: AccessDenied; Request ID: DTE6FE34HH27QG53; S3 Extended Request ID: 8/dwdIxEqGPDY3N84scq6Du94hRSWjVs/GVT7MhW6baCIG1zvT6PNqKq7wP4dDCuqICpYoeWYEEQlIUu5+gUHuY92YCmSq+Y; Proxy: null)\n",
+          "timestamp": "2026-08-26T14:15:46.284Z",
+          "logStreamName": "jr_44227e20ea85b69c33e6936b64b1da5b07b858ac7a707ec9398875d59f4020b9",
+          "eventId": "39868240773598046855538727170712913534458515707220721664"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fjobs%252Ferror/log-events/jr_44227e20ea85b69c33e6936b64b1da5b07b858ac7a707ec9398875d59f4020b9",
+      "sourceAgentId": "worker-/aws-glue/jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "a5015434-f755-42b1-bed4-18f1e93f4e02",
+      "category": "access_denied",
+      "severity": "low",
+      "title": "Access Denied",
+      "summary": "1 occurrence in /aws-glue/jobs/error",
+      "count": 1,
+      "firstSeen": "2026-08-26T14:15:49.999Z",
+      "lastSeen": "2026-08-26T14:15:49.999Z",
+      "logGroupName": "/aws-glue/jobs/error",
+      "logStreamName": "jr_256a2d5445cc00c4fa0fc25c4a54a6c2ecb13317521d9d6dfd8e695e7423948a",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "Warn: Failed to download analyzer rules from glue assets s3 path to /tmp/glue_app_analyzer_rules, Error: Access Denied (Service: Amazon S3; Status Code: 403; Error Code: AccessDenied; Request ID: YC8BYZP47T5V0RMX; S3 Extended Request ID: k2nikD6O9yecnhgZqjBhQyvbOQMfuuXsSNw/697ICDdP9mw5hjdRn5HSl2MFhnxWlmOaTYNLX1wEGr1HbRPNl8HKZlUBeLtW; Proxy: null)\n",
+          "timestamp": "2026-08-26T14:15:49.999Z",
+          "logStreamName": "jr_256a2d5445cc00c4fa0fc25c4a54a6c2ecb13317521d9d6dfd8e695e7423948a",
+          "eventId": "39868240856445315268079992146219753261642467846929580032"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fjobs%252Ferror/log-events/jr_256a2d5445cc00c4fa0fc25c4a54a6c2ecb13317521d9d6dfd8e695e7423948a",
+      "sourceAgentId": "worker-/aws-glue/jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "eba8df35-f602-4d3d-97fa-21646cc3498c",
+      "category": "access_denied",
+      "severity": "low",
+      "title": "Access Denied",
+      "summary": "1 occurrence in /aws/lambda/posis-email-service",
+      "count": 1,
+      "firstSeen": "2026-08-26T11:32:35.869Z",
+      "lastSeen": "2026-08-26T11:32:35.869Z",
+      "logGroupName": "/aws/lambda/posis-email-service",
+      "logStreamName": "2026/08/26/[$LATEST]a1151034766445bcaab4e809504cfbb5",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "ERROR: An error occurred (AccessDeniedException) when calling the GetSecretValue operation: Access to KMS is not allowed\n",
+          "timestamp": "2026-08-26T11:32:35.869Z",
+          "logStreamName": "2026/08/26/[$LATEST]a1151034766445bcaab4e809504cfbb5",
+          "eventId": "39868022440047743983347951106330008635103848770936045575"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws%252Flambda%252Fposis-email-service/log-events/2026%252F08%252F26%252F%255B%2524LATEST%255Da1151034766445bcaab4e809504cfbb5",
+      "sourceAgentId": "worker-/aws/lambda/posis-email-service",
+      "confidence": "high",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "f3a5574d-ac5b-45b9-bb13-6e88cac2954d",
+      "category": "throttling",
+      "severity": "low",
+      "title": "Throttling",
+      "summary": "1 occurrence in /aws-glue/jobs/error",
+      "count": 1,
+      "firstSeen": "2026-08-26T12:16:42.430Z",
+      "lastSeen": "2026-08-26T12:16:42.430Z",
+      "logGroupName": "/aws-glue/jobs/error",
+      "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "2026-08-26 12:16:42,429 INFO [Thread-8] storage.DiskBlockManager (Logging.scala:logInfo(57)): Created local directory at /tmp/blockmgr-cf027289-d1a0-46e1-8682-99d10d6ffe0d\n",
+          "timestamp": "2026-08-26T12:16:42.430Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104",
+          "eventId": "39868081460330257351752466381881127055498287432843591686"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fjobs%252Ferror/log-events/jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104",
+      "sourceAgentId": "worker-/aws-glue/jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "74951fb5-4225-4f98-b86a-009c03023f1a",
+      "category": "throttling",
+      "severity": "low",
+      "title": "Throttling",
+      "summary": "1 occurrence in /aws-glue/jobs/error",
+      "count": 1,
+      "firstSeen": "2026-08-26T12:17:14.429Z",
+      "lastSeen": "2026-08-26T12:17:14.429Z",
+      "logGroupName": "/aws-glue/jobs/error",
+      "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-fd25dfec5008d0550842dc8dc7ec49abd44c3b3f",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "2026-08-26 12:17:14,429 - __main__ - INFO - Glue ETL Marketplace - using region: eu-west-1, proxy: 169.254.76.0:8888 and glue endpoint: https://glue.eu-west-1.amazonaws.com to get connection: posis_qa_mysql8_jdbc_conn\n",
+          "timestamp": "2026-08-26T12:17:14.429Z",
+          "logStreamName": "jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-fd25dfec5008d0550842dc8dc7ec49abd44c3b3f",
+          "eventId": "39868082173931802959533876326349430287078330963630555136"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fjobs%252Ferror/log-events/jr_6ffaebbed6f8ff81964b302a2ce837f0c9667a0253d776580a9eb52d0547f104_g-fd25dfec5008d0550842dc8dc7ec49abd44c3b3f",
+      "sourceAgentId": "worker-/aws-glue/jobs/error",
+      "confidence": "medium",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "dd9da940-949b-4e5d-8901-5011dbe9bb58",
+      "category": "throttling",
+      "severity": "low",
+      "title": "Throttling",
+      "summary": "1 occurrence in /aws-glue/python-jobs/output",
+      "count": 1,
+      "firstSeen": "2026-08-27T05:46:54.429Z",
+      "lastSeen": "2026-08-27T05:46:54.429Z",
+      "logGroupName": "/aws-glue/python-jobs/output",
+      "logStreamName": "jr_3ce53cfd98c8624983f928c2180a29a6d69bbd16af4d775614e2b07fe173de55",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "[shell_run_sp_with_params][INFO] 2026-08-27 05:46:54,429: \n----------------- Running OLAP stored procedures ------------------------\n",
+          "timestamp": "2026-08-27T05:46:54.429Z",
+          "logStreamName": "jr_3ce53cfd98c8624983f928c2180a29a6d69bbd16af4d775614e2b07fe173de55",
+          "eventId": "39869486674864406418179406384466103920949350214666944512"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fpython-jobs%252Foutput/log-events/jr_3ce53cfd98c8624983f928c2180a29a6d69bbd16af4d775614e2b07fe173de55",
+      "sourceAgentId": "worker-/aws-glue/python-jobs/output",
+      "confidence": "medium",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    },
+    {
+      "id": "2e5a2778-0436-40e7-965a-080d6414489b",
+      "category": "throttling",
+      "severity": "low",
+      "title": "Throttling",
+      "summary": "1 occurrence in /aws-glue/python-jobs/output",
+      "count": 1,
+      "firstSeen": "2026-08-27T05:46:54.430Z",
+      "lastSeen": "2026-08-27T05:46:54.430Z",
+      "logGroupName": "/aws-glue/python-jobs/output",
+      "logStreamName": "jr_3ce53cfd98c8624983f928c2180a29a6d69bbd16af4d775614e2b07fe173de55",
+      "region": "eu-west-1",
+      "evidence": [
+        {
+          "message": "[shell_run_sp_with_params][INFO] 2026-08-27 05:46:54,429: Run Date and Time: 27-08-2026 05:46:54\n",
+          "timestamp": "2026-08-27T05:46:54.430Z",
+          "logStreamName": "jr_3ce53cfd98c8624983f928c2180a29a6d69bbd16af4d775614e2b07fe173de55",
+          "eventId": "39869486674886707163377937007607639639221998576172924929"
+        }
+      ],
+      "cloudWatchUrl": "https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups/log-group/%252Faws-glue%252Fpython-jobs%252Foutput/log-events/jr_3ce53cfd98c8624983f928c2180a29a6d69bbd16af4d775614e2b07fe173de55",
+      "sourceAgentId": "worker-/aws-glue/python-jobs/output",
+      "confidence": "medium",
+      "affectedStreams": 1,
+      "recurrence": {
+        "isRecurring": false,
+        "description": null
+      }
+    }
+  ],
+  "logGroupAnalyses": [
+    {
+      "logGroupName": "/apigateway/5j9whasdn7/qa",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/apigateway/wwk0pq9ea0/qa",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/apigateway/wwk0pq9ea0/undefined",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws-glue/crawlers",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws-glue/jobs/error",
+      "status": "Issues",
+      "findingCount": 11,
+      "criticalCount": 0,
+      "lastEventTime": "2026-08-26T14:15:53.756Z",
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws-glue/jobs/logs-v2",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws-glue/jobs/output",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws-glue/python-jobs/error",
+      "status": "Critical",
+      "findingCount": 5,
+      "criticalCount": 1,
+      "lastEventTime": "2026-08-28T15:59:28.098Z",
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws-glue/python-jobs/output",
+      "status": "Issues",
+      "findingCount": 2,
+      "criticalCount": 0,
+      "lastEventTime": "2026-08-27T05:46:54.430Z",
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/apigateway/welcome",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/ecs/containerinsights/posis-qa/performance",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/events/aws_patching",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda-insights",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/CdmSalesOutboundFileGenerationNodejs_lambda_function",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/DEEP-Patching-Helper",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/DEEP-Patching-Logger",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/DEEP-ssm-log-parser",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/OLAP-RDS-STOP",
+      "status": "Issues",
+      "findingCount": 1,
+      "criticalCount": 0,
+      "lastEventTime": "2026-08-30T13:30:35.043Z",
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/appstream_scaling_policy",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/deep-appstream-scaling-policy",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-call-data-validation-sp",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-call-data-validation-storedprocedure",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-copy-files-to-dsd-sales",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-copy-tables",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-create-update-mail-templates",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-email-service",
+      "status": "Issues",
+      "findingCount": 1,
+      "criticalCount": 0,
+      "lastEventTime": "2026-08-26T11:32:35.869Z",
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-geocode-lambda-qa",
+      "status": "Issues",
+      "findingCount": 1,
+      "criticalCount": 0,
+      "lastEventTime": "2026-08-28T07:00:29.911Z",
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-geojson-qa",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-imdl-sync",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-ingestion-lambda",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-keyPosBulkUpdate-InboundFileDateCleanup-qa",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-move-files-to-dsdsales",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-opsbuddy",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-opsbuddy-ondemand",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-pos-polygon-qa",
+      "status": "Issues",
+      "findingCount": 1,
+      "criticalCount": 0,
+      "lastEventTime": "2026-08-27T07:00:28.638Z",
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-qa-geojson-process-lambda",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-ses",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-unzip-and-ingestion-processing",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-unzip-to-api-preprocessing",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/posis-unzip-to-preprocessing",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/sellout-api-processing",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/sellout-notify-file-lambda-job",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/sellout-ses-job",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/sellout-unified-submission-job",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/ssm-s3-policy-lambda",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/lambda/testlambda",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/sagemaker/NotebookInstances",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/transfer/s-b805842411c24db49",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/aws/transfer/s-d312e081f3d249afb",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/deep/patching",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/ec2-linux/qa",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/ec2-linux/qa/lcs",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/ec2-win/qa",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/ec2-win/qa/lcs",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/ec2/ssm-logs",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/ecs/posis-ar-backend-service",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/ecs/posis-ar-backend-service-api",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/ecs/posis-ar-interface-service-olap",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/ecs/posis-ar-interface-service-oltp",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/ecs/posis-ar-webui",
+      "status": "Issues",
+      "findingCount": 5,
+      "criticalCount": 0,
+      "lastEventTime": "2026-08-27T11:27:21.678Z",
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/ecs/posis-ar-wmt-webui",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/ecs/posis-ar-wmt-webui-new",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "/ecs/posis-interface-service-oltp-rest-api",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "API-Gateway-Execution-Logs_598cukiatd/qa",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "API-Gateway-Execution-Logs_5j9whasdn7/qa",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "API-Gateway-Execution-Logs_e3ews5w5e0/dev",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "API-Gateway-Execution-Logs_wwk0pq9ea0/qa",
+      "status": "Healthy",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "COMPLETED",
+      "workerError": null
+    },
+    {
+      "logGroupName": "api-gateway",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    },
+    {
+      "logGroupName": "dms-tasks-posis-dms-replica-instance",
+      "status": "No Data",
+      "findingCount": 0,
+      "criticalCount": 0,
+      "lastEventTime": null,
+      "workerStatus": "NO_DATA",
+      "workerError": null
+    }
+  ],
+  "workers": [
+    {
+      "agentId": "9d4f429d-0e4e-49fb-849c-8c3d72695b32",
+      "agentType": "timeout-analysis",
+      "label": "Timeout Analysis Agent",
+      "status": "COMPLETED",
+      "startedAt": "2026-09-02T11:31:53.070Z",
+      "completedAt": "2026-09-02T11:31:53.073Z",
+      "findingCount": 3
+    },
+    {
+      "agentId": "6eaf7210-52a5-4c31-96af-cab21d2b9473",
+      "agentType": "error-analysis",
+      "label": "Error Analysis Agent",
+      "status": "COMPLETED",
+      "startedAt": "2026-09-02T11:31:53.095Z",
+      "completedAt": "2026-09-02T11:31:53.099Z",
+      "findingCount": 15
+    },
+    {
+      "agentId": "ff98610a-cc01-4736-bf67-91fc7317e726",
+      "agentType": "aws-failure-analysis",
+      "label": "AWS Failure Analysis Agent",
+      "status": "COMPLETED",
+      "startedAt": "2026-09-02T11:31:53.116Z",
+      "completedAt": "2026-09-02T11:31:53.136Z",
+      "findingCount": 8
+    },
+    {
+      "agentId": "86968bff-2e18-4045-bc7e-e88297ee7038",
+      "agentType": "network-analysis",
+      "label": "Network Analysis Agent",
+      "status": "COMPLETED",
+      "startedAt": "2026-09-02T11:31:53.170Z",
+      "completedAt": "2026-09-02T11:31:53.185Z",
+      "findingCount": 1
+    },
+    {
+      "agentId": "19476dac-8b09-4e0c-8af4-29b67954884f",
+      "agentType": "pattern-analysis",
+      "label": "Pattern / Recurrence Agent",
+      "status": "COMPLETED",
+      "startedAt": "2026-09-02T11:31:53.247Z",
+      "completedAt": "2026-09-02T11:31:53.261Z",
+      "findingCount": 27
+    },
+    {
+      "agentId": "f5c7db4d-d786-4f26-b263-d30cdbd7f205",
+      "agentType": "correlation",
+      "label": "Correlation Agent",
+      "status": "COMPLETED",
+      "startedAt": "2026-09-02T11:31:53.300Z",
+      "completedAt": "2026-09-02T11:31:53.321Z",
+      "findingCount": 25
+    },
+    {
+      "agentId": "b7e2936b-6b0f-4837-bb20-76bfa56a8689",
+      "agentType": "root-cause",
+      "label": "Root Cause Analysis Agent",
+      "status": "COMPLETED",
+      "startedAt": "2026-09-02T11:31:53.386Z",
+      "completedAt": "2026-09-02T11:31:58.104Z",
+      "findingCount": 0
+    },
+    {
+      "agentId": "d3436bce-7b80-41d3-a654-d6aa0bfabfe3",
+      "agentType": "report-synthesis",
+      "label": "Report Synthesis Agent",
+      "status": "COMPLETED",
+      "startedAt": "2026-09-02T11:31:58.146Z",
+      "completedAt": "2026-09-02T11:32:01.387Z",
+      "findingCount": 0
+    }
+  ],
+  "correlations": [
+    {
+      "id": "eceb9a87-2e1f-4fa3-8ac4-d6e6489e92cc",
+      "findingIds": [
+        "28d2f5bd-bb08-48d7-bc97-9f13f25a826a",
+        "92e47312-5d3a-45d9-8ba3-71e09c88ac62"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/python-jobs/error within overlapping time windows."
+    },
+    {
+      "id": "ec663666-8ddf-4991-903a-9c8f86e0da4c",
+      "findingIds": [
+        "28d2f5bd-bb08-48d7-bc97-9f13f25a826a",
+        "04415c07-c6fb-4feb-8120-73e7875dece4"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/python-jobs/error within overlapping time windows."
+    },
+    {
+      "id": "bd100db8-8176-4a8a-97e6-7a6184acd963",
+      "findingIds": [
+        "28d2f5bd-bb08-48d7-bc97-9f13f25a826a",
+        "38b7fe41-f9b7-4a7e-81a8-0c816b1de56d"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/python-jobs/error within overlapping time windows."
+    },
+    {
+      "id": "f722b765-266d-41c0-8b33-867c9c0e1c85",
+      "findingIds": [
+        "28d2f5bd-bb08-48d7-bc97-9f13f25a826a",
+        "628f303a-1660-44c3-82b3-564b46b0c15c"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/python-jobs/error within overlapping time windows."
+    },
+    {
+      "id": "0a01ec97-d1b2-4905-97de-20b7543cb6d2",
+      "findingIds": [
+        "92e47312-5d3a-45d9-8ba3-71e09c88ac62",
+        "04415c07-c6fb-4feb-8120-73e7875dece4"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/python-jobs/error within overlapping time windows."
+    },
+    {
+      "id": "481abc14-aeb2-4235-92b7-ab7112917d3a",
+      "findingIds": [
+        "92e47312-5d3a-45d9-8ba3-71e09c88ac62",
+        "38b7fe41-f9b7-4a7e-81a8-0c816b1de56d"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/python-jobs/error within overlapping time windows."
+    },
+    {
+      "id": "1a03c007-d81f-42bc-aae9-7796ca8d9131",
+      "findingIds": [
+        "92e47312-5d3a-45d9-8ba3-71e09c88ac62",
+        "628f303a-1660-44c3-82b3-564b46b0c15c"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/python-jobs/error within overlapping time windows."
+    },
+    {
+      "id": "0c7ea964-f816-4fe4-9e02-a9a9e6529d18",
+      "findingIds": [
+        "04415c07-c6fb-4feb-8120-73e7875dece4",
+        "38b7fe41-f9b7-4a7e-81a8-0c816b1de56d"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/python-jobs/error within overlapping time windows."
+    },
+    {
+      "id": "3ec2725e-bb6c-4c9b-b9cc-6a1bd0563c36",
+      "findingIds": [
+        "04415c07-c6fb-4feb-8120-73e7875dece4",
+        "628f303a-1660-44c3-82b3-564b46b0c15c"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/python-jobs/error within overlapping time windows."
+    },
+    {
+      "id": "483234fd-c507-4cfb-8111-5d91b27889ca",
+      "findingIds": [
+        "38b7fe41-f9b7-4a7e-81a8-0c816b1de56d",
+        "628f303a-1660-44c3-82b3-564b46b0c15c"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/python-jobs/error within overlapping time windows."
+    },
+    {
+      "id": "4b3133b1-c66b-4c07-b55a-e5b22617d65a",
+      "findingIds": [
+        "3fffa21f-8efa-4f96-8ac9-884f4f468d64",
+        "96888668-e509-47bf-a3c0-addb6c34af7d"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "1eb64645-1ab5-4343-bb0e-67bf9c36a495",
+      "findingIds": [
+        "3fffa21f-8efa-4f96-8ac9-884f4f468d64",
+        "d1dcfcf3-eaee-4128-8dea-c9223b37f3e4"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "2317101e-a54c-483f-9438-e957b1970508",
+      "findingIds": [
+        "3fffa21f-8efa-4f96-8ac9-884f4f468d64",
+        "83b4ae2b-614e-45e5-a692-fef10962d68f"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "76065251-5dd9-402e-81ca-2fddbabe76e3",
+      "findingIds": [
+        "3fffa21f-8efa-4f96-8ac9-884f4f468d64",
+        "97000a6e-7d23-4972-8f62-dca11bb9c427"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "c6191431-8166-45f8-ba89-bf77b905fef1",
+      "findingIds": [
+        "3fffa21f-8efa-4f96-8ac9-884f4f468d64",
+        "8fec3505-820d-49ea-a257-a8bf88453520"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "17a82298-0c9c-4336-a38a-4c737104d50b",
+      "findingIds": [
+        "96888668-e509-47bf-a3c0-addb6c34af7d",
+        "d1dcfcf3-eaee-4128-8dea-c9223b37f3e4"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "884d42ed-9161-4fb4-9a08-7945901fc7da",
+      "findingIds": [
+        "96888668-e509-47bf-a3c0-addb6c34af7d",
+        "83b4ae2b-614e-45e5-a692-fef10962d68f"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "b32290b0-17d0-4d8d-b0e5-867a87546da6",
+      "findingIds": [
+        "96888668-e509-47bf-a3c0-addb6c34af7d",
+        "97000a6e-7d23-4972-8f62-dca11bb9c427"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "d2cd08f2-2b41-412a-9eeb-c9e3db2ca194",
+      "findingIds": [
+        "96888668-e509-47bf-a3c0-addb6c34af7d",
+        "8fec3505-820d-49ea-a257-a8bf88453520"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "4eb6add1-0459-46f4-b810-d4a49e4dbcd5",
+      "findingIds": [
+        "d1dcfcf3-eaee-4128-8dea-c9223b37f3e4",
+        "83b4ae2b-614e-45e5-a692-fef10962d68f"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "481ce251-3a20-4f23-986a-3335e16e10d9",
+      "findingIds": [
+        "d1dcfcf3-eaee-4128-8dea-c9223b37f3e4",
+        "97000a6e-7d23-4972-8f62-dca11bb9c427"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "620ae943-5d73-4068-bd29-06450b2d47f8",
+      "findingIds": [
+        "d1dcfcf3-eaee-4128-8dea-c9223b37f3e4",
+        "8fec3505-820d-49ea-a257-a8bf88453520"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "858add46-6173-431c-89fb-dd71daa8baf3",
+      "findingIds": [
+        "83b4ae2b-614e-45e5-a692-fef10962d68f",
+        "97000a6e-7d23-4972-8f62-dca11bb9c427"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "cc81b2e0-0d55-4850-a845-c3fe1db3ec27",
+      "findingIds": [
+        "83b4ae2b-614e-45e5-a692-fef10962d68f",
+        "8fec3505-820d-49ea-a257-a8bf88453520"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    },
+    {
+      "id": "157c1a30-1f64-421e-a5f2-553995c2aeed",
+      "findingIds": [
+        "97000a6e-7d23-4972-8f62-dca11bb9c427",
+        "8fec3505-820d-49ea-a257-a8bf88453520"
+      ],
+      "relationship": "OBSERVED",
+      "reason": "Both findings occurred in /aws-glue/jobs/error within overlapping time windows."
+    }
+  ],
+  "kpis": {
+    "totalFindings": 27,
+    "criticalCount": 1,
+    "categoryCounts": {
+      "timeout": 3,
+      "exception": 2,
+      "application": 13,
+      "access_denied": 4,
+      "throttling": 4,
+      "network": 1
+    },
+    "severityCounts": {
+      "critical": 1,
+      "high": 3,
+      "medium": 8,
+      "low": 15,
+      "info": 0
+    },
+    "affectedGroupsCount": 8,
+    "trend": [
+      {
+        "bucketLabel": "2026-08-27",
+        "count": 20
+      },
+      {
+        "bucketLabel": "2026-08-28",
+        "count": 2
+      },
+      {
+        "bucketLabel": "2026-08-29",
+        "count": 4
+      },
+      {
+        "bucketLabel": "2026-08-30",
+        "count": 0
+      },
+      {
+        "bucketLabel": "2026-08-31",
+        "count": 1
+      },
+      {
+        "bucketLabel": "2026-09-01",
+        "count": 0
+      },
+      {
+        "bucketLabel": "2026-09-02",
+        "count": 0
+      }
+    ]
+  },
+  "rootCause": "**Likely cause:** AWS Glue Python jobs are experiencing widespread application failures driven by a critical error in the primary job process.\n\n**Confidence:** high\n\n**Supporting evidence:**\n- Finding ID 28d2f5bd-bb08-48d7-bc97-9f13f25a826a (critical severity, 27 occurrences) in /aws-glue/python-jobs/error dominates the incident\n- Four additional high-severity findings (IDs 92e47312-5d3a-45d9-8ba3-71e09c88ac62 with 19 counts, 04415c07-c6fb-4feb-8120-73e7875dece4 with 14 counts, 38b7fe41-f9b7-4a7e-81a8-0c816b1de56d with 13 counts) all correlate within the same log group with overlapping timeframes (2026-08-26 through 2026-08-28)\n- All top correlations (10 documented) show OBSERVED relationships among these five findings in /aws-glue/python-jobs/error\n- Category breakdown shows 13 application-level errors as the primary issue type\n- Peak occurrence on 2026-08-27 (20 findings) indicates acute failure window concentrated around job execution processes",
+  "executiveSummary": "- Is anything wrong: Yes, 1 critical finding and 3 high severity findings detected across 27 total findings\n- Biggest issue: Application error in /aws-glue/python-jobs/error affecting all 27 findings with critical severity\n- Where: AWS Glue Python jobs error log group with 8 affected groups across the infrastructure\n- Recurring: Yes, spike of 20 findings on 2026-08-27 followed by ongoing occurrences totaling 7 findings through 2026-09-02\n- Investigate first: Application category errors (13 findings) and access_denied issues (4 findings) after addressing the critical Glue Python job error",
+  "error": null
+}

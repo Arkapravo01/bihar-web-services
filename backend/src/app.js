@@ -1,11 +1,14 @@
 import express from 'express'
 import cors from 'cors'
 import { PORT } from './config/env.js'
+import { rebuildIndexFromDisk } from './agents/report-agent/store.js'
 import { AWS_REGION, S3_PROFILE, CLOUDWATCH_PROFILE, IAM_PROFILE, LAMBDA_PROFILE, SECRETS_PROFILE, RDS_PROFILE, ECS_PROFILE, EVENTBRIDGE_PROFILE, GLUE_PROFILE } from './config/aws.js'
 import { requestIdMiddleware } from './middleware/requestId.middleware.js'
 import { loggingMiddleware } from './middleware/logging.middleware.js'
 import { errorMiddleware } from './middleware/error.middleware.js'
 import { apiRouter } from './routes/index.js'
+
+rebuildIndexFromDisk().catch(console.error)
 
 const app = express()
 

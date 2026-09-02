@@ -13,6 +13,7 @@ const AGENT_REGISTRY = {
   rds: { name: 'RDS', description: 'Manages RDS instances, databases, snapshots, backups, security, parameters' },
   cloudwatch: { name: 'CloudWatch', description: 'Analyzes CloudWatch logs, metrics, dashboards, alarms, log insights' },
   secrets: { name: 'Secrets Manager', description: 'Manages secrets, versioning, rotation, access policies' },
+  report: { name: 'Report Agent', description: 'Runs Log Intelligence — analyzes real CloudWatch Logs across all discovered log groups, categorizes failures, and produces an operational report with evidence and CloudWatch deep links' },
 }
 
 // ─── tool definitions ────────────────────────────────────────────────────────

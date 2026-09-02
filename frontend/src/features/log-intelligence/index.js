@@ -1,0 +1,1 @@
+export { logIntelligenceRoutes } from './routes'

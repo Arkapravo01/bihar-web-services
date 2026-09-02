@@ -10,6 +10,7 @@ import { rdsRoutes } from "@/features/rds";
 import { ecsRoutes } from "@/features/ecs";
 import { eventbridgeRoutes } from "@/features/eventbridge";
 import { glueRoutes } from "@/features/glue";
+import { logIntelligenceRoutes } from "@/features/log-intelligence";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
       ...ecsRoutes,
       ...eventbridgeRoutes,
       ...glueRoutes,
+      ...logIntelligenceRoutes,
     ],
   },
 ]);
