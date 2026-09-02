@@ -83,6 +83,7 @@ export async function runAgent({ systemPrompt, toolDefinitions, executeTool, kno
 
   let toolCallCount = 0
   let finalText = ''
+  const orchestrationTrace = []
 
   while (true) {
     const response = await icaChat(messages, toolDefinitions)
@@ -95,16 +96,42 @@ export async function runAgent({ systemPrompt, toolDefinitions, executeTool, kno
 
     for (const tc of msg.tool_calls) {
       toolCallCount++
+      const startTime = Date.now()
       let toolResult
+      let toolStatus = 'success'
+      let toolError = null
+
       if (toolCallCount > MAX_TOOL_CALLS) {
         toolResult = { error: 'Tool call limit reached — summarise findings so far.' }
+        toolStatus = 'error'
+        toolError = 'Tool call limit'
       } else {
         let args
         try { args = JSON.parse(tc.function.arguments) } catch { args = {} }
         console.log(`[${agentTag}] tool: ${tc.function.name}`, JSON.stringify(args).slice(0, 120))
         try { toolResult = await executeTool(tc.function.name, args) }
-        catch (err) { toolResult = { error: err.message } }
+        catch (err) {
+          toolResult = { error: err.message }
+          toolStatus = 'error'
+          toolError = err.message
+        }
       }
+
+      const duration = Date.now() - startTime
+      const outputSummary = JSON.stringify(toolResult).slice(0, 200)
+
+      orchestrationTrace.push({
+        id: `${toolCallCount}`,
+        tool_name: tc.function.name,
+        agent: toolResult.agent || null,
+        input: tc.function.arguments,
+        output_summary: outputSummary,
+        timestamp: new Date().toISOString(),
+        duration_ms: duration,
+        status: toolStatus,
+        error: toolError,
+      })
+
       messages.push({ role: 'tool', tool_call_id: tc.id, content: JSON.stringify(toolResult) })
     }
 
@@ -120,5 +147,6 @@ export async function runAgent({ systemPrompt, toolDefinitions, executeTool, kno
     reply: finalText,
     tool_calls_made: toolCallCount,
     history: messages.filter((m) => m.role !== 'system'),
+    orchestration_trace: orchestrationTrace,
   }
 }

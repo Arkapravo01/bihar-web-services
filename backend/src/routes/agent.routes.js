@@ -4,6 +4,7 @@ import * as agentController from '../controllers/agent.controller.js'
 
 export const agentRouter = Router()
 agentRouter.use(express.json())
+agentRouter.post('/orchestrator/investigate', agentController.investigateOrchestrator)
 agentRouter.post('/cloudwatch/investigate', agentController.investigate)
 agentRouter.post('/s3/investigate', agentController.investigateS3)
 agentRouter.post('/iam/investigate', agentController.investigateIAM)

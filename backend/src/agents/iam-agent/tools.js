@@ -537,76 +537,132 @@ export async function executeTool(name, args) {
     case 'list_user_access_keys':      return listUserAccessKeys(args.userName)
 
     case 'create_user': {
-      const res = await iamClient.send(new CreateUserCommand({ UserName: args.userName, Path: args.path ?? '/' }))
-      return { created: true, user: { name: res.User.UserName, arn: res.User.Arn } }
+      try {
+        const res = await iamClient.send(new CreateUserCommand({ UserName: args.userName, Path: args.path ?? '/' }))
+        return { created: true, user: { name: res.User.UserName, arn: res.User.Arn } }
+      } catch (e) {
+        return { error: e.message, code: e.name }
+      }
     }
     case 'delete_user': {
-      await iamClient.send(new DeleteUserCommand({ UserName: args.userName }))
-      return { deleted: true, userName: args.userName }
+      try {
+        await iamClient.send(new DeleteUserCommand({ UserName: args.userName }))
+        return { deleted: true, userName: args.userName }
+      } catch (e) {
+        return { error: e.message, code: e.name }
+      }
     }
     case 'create_access_key': {
-      const res = await iamClient.send(new CreateAccessKeyCommand({ UserName: args.userName }))
-      return {
-        created: true,
-        accessKeyId: res.AccessKey.AccessKeyId,
-        secretAccessKey: res.AccessKey.SecretAccessKey,
-        status: res.AccessKey.Status,
-        warning: 'This is the only time the secret will be shown.',
+      try {
+        const res = await iamClient.send(new CreateAccessKeyCommand({ UserName: args.userName }))
+        return {
+          created: true,
+          accessKeyId: res.AccessKey.AccessKeyId,
+          secretAccessKey: res.AccessKey.SecretAccessKey,
+          status: res.AccessKey.Status,
+          warning: 'This is the only time the secret will be shown.',
+        }
+      } catch (e) {
+        return { error: e.message, code: e.name }
       }
     }
     case 'delete_access_key': {
-      await iamClient.send(new DeleteAccessKeyCommand({ UserName: args.userName, AccessKeyId: args.accessKeyId }))
-      return { deleted: true, accessKeyId: args.accessKeyId }
+      try {
+        await iamClient.send(new DeleteAccessKeyCommand({ UserName: args.userName, AccessKeyId: args.accessKeyId }))
+        return { deleted: true, accessKeyId: args.accessKeyId }
+      } catch (e) {
+        return { error: e.message, code: e.name }
+      }
     }
     case 'add_user_to_group': {
-      await iamClient.send(new AddUserToGroupCommand({ UserName: args.userName, GroupName: args.groupName }))
-      return { added: true, userName: args.userName, groupName: args.groupName }
+      try {
+        await iamClient.send(new AddUserToGroupCommand({ UserName: args.userName, GroupName: args.groupName }))
+        return { added: true, userName: args.userName, groupName: args.groupName }
+      } catch (e) {
+        return { error: e.message, code: e.name }
+      }
     }
     case 'remove_user_from_group': {
-      await iamClient.send(new RemoveUserFromGroupCommand({ UserName: args.userName, GroupName: args.groupName }))
-      return { removed: true, userName: args.userName, groupName: args.groupName }
+      try {
+        await iamClient.send(new RemoveUserFromGroupCommand({ UserName: args.userName, GroupName: args.groupName }))
+        return { removed: true, userName: args.userName, groupName: args.groupName }
+      } catch (e) {
+        return { error: e.message, code: e.name }
+      }
     }
 
     case 'create_role': {
-      const res = await iamClient.send(new CreateRoleCommand({
-        RoleName: args.roleName,
-        AssumeRolePolicyDocument: args.trustPolicyDocument,
-        Description: args.description,
-      }))
-      return { created: true, role: { name: res.Role.RoleName, arn: res.Role.Arn } }
+      try {
+        const res = await iamClient.send(new CreateRoleCommand({
+          RoleName: args.roleName,
+          AssumeRolePolicyDocument: args.trustPolicyDocument,
+          Description: args.description,
+        }))
+        return { created: true, role: { name: res.Role.RoleName, arn: res.Role.Arn } }
+      } catch (e) {
+        return { error: e.message, code: e.name }
+      }
     }
     case 'delete_role': {
-      await iamClient.send(new DeleteRoleCommand({ RoleName: args.roleName }))
-      return { deleted: true, roleName: args.roleName }
+      try {
+        await iamClient.send(new DeleteRoleCommand({ RoleName: args.roleName }))
+        return { deleted: true, roleName: args.roleName }
+      } catch (e) {
+        return { error: e.message, code: e.name }
+      }
     }
 
     case 'create_policy': {
-      const res = await iamClient.send(new CreatePolicyCommand({
-        PolicyName: args.policyName,
-        PolicyDocument: args.policyDocument,
-        Description: args.description,
-      }))
-      return { created: true, policy: { name: res.Policy.PolicyName, arn: res.Policy.Arn } }
+      try {
+        const res = await iamClient.send(new CreatePolicyCommand({
+          PolicyName: args.policyName,
+          PolicyDocument: args.policyDocument,
+          Description: args.description,
+        }))
+        return { created: true, policy: { name: res.Policy.PolicyName, arn: res.Policy.Arn } }
+      } catch (e) {
+        return { error: e.message, code: e.name }
+      }
     }
     case 'delete_policy': {
-      await iamClient.send(new DeletePolicyCommand({ PolicyArn: args.policyArn }))
-      return { deleted: true, policyArn: args.policyArn }
+      try {
+        await iamClient.send(new DeletePolicyCommand({ PolicyArn: args.policyArn }))
+        return { deleted: true, policyArn: args.policyArn }
+      } catch (e) {
+        return { error: e.message, code: e.name }
+      }
     }
     case 'attach_user_policy': {
-      await iamClient.send(new AttachUserPolicyCommand({ UserName: args.userName, PolicyArn: args.policyArn }))
-      return { attached: true, userName: args.userName, policyArn: args.policyArn }
+      try {
+        await iamClient.send(new AttachUserPolicyCommand({ UserName: args.userName, PolicyArn: args.policyArn }))
+        return { attached: true, userName: args.userName, policyArn: args.policyArn }
+      } catch (e) {
+        return { error: e.message, code: e.name }
+      }
     }
     case 'detach_user_policy': {
-      await iamClient.send(new DetachUserPolicyCommand({ UserName: args.userName, PolicyArn: args.policyArn }))
-      return { detached: true, userName: args.userName, policyArn: args.policyArn }
+      try {
+        await iamClient.send(new DetachUserPolicyCommand({ UserName: args.userName, PolicyArn: args.policyArn }))
+        return { detached: true, userName: args.userName, policyArn: args.policyArn }
+      } catch (e) {
+        return { error: e.message, code: e.name }
+      }
     }
     case 'attach_role_policy': {
-      await iamClient.send(new AttachRolePolicyCommand({ RoleName: args.roleName, PolicyArn: args.policyArn }))
-      return { attached: true, roleName: args.roleName, policyArn: args.policyArn }
+      try {
+        await iamClient.send(new AttachRolePolicyCommand({ RoleName: args.roleName, PolicyArn: args.policyArn }))
+        return { attached: true, roleName: args.roleName, policyArn: args.policyArn }
+      } catch (e) {
+        return { error: e.message, code: e.name }
+      }
     }
     case 'detach_role_policy': {
-      await iamClient.send(new DetachRolePolicyCommand({ RoleName: args.roleName, PolicyArn: args.policyArn }))
-      return { detached: true, roleName: args.roleName, policyArn: args.policyArn }
+      try {
+        await iamClient.send(new DetachRolePolicyCommand({ RoleName: args.roleName, PolicyArn: args.policyArn }))
+        return { detached: true, roleName: args.roleName, policyArn: args.policyArn }
+      } catch (e) {
+        return { error: e.message, code: e.name }
+      }
     }
 
     default:
