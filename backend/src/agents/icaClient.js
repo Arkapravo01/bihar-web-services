@@ -15,6 +15,7 @@ export async function icaChat(messages, tools = [], opts = {}) {
     method:  'POST',
     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${ICA_KEY}` },
     body: JSON.stringify(body),
+    signal: AbortSignal.timeout(opts.timeoutMs ?? 30_000),
   })
   const json = await res.json()
   if (!res.ok) throw new Error(JSON.stringify(json))

@@ -10,6 +10,7 @@ import { eventbridgeRouter } from "./eventbridge.routes.js";
 import { glueRouter } from "./glue.routes.js";
 import { agentRouter } from "./agent.routes.js";
 import { reportRouter } from "./report.routes.js";
+import { apiGatewayRouter } from "./apigateway.routes.js";
 
 export const apiRouter = Router();
 
@@ -24,3 +25,4 @@ apiRouter.use("/eventbridge", eventbridgeRouter);
 apiRouter.use("/glue", glueRouter);
 apiRouter.use("/agent", agentRouter);
 apiRouter.use("/report", reportRouter);
+apiRouter.use("/apigateway", apiGatewayRouter);

@@ -17,7 +17,7 @@
 
 import { randomUUID } from 'crypto'
 import { discoverAllLogGroups } from './cwGateway.js'
-import { runPool } from './pool.js'
+import { runPool, withTimeout } from './pool.js'
 import { runLogGroupWorker } from './worker.js'
 import { SPECIALISTS } from './specialists.js'
 import { computeRecurrence } from './recurrence.js'
@@ -25,7 +25,11 @@ import { computeCorrelations } from './correlation.js'
 import { generateRootCauseNarrative, generateExecutiveSummary } from './narrative.js'
 import { updateRun, saveRun } from '../store.js'
 
-export const WORKER_CONCURRENCY = 10
+// Kept modest on purpose: CloudWatch Logs' FilterLogEvents quota is low per
+// account, and higher concurrency here throttles a random subset of log
+// groups on every run (see cwGateway.js's retry for the other half of this fix).
+export const WORKER_CONCURRENCY = 5
+export const DISCOVERY_TIMEOUT_MS = 20_000
 
 // Map from category → which named specialist handles it
 const CATEGORY_TO_SPECIALIST = {
@@ -122,7 +126,14 @@ function buildLogGroupAnalyses(logGroups, collectorResults, findings) {
       else if (groupFindings.length > 0) status = 'Issues'
       else status = 'Healthy'
     }
-    return { logGroupName: lg.name, status, findingCount: groupFindings.length, criticalCount, lastEventTime }
+    return {
+      logGroupName: lg.name,
+      status,
+      findingCount: groupFindings.length,
+      criticalCount,
+      lastEventTime,
+      truncated: worker?.truncated ?? false,
+    }
   })
 }
 
@@ -130,7 +141,12 @@ export async function executeReportRun({ runId, env, timeRange }) {
   try {
     // ── Phase 1: Discover log groups ─────────────────────────────────────────
     await updateRun(runId, { status: 'discovering' })
-    const { logGroups, region } = await discoverAllLogGroups({ env })
+    const discovery = await withTimeout((signal) => discoverAllLogGroups({ env, signal }), DISCOVERY_TIMEOUT_MS)
+    if (discovery.timedOut) {
+      throw new Error(`Log group discovery timed out after ${DISCOVERY_TIMEOUT_MS / 1000}s — check AWS connectivity/credentials for the CloudWatch profile.`)
+    }
+    if (discovery.error) throw discovery.error
+    const { logGroups, region } = discovery.value
     await updateRun(runId, { status: 'collecting', logGroupsDiscovered: logGroups.length })
 
     if (!logGroups.length) {
@@ -153,14 +169,16 @@ export async function executeReportRun({ runId, env, timeRange }) {
 
     await updateRun(runId, { workersSpawned: assignments.length })
 
-    const poolResults = await runPool(assignments, WORKER_CONCURRENCY, async (assignment, idx) => {
+    // Local counter, not a store read-modify-write: runPool's lanes each await
+    // inside this callback, but the increment itself is synchronous JS, so
+    // concurrent lanes can never clobber each other's progress update (the
+    // previous "(await import).getRun(runId).workersCompleted + 1" pattern could
+    // and did lose increments under concurrency).
+    let doneSoFar = 0
+    const poolResults = await runPool(assignments, WORKER_CONCURRENCY, async (assignment) => {
       const result = await runLogGroupWorker(assignment)
-      // Update progress as each collector finishes
-      const run = (await import('../store.js')).getRun(runId)
-      if (run) {
-        const completedSoFar = (run.workersCompleted ?? 0) + 1
-        await updateRun(runId, { workersCompleted: completedSoFar })
-      }
+      doneSoFar += 1
+      await updateRun(runId, { workersCompleted: doneSoFar })
       return result
     })
 
@@ -172,7 +190,10 @@ export async function executeReportRun({ runId, env, timeRange }) {
       error: r.reason?.message ?? 'Unknown error',
     })
 
-    const completedCollectors = collectorResults.filter(w => w.status === 'COMPLETED')
+    // NO_DATA is a legitimate, successfully-analyzed outcome (the group just had
+    // no matching events) — it must count as "done", not sit in limbo, or the
+    // collector tally visibly undercounts even on a fully successful run.
+    const completedCollectors = collectorResults.filter(w => ['COMPLETED', 'NO_DATA'].includes(w.status))
     const failedCollectors = collectorResults.filter(w => ['FAILED', 'TIMED_OUT'].includes(w.status))
 
     await updateRun(runId, {

@@ -36,7 +36,7 @@ export function SeverityBreakdown({ findings }) {
             return (
               <div key={sev} className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <div className={`size-2 rounded-full ${className}`} />
-                {label}: <span className="text-foreground font-medium">{count}</span>
+                {label}: <span className="text-foreground font-mono font-medium tabular-nums">{count}</span>
               </div>
             )
           })}

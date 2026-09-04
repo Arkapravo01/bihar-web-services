@@ -9,6 +9,7 @@ import { runInvestigation as runEcsInvestigation } from '../agents/ecs-agent/age
 import { runInvestigation as runEventBridgeInvestigation } from '../agents/eventbridge-agent/agent.js'
 import { runInvestigation as runGlueInvestigation } from '../agents/glue-agent/agent.js'
 import { runInvestigation as runReportInvestigation } from '../agents/report-agent/agent.js'
+import { runInvestigation as runApiGatewayInvestigation } from '../agents/apigateway-agent/agent.js'
 import * as s3Service from '../services/s3.service.js'
 
 function resolveEnv(req) {
@@ -16,25 +17,36 @@ function resolveEnv(req) {
   return env === 'prod' ? 'prod' : 'qa'
 }
 
-export async function investigateOrchestrator(req, res) {
+function agentHandler(fn) {
+  return async (req, res) => {
+    try {
+      await fn(req, res)
+    } catch (err) {
+      console.error('[agent.controller]', err)
+      res.status(500).json({ success: false, error: { message: err.message ?? 'Agent failed' } })
+    }
+  }
+}
+
+export const investigateOrchestrator = agentHandler(async (req, res) => {
   const { query, history } = req.body
   if (!query || typeof query !== 'string' || !query.trim()) {
     return res.status(400).json({ success: false, error: { message: 'query is required' } })
   }
   const result = await runOrchestratorInvestigation(query.trim(), history ?? [])
   res.json({ success: true, data: result })
-}
+})
 
-export async function investigate(req, res) {
+export const investigate = agentHandler(async (req, res) => {
   const { query, history } = req.body
   if (!query || typeof query !== 'string' || !query.trim()) {
     return res.status(400).json({ success: false, error: { message: 'query is required' } })
   }
   const result = await runCloudwatchInvestigation(query.trim(), history ?? [])
   res.json({ success: true, data: result })
-}
+})
 
-export async function investigateS3(req, res) {
+export const investigateS3 = agentHandler(async (req, res) => {
   const env = resolveEnv(req)
   s3Service.setClientForEnv(env)
   const { query, history } = req.body
@@ -43,72 +55,72 @@ export async function investigateS3(req, res) {
   }
   const result = await runS3Investigation(query.trim(), history ?? [])
   res.json({ success: true, data: result })
-}
+})
 
-export async function investigateIAM(req, res) {
+export const investigateIAM = agentHandler(async (req, res) => {
   const { query, history } = req.body
   if (!query || typeof query !== 'string' || !query.trim()) {
     return res.status(400).json({ success: false, error: { message: 'query is required' } })
   }
   const result = await runIAMInvestigation(query.trim(), history ?? [])
   res.json({ success: true, data: result })
-}
+})
 
-export async function investigateLambda(req, res) {
+export const investigateLambda = agentHandler(async (req, res) => {
   const { query, history } = req.body
   if (!query || typeof query !== 'string' || !query.trim()) {
     return res.status(400).json({ success: false, error: { message: 'query is required' } })
   }
   const result = await runLambdaInvestigation(query.trim(), history ?? [])
   res.json({ success: true, data: result })
-}
+})
 
-export async function investigateSecrets(req, res) {
+export const investigateSecrets = agentHandler(async (req, res) => {
   const { query, history } = req.body
   if (!query || typeof query !== 'string' || !query.trim()) {
     return res.status(400).json({ success: false, error: { message: 'query is required' } })
   }
   const result = await runSecretsInvestigation(query.trim(), history ?? [])
   res.json({ success: true, data: result })
-}
+})
 
-export async function investigateRds(req, res) {
+export const investigateRds = agentHandler(async (req, res) => {
   const { query, history } = req.body
   if (!query || typeof query !== 'string' || !query.trim()) {
     return res.status(400).json({ success: false, error: { message: 'query is required' } })
   }
   const result = await runRdsInvestigation(query.trim(), history ?? [])
   res.json({ success: true, data: result })
-}
+})
 
-export async function investigateEcs(req, res) {
+export const investigateEcs = agentHandler(async (req, res) => {
   const { query, history } = req.body
   if (!query || typeof query !== 'string' || !query.trim()) {
     return res.status(400).json({ success: false, error: { message: 'query is required' } })
   }
   const result = await runEcsInvestigation(query.trim(), history ?? [])
   res.json({ success: true, data: result })
-}
+})
 
-export async function investigateEventBridge(req, res) {
+export const investigateEventBridge = agentHandler(async (req, res) => {
   const { query, history } = req.body
   if (!query || typeof query !== 'string' || !query.trim()) {
     return res.status(400).json({ success: false, error: { message: 'query is required' } })
   }
   const result = await runEventBridgeInvestigation(query.trim(), history ?? [])
   res.json({ success: true, data: result })
-}
+})
 
-export async function investigateGlue(req, res) {
+export const investigateGlue = agentHandler(async (req, res) => {
   const { query, history } = req.body
   if (!query || typeof query !== 'string' || !query.trim()) {
     return res.status(400).json({ success: false, error: { message: 'query is required' } })
   }
   const result = await runGlueInvestigation(query.trim(), history ?? [])
   res.json({ success: true, data: result })
-}
+})
 
-export async function investigateReport(req, res) {
+export const investigateReport = agentHandler(async (req, res) => {
   const env = resolveEnv(req)
   const { query, history } = req.body
   if (!query || typeof query !== 'string' || !query.trim()) {
@@ -116,4 +128,13 @@ export async function investigateReport(req, res) {
   }
   const result = await runReportInvestigation(query.trim(), history ?? [], env)
   res.json({ success: true, data: result })
-}
+})
+
+export const investigateApiGateway = agentHandler(async (req, res) => {
+  const { query, history } = req.body
+  if (!query || typeof query !== 'string' || !query.trim()) {
+    return res.status(400).json({ success: false, error: { message: 'query is required' } })
+  }
+  const result = await runApiGatewayInvestigation(query.trim(), history ?? [])
+  res.json({ success: true, data: result })
+})

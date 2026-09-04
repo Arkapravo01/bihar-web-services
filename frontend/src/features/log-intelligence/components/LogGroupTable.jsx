@@ -30,6 +30,7 @@ export function LogGroupTable({ logGroupAnalyses }) {
               <TableHead className="text-right">Findings</TableHead>
               <TableHead className="text-right">Critical</TableHead>
               <TableHead>Last Event</TableHead>
+              <TableHead>Sample</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -45,14 +46,21 @@ export function LogGroupTable({ logGroupAnalyses }) {
                     {lg.status}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-right text-sm">{lg.findingCount}</TableCell>
-                <TableCell className="text-right text-sm">
+                <TableCell className="text-right font-mono text-sm tabular-nums">{lg.findingCount}</TableCell>
+                <TableCell className="text-right font-mono text-sm tabular-nums">
                   {lg.criticalCount > 0 ? (
                     <span className="text-destructive font-medium">{lg.criticalCount}</span>
                   ) : lg.criticalCount}
                 </TableCell>
-                <TableCell className="text-xs text-muted-foreground">
+                <TableCell className="text-xs font-mono text-muted-foreground">
                   {lg.lastEventTime ? new Date(lg.lastEventTime).toLocaleString() : '—'}
+                </TableCell>
+                <TableCell className="text-xs text-muted-foreground">
+                  {lg.truncated ? (
+                    <span title="Capped at 500 events for this window — more may exist">Partial</span>
+                  ) : (
+                    <span className="text-muted-foreground/40">Full</span>
+                  )}
                 </TableCell>
               </TableRow>
             ))}

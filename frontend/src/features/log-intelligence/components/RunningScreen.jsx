@@ -55,15 +55,15 @@ export function RunningScreen({ run }) {
           </p>
           <div className="grid grid-cols-3 gap-1 text-xs text-muted-foreground">
             <div>
-              <p className="font-medium text-foreground text-base">{run.logGroupsDiscovered ?? 0}</p>
+              <p className="font-mono font-medium text-foreground text-base tabular-nums">{run.logGroupsDiscovered ?? 0}</p>
               <p>discovered</p>
             </div>
             <div>
-              <p className="font-medium text-green-600 dark:text-green-400 text-base">{run.workersCompleted ?? 0}</p>
+              <p className="font-mono font-medium text-green-600 dark:text-green-400 text-base tabular-nums">{run.workersCompleted ?? 0}</p>
               <p>done</p>
             </div>
             <div>
-              <p className={`font-medium text-base ${(run.workersFailed ?? 0) > 0 ? 'text-destructive' : 'text-foreground'}`}>
+              <p className={`font-mono font-medium text-base tabular-nums ${(run.workersFailed ?? 0) > 0 ? 'text-destructive' : 'text-foreground'}`}>
                 {run.workersFailed ?? 0}
               </p>
               <p>failed</p>

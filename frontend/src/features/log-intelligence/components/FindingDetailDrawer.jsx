@@ -8,7 +8,7 @@ const SEVERITY_VARIANT = {
   critical: 'destructive', high: 'destructive', medium: 'secondary', low: 'outline', info: 'outline',
 }
 
-export function FindingDetailDrawer({ finding, open, onClose }) {
+export function FindingDetailDrawer({ finding, open, onClose, sampled }) {
   return (
     <Sheet open={open} onOpenChange={(v) => !v && onClose()}>
       <SheetContent side="right" className="w-full sm:max-w-lg overflow-y-auto">
@@ -20,7 +20,12 @@ export function FindingDetailDrawer({ finding, open, onClose }) {
                 <div className="flex items-center gap-2 flex-wrap">
                   <Badge variant={SEVERITY_VARIANT[finding.severity] ?? 'outline'}>{finding.severity}</Badge>
                   {finding.isRecurring && <Badge variant="outline" className="text-amber-600 border-amber-600">↺ Recurring</Badge>}
-                  <span className="text-xs text-muted-foreground">{finding.count} occurrences</span>
+                  <span className="text-xs font-mono text-muted-foreground tabular-nums">{finding.count} occurrences</span>
+                  {sampled && (
+                    <span className="text-xs text-muted-foreground/70" title="Sample capped at 500 events for this window — more may exist">
+                      · sampled
+                    </span>
+                  )}
                 </div>
               </SheetDescription>
             </SheetHeader>
@@ -36,11 +41,11 @@ export function FindingDetailDrawer({ finding, open, onClose }) {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">First Seen</p>
-                  <p className="text-xs">{new Date(finding.firstSeen).toLocaleString()}</p>
+                  <p className="text-xs font-mono">{new Date(finding.firstSeen).toLocaleString()}</p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Last Seen</p>
-                  <p className="text-xs">{new Date(finding.lastSeen).toLocaleString()}</p>
+                  <p className="text-xs font-mono">{new Date(finding.lastSeen).toLocaleString()}</p>
                 </div>
               </div>
 

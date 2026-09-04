@@ -50,9 +50,10 @@ export function AgentActivityPanel({ run }) {
     <Card>
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-sm font-semibold">Agent Activity</CardTitle>
-          <span className="text-xs text-muted-foreground">{STAGE_LABELS[run.status] ?? run.status}</span>
+          <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Methodology</CardTitle>
+          <span className="text-xs font-mono text-muted-foreground">{STAGE_LABELS[run.status] ?? run.status}</span>
         </div>
+        <p className="text-xs text-muted-foreground pt-1">How this report was produced — collection, specialist analysis, and synthesis stages.</p>
       </CardHeader>
       <CardContent className="space-y-4">
 
@@ -67,7 +68,7 @@ export function AgentActivityPanel({ run }) {
             </span>
           </div>
           {isRunning && <Progress value={progressValue} className="h-1 mb-2" />}
-          <div className="grid grid-cols-2 gap-x-6 gap-y-0.5 text-xs text-muted-foreground">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-0.5 text-xs text-muted-foreground font-mono">
             <span>Discovered: <strong className="text-foreground">{run.logGroupsDiscovered}</strong></span>
             <span>Spawned: <strong className="text-foreground">{run.workersSpawned}</strong></span>
             <span>Completed: <strong className="text-green-600 dark:text-green-400">{run.workersCompleted}</strong></span>

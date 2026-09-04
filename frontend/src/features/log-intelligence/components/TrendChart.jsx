@@ -11,10 +11,10 @@ export function TrendChart({ kpis, timeRange }) {
     <Card>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-sm font-semibold">
+          <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
             {timeRange === '7d' ? 'Daily Trend' : 'Hourly Trend'}
           </CardTitle>
-          <span className="text-xs text-muted-foreground">{total} total events</span>
+          <span className="text-xs font-mono text-muted-foreground tabular-nums">{total} events</span>
         </div>
       </CardHeader>
       <CardContent>
@@ -36,7 +36,7 @@ export function TrendChart({ kpis, timeRange }) {
             )
           })}
         </div>
-        <div className="flex justify-between mt-1.5 text-[10px] text-muted-foreground select-none">
+        <div className="flex justify-between mt-1.5 text-[10px] font-mono text-muted-foreground select-none">
           <span>{trend[0]?.bucketLabel}</span>
           <span>{trend[Math.floor(trend.length / 2)]?.bucketLabel}</span>
           <span>{trend[trend.length - 1]?.bucketLabel}</span>

@@ -32,7 +32,7 @@ export function ErrorCategoryExplorer({ kpis, activeCategory, onCategoryClick })
               }`}
             >
               {CATEGORY_LABELS[cat] ?? cat}
-              <span className="font-semibold">{count}</span>
+              <span className="font-mono font-semibold tabular-nums">{count}</span>
             </button>
           ))}
         </div>

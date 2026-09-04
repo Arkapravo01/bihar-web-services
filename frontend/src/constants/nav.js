@@ -10,7 +10,7 @@ export const NAV_MODULES = [
   { id: "eventbridge", label: "EventBridge", href: "/eventbridge", enabled: true },
   { id: "glue", label: "Glue", href: "/glue", enabled: true },
   { id: "log-intelligence", label: "Log Intelligence", href: "/log-intelligence", enabled: true },
-  { id: "api-gateway", label: "API Gateway", href: "#", enabled: false },
+  { id: "api-gateway", label: "API Gateway", href: "/apigateway", enabled: true },
 ];
 
 export const NAV_AI_MODULES = [
