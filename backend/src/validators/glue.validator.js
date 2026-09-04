@@ -15,3 +15,7 @@ export function assertJobName(name) {
 export function assertCrawlerName(name) {
   if (!name) throw new ApiError(400, 'GLUE_CRAWLER_NAME_REQUIRED', 'Crawler name is required')
 }
+
+export function assertWorkflowName(name) {
+  if (!name) throw new ApiError(400, 'GLUE_WORKFLOW_NAME_REQUIRED', 'Workflow name is required')
+}

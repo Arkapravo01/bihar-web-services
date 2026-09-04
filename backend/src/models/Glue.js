@@ -41,9 +41,13 @@ export function toJob(awsJob) {
     scriptLanguage: awsJob.Command?.ScriptLanguage,
     jobType: awsJob.Command?.Name,
     role: awsJob.Role,
+    workerType: awsJob.WorkerType ?? null,
+    numberOfWorkers: awsJob.NumberOfWorkers ?? null,
+    maxCapacity: awsJob.MaxCapacity ?? null,
     maxRetries: awsJob.MaxRetries,
     timeout: awsJob.Timeout,
     glueVersion: awsJob.GlueVersion,
+    defaultArguments: awsJob.DefaultArguments ?? {},
     created: awsJob.CreatedOn?.toISOString(),
     updated: awsJob.LastModifiedOn?.toISOString(),
   }
@@ -91,5 +95,44 @@ export function toCrawler(awsCrawler) {
     created: awsCrawler.CreationTime?.toISOString(),
     updated: awsCrawler.LastUpdated?.toISOString(),
     lastCrawl: awsCrawler.LastCrawl?.Timestamp?.toISOString(),
+  }
+}
+
+export function toWorkflow(wf) {
+  if (!wf) return null
+  const lr = wf.LastRun
+  return {
+    name: wf.Name,
+    description: wf.Description ?? null,
+    maxConcurrentRuns: wf.MaxConcurrentRuns ?? null,
+    defaultRunProperties: wf.DefaultRunProperties ?? {},
+    created: wf.CreatedOn?.toISOString() ?? null,
+    updated: wf.LastModifiedOn?.toISOString() ?? null,
+    lastRun: lr ? {
+      runId:            lr.WorkflowRunId,
+      status:           lr.Status,
+      startedOn:        lr.StartedOn?.toISOString() ?? null,
+      completedOn:      lr.CompletedOn?.toISOString() ?? null,
+      totalActions:     lr.Statistics?.TotalActions     ?? 0,
+      succeededActions: lr.Statistics?.SucceededActions ?? 0,
+      failedActions:    lr.Statistics?.FailedActions    ?? 0,
+      runningActions:   lr.Statistics?.RunningActions   ?? 0,
+      erroredActions:   lr.Statistics?.ErroredActions   ?? 0,
+    } : null,
+  }
+}
+
+export function toWorkflowRun(run) {
+  if (!run) return null
+  return {
+    runId:            run.WorkflowRunId,
+    status:           run.Status,
+    startedOn:        run.StartedOn?.toISOString() ?? null,
+    completedOn:      run.CompletedOn?.toISOString() ?? null,
+    totalActions:     run.Statistics?.TotalActions     ?? 0,
+    succeededActions: run.Statistics?.SucceededActions ?? 0,
+    failedActions:    run.Statistics?.FailedActions    ?? 0,
+    runningActions:   run.Statistics?.RunningActions   ?? 0,
+    erroredActions:   run.Statistics?.ErroredActions   ?? 0,
   }
 }
