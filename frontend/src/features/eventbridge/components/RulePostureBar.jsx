@@ -1,31 +1,31 @@
-import { AlertTriangle, Clock, Check, Pause } from 'lucide-react'
-import { KEY_STATES, STATE_ORDER, ROTATION_WINDOWS, rotationWindowLabel } from '../lib/rotation'
+import { AlertTriangle, Check, Lock, Pause } from 'lucide-react'
+import { motion } from 'motion/react'
+import { RULE_STATES, STATE_ORDER } from '../lib/rules'
 import { cn } from '@/lib/utils'
 
 /**
- * The fleet's rotation posture, as one bar.
+ * Every rule in the account as one bar, and the page's opening statement.
  *
- * This is the page's opening statement, and it is a control rather than a
- * readout: the segments are proportional to how many keys sit in each state,
- * and clicking one filters the ledger below. A row of separate stat tiles would
- * have shown the same four numbers without showing their relative weight, and
- * would not have been actionable.
+ * It is a control, not a readout: segment widths are the share of rules in each
+ * state and clicking one filters the ledger below. Four stat tiles would show the
+ * same four numbers while hiding their proportions, and would not be actionable —
+ * "1 dead end" means something very different among 4 rules than among 400.
  *
- * Segments carry a 2px surface gap so adjacent fills never read as one mass,
- * and every state appears in the legend with an icon and a word, because the
- * green and red in this palette are nearly identical under red-green colour
- * blindness — colour alone would tell some readers nothing.
+ * The bar carries a 2px surface gap between fills so adjacent segments never read
+ * as one mass, and every state appears in the legend as icon plus word plus count,
+ * because this palette's positive and destructive steps are nearly identical under
+ * red-green colour blindness.
  */
 
-const ICONS = { alert: AlertTriangle, clock: Clock, check: Check, pause: Pause }
+const ICONS = { alert: AlertTriangle, pause: Pause, lock: Lock, check: Check }
 
-export function KeyPostureBar({
+export function RulePostureBar({
   summary,
-  rotationDays,
-  onRotationDaysChange,
   activeState,
   onStateChange,
-  loading,
+  buses = [],
+  activeBus,
+  onBusChange,
 }) {
   const { counts, total } = summary
   const present = STATE_ORDER.filter((id) => counts[id] > 0)
@@ -35,52 +35,55 @@ export function KeyPostureBar({
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h2 id="posture-heading" className="text-sm font-medium text-foreground">
-            Rotation posture
+            Routing posture
           </h2>
           <p className="mt-0.5 text-xs text-muted-foreground">
-            {loading
-              ? 'Checking every key’s age and last use…'
-              : total === 0
-                ? 'No access keys in this account yet.'
-                : summary.attention === 0
-                  ? `All ${total} keys are within the ${rotationWindowLabel(rotationDays)} window.`
-                  : `${summary.attention} of ${total} keys need attention. Oldest is ${summary.oldestAge} days.`}
+            {total === 0
+              ? 'No rules on any bus in this account yet.'
+              : summary.attention === 0
+                ? `All ${total} rules deliver somewhere. ${summary.targets} targets across ${summary.buses} ${summary.buses === 1 ? 'bus' : 'buses'}.`
+                : `${summary.attention} of ${total} rules are switched on but deliver nowhere.`}
           </p>
         </div>
 
-        <label className="flex items-center gap-2 text-xs text-muted-foreground">
-          Rotate keys after
-          <select
-            value={rotationDays}
-            onChange={(e) => onRotationDaysChange(Number(e.target.value))}
-            className="h-7 rounded-sm border border-border bg-card px-2 font-mono text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-ring/40"
-          >
-            {ROTATION_WINDOWS.map((d) => (
-              <option key={d} value={d}>
-                {rotationWindowLabel(d)}
-              </option>
-            ))}
-          </select>
-        </label>
+        {buses.length > 1 && (
+          <label className="flex items-center gap-2 text-xs text-muted-foreground">
+            Bus
+            <select
+              value={activeBus ?? ''}
+              onChange={(e) => onBusChange(e.target.value || null)}
+              className="h-7 rounded-sm border border-border bg-card px-2 font-mono text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-ring/40"
+            >
+              <option value="">All buses</option>
+              {buses.map((b) => (
+                <option key={b.name} value={b.name}>
+                  {b.name}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
       </div>
 
-      {loading && <div className="h-2.5 w-full animate-pulse rounded-sm bg-muted" />}
-
-      {!loading && total > 0 && (
+      {total > 0 && (
         <>
-          {/* The bar. gap-0.5 supplies the 2px surface gap between fills. */}
           <div className="flex h-2.5 w-full gap-0.5 overflow-hidden rounded-sm bg-muted">
             {present.map((id) => {
-              const state = KEY_STATES[id]
+              const state = RULE_STATES[id]
               const pct = (counts[id] / total) * 100
               const isActive = activeState === id
               const dimmed = activeState && !isActive
               return (
-                <button
+                <motion.button
                   key={id}
                   type="button"
                   onClick={() => onStateChange(isActive ? null : id)}
-                  style={{ width: `${pct}%` }}
+                  /* The page's one piece of unprompted motion: the posture
+                     resolving itself on arrival. Everything after this moves only
+                     in answer to a click. */
+                  initial={{ width: 0 }}
+                  animate={{ width: `${pct}%` }}
+                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                   title={`${counts[id]} ${state.label.toLowerCase()} — click to ${isActive ? 'clear filter' : 'filter'}`}
                   aria-pressed={isActive}
                   aria-label={`${counts[id]} ${state.label}`}
@@ -95,11 +98,9 @@ export function KeyPostureBar({
             })}
           </div>
 
-          {/* Legend and filter in one row. Icon + label + count: identity never
-              depends on the colour of the swatch beside them. */}
           <div className="flex flex-wrap items-center gap-1">
             {STATE_ORDER.map((id) => {
-              const state = KEY_STATES[id]
+              const state = RULE_STATES[id]
               const Icon = ICONS[state.icon]
               const isActive = activeState === id
               const count = counts[id]
@@ -125,10 +126,13 @@ export function KeyPostureBar({
                 </button>
               )
             })}
-            {activeState && (
+            {(activeState || activeBus) && (
               <button
                 type="button"
-                onClick={() => onStateChange(null)}
+                onClick={() => {
+                  onStateChange(null)
+                  onBusChange(null)
+                }}
                 className="ml-1 rounded-sm px-2 py-1 text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline focus:outline-none focus:ring-2 focus:ring-ring/40"
               >
                 Show all

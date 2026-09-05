@@ -60,6 +60,18 @@ export const KEY_STATES = {
     text: 'text-muted-foreground',
     ring: 'ring-border',
   },
+  // Display-only: a key can be well inside its rotation window and still be
+  // worth acting on because nothing has ever used it. Without this, such a key
+  // sat in "Needs attention" wearing a green Healthy tick, and the row
+  // contradicted the panel it was in.
+  unused: {
+    id: 'unused',
+    label: 'Unused',
+    icon: 'unused',
+    fill: 'bg-warning',
+    text: 'text-warning',
+    ring: 'ring-warning/30',
+  },
 }
 
 /** Order the ledger and the posture bar both read in: worst first. */
@@ -108,13 +120,46 @@ export function keyFlags(key, rotationDays = DEFAULT_ROTATION_DAYS) {
   return flags
 }
 
+/**
+ * What a row should badge itself as. `keyState` buckets by rotation age and
+ * drives the posture bar; this adds the usage signal on top, so a row never
+ * claims to be healthy while sitting in the attention list.
+ */
+export function displayKeyState(key, rotationDays = DEFAULT_ROTATION_DAYS) {
+  const state = keyState(key, rotationDays)
+  if (state === 'overdue' || state === 'inactive') return state
+  if (isUsageStale(key)) return 'unused'
+  return state
+}
+
+/** Active, but either never used since creation or untouched for a long time. */
+export function isUsageStale(key) {
+  if (key.status !== 'Active') return false
+  if (key.neverUsed) return (key.ageDays ?? 0) >= 7
+  return (key.lastUsedDaysAgo ?? 0) >= STALE_USE_DAYS
+}
+
 /** A key needs action if it is active and either past due or clearly abandoned. */
 export function needsAttention(key, rotationDays = DEFAULT_ROTATION_DAYS) {
   if (key.status !== 'Active') return false
   const state = keyState(key, rotationDays)
   if (state === 'overdue' || state === 'due') return true
-  if (key.neverUsed && (key.ageDays ?? 0) >= 7) return true
-  return (key.lastUsedDaysAgo ?? 0) >= STALE_USE_DAYS
+  return isUsageStale(key)
+}
+
+/**
+ * Why the attention panel is showing anything, in a sentence that reads for
+ * both one key and many.
+ */
+export function attentionSummary(keys, rotationDays = DEFAULT_ROTATION_DAYS) {
+  const flagged = keys.filter((k) => needsAttention(k, rotationDays))
+  const overdue = flagged.filter((k) => keyState(k, rotationDays) !== 'healthy').length
+  const stale = flagged.filter((k) => keyState(k, rotationDays) === 'healthy').length
+  const parts = []
+  if (overdue) parts.push(`${overdue} past the ${rotationWindowLabel(rotationDays)} window`)
+  if (stale) parts.push(`${stale} unused`)
+  const noun = flagged.length === 1 ? 'key' : 'keys'
+  return `${flagged.length} active ${noun}: ${parts.join(', ')}.`
 }
 
 export function summarize(keys, rotationDays = DEFAULT_ROTATION_DAYS) {

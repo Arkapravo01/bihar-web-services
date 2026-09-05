@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils'
  * detail view did, can show "no policies" for a user who has plenty through a
  * group.
  */
-export function PermissionsPanel({ users, keysByUser, loading, onInspect, onCreateKey }) {
+export function PermissionsPanel({ users, keysByUser, loading, keysLoading, onInspect, onCreateKey }) {
   const [expanded, setExpanded] = useState(null)
 
   if (loading) {
@@ -63,8 +63,12 @@ export function PermissionsPanel({ users, keysByUser, loading, onInspect, onCrea
               <span className="min-w-0 flex-1 truncate font-mono text-xs text-foreground">
                 {user.name}
               </span>
+              {/* Until the key list has arrived, this says nothing rather than
+                  claiming the user has no key — the two are not the same. */}
               <span className="shrink-0 text-xs text-muted-foreground">
-                {activeKeys === 0 ? (
+                {keysLoading ? (
+                  <span className="text-muted-foreground/50">checking keys…</span>
+                ) : activeKeys === 0 ? (
                   'no active key'
                 ) : (
                   <>

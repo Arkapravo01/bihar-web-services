@@ -521,7 +521,8 @@ Use this checklist every time. Do not skip steps.
 
 - [ ] **API** — create `src/features/new/api/newApi.js` with all fetch functions, each ending in `.then((r) => r.data)`
 - [ ] **Hooks** — create one `useThings.js` per resource in `src/features/new/hooks/`
-- [ ] **Components** — create feature-specific components in `src/features/new/components/`
+- [ ] **Domain lib** — create `src/features/new/lib/<domain>.js` holding the state model: what each state means, what counts as needing attention, and a `summarize()` for the posture bar. Keep it plain JS with no React imports so it can be reasoned about and tested on its own.
+- [ ] **Components** — create feature-specific components in `src/features/new/components/`, styled with semantic tokens only (see "Design language")
 - [ ] **Page** — create `src/features/new/pages/NewOverviewPage.jsx`; use `useMemo(() => data.things ?? [], [data])` to unpack hook data
 - [ ] **AI query bar** — create `src/features/new/components/NewAiQueryBar.jsx`, accept a `thingName` (or equivalent) prop, inject it as `[Context: ...]` into the query sent to the agent (see "AI query bars must be page-aware" above). Render it unscoped on the overview page and scoped (with the resolved name) on the detail page.
 - [ ] **Routes** — create `src/features/new/routes.jsx` and `src/features/new/index.js`
@@ -529,6 +530,18 @@ Use this checklist every time. Do not skip steps.
 - [ ] **Nav** — add entry to `NAV_MODULES` in `src/constants/nav.js` with `enabled: true`
 
 ---
+
+## Design language
+
+The visual direction is written at the top of `frontend/src/styles/globals.css`. Three rules matter when building any page:
+
+**Semantic tokens only — never a hardcoded colour.** Use `bg-card`, `text-muted-foreground`, `border-border`, `text-positive`, `text-warning`, `text-destructive`, `bg-accent/40`. A `slate-900` or `violet-500/20` in a component is a bug: the app ships five themes (light, dark, Deep Space, Red/Black, system) and hardcoded colours are invisible or illegible in at least two of them. `ring-white/5` is invisible in the light theme for the same reason. Anything that reads as data — an ARN, a count, a timestamp, an identifier, a cron expression — gets `font-mono`, and numbers get `tabular-nums`.
+
+**Status is never colour alone.** The light palette's positive and destructive steps sit at a colour-vision separation of about 2, so every state ships colour *plus* an icon *plus* a word. Define states in one place per feature (`features/<service>/lib/<domain>.js`) as a map of `{ id, label, icon, fill, text }` and let the components read from it — see `features/iam/lib/rotation.js` and `features/eventbridge/lib/rules.js`.
+
+**Pages open with posture, not with stat tiles.** A row of four cards showing four counts hides the proportions between them and cannot be acted on. Instead compute the fleet's state in the feature's `lib/` and open with a proportional bar whose segments filter the table below (`KeyPostureBar`, `RulePostureBar`). Then a "Needs attention" panel that renders *only when something is wrong*, then the full ledger worst-first. Every page is a vertical stack of `<Panel>` (`components/layout/Panel.jsx`), not a grid of cards — a grid implies its items are equal alternatives, which is almost never true of an ops page.
+
+Motion: one orchestrated moment per page (the posture bar resolving on load) plus motion that answers a click. Per-card entrance staggers and hover lifts on everything read as generated filler; don't add them.
 
 ## Common pitfalls
 

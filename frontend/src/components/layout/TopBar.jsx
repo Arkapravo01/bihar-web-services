@@ -26,8 +26,9 @@ export function TopBar({ env, envUnreachable, onOpenCommandPalette }) {
     <header className="flex h-14 shrink-0 items-center gap-3 border-b bg-sidebar px-4 relative">
       <SidebarTrigger />
 
-      {/* Logo — centred in the full header width */}
-      <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 select-none">
+      {/* Logo — centred in the full header width. Hidden on small screens, where
+          absolute centring put it straight through the environment controls. */}
+      <div className="absolute left-1/2 hidden -translate-x-1/2 select-none items-center gap-2 md:flex">
         {isWitcher ? (
           <span className="text-primary" style={{ lineHeight: 1 }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="witcher-icon">

@@ -5,6 +5,7 @@ import {
   assertAccessKeyId,
   assertAccessKeyStatus,
 } from '../validators/iam.validator.js'
+import { ApiError } from '../errors.js'
 
 export async function listAccessKeys(req, res) {
   try {
@@ -108,13 +109,30 @@ export async function deleteUser(req, res) {
   res.json({ success: true, data: result })
 }
 
+/**
+ * IAM reports a missing user or key as NoSuchEntity, which is a 404, not a
+ * server fault. Without this the UI showed "internal error" for a name that
+ * simply does not exist.
+ */
+function rethrowAsApiError(err) {
+  // AWS SDK v3 suffixes IAM error names with "Exception". The un-suffixed
+  // spelling below it is kept only so an older SDK would still match.
+  if (err?.name === 'NoSuchEntityException' || err?.name === 'NoSuchEntity') {
+    throw new ApiError(404, 'IAM_ENTITY_NOT_FOUND', err.message)
+  }
+  if (err?.name === 'LimitExceededException' || err?.name === 'LimitExceeded') {
+    throw new ApiError(409, 'ACCESS_KEY_LIMIT_REACHED', 'This user already has the maximum of two access keys. Delete or disable one first.')
+  }
+  throw err
+}
+
 export async function createAccessKey(req, res) {
   const env = resolveEnv(req)
   iamService.setClientForEnv(env)
   const { userName } = req.params
   assertUserName(userName)
   // Carries the one and only copy of the secret.
-  const accessKey = await iamService.createAccessKey(userName)
+  const accessKey = await iamService.createAccessKey(userName).catch(rethrowAsApiError)
   res.json({ success: true, data: { accessKey } })
 }
 
@@ -126,7 +144,9 @@ export async function updateAccessKeyStatus(req, res) {
   assertUserName(userName)
   assertAccessKeyId(accessKeyId)
   assertAccessKeyStatus(status)
-  const result = await iamService.updateAccessKeyStatus(userName, accessKeyId, status)
+  const result = await iamService
+    .updateAccessKeyStatus(userName, accessKeyId, status)
+    .catch(rethrowAsApiError)
   res.json({ success: true, data: result })
 }
 
@@ -136,6 +156,6 @@ export async function deleteAccessKey(req, res) {
   const { userName, accessKeyId } = req.params
   assertUserName(userName)
   assertAccessKeyId(accessKeyId)
-  const result = await iamService.deleteAccessKey(userName, accessKeyId)
+  const result = await iamService.deleteAccessKey(userName, accessKeyId).catch(rethrowAsApiError)
   res.json({ success: true, data: result })
 }

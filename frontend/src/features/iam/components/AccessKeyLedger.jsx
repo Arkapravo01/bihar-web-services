@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AlertTriangle, Clock, Check, Pause, Copy, MoreHorizontal, Power, Trash2, KeyRound } from 'lucide-react'
+import { AlertTriangle, Clock, Check, Pause, CircleSlash, Copy, MoreHorizontal, Power, Trash2, KeyRound } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
   DropdownMenu,
@@ -8,7 +8,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { KEY_STATES, keyState, keyFlags, rotateByDate, relativeDays } from '../lib/rotation'
+import {
+  KEY_STATES,
+  keyState,
+  displayKeyState,
+  keyFlags,
+  needsAttention,
+  rotateByDate,
+  relativeDays,
+} from '../lib/rotation'
 import { cn } from '@/lib/utils'
 
 /**
@@ -23,7 +31,7 @@ import { cn } from '@/lib/utils'
  * and hue say different things.
  */
 
-const ICONS = { alert: AlertTriangle, clock: Clock, check: Check, pause: Pause }
+const ICONS = { alert: AlertTriangle, clock: Clock, check: Check, pause: Pause, unused: CircleSlash }
 
 function StateChip({ stateId }) {
   const state = KEY_STATES[stateId]
@@ -45,11 +53,20 @@ function AgeMeter({ ageDays, rotationDays, stateId }) {
         {ageDays == null ? '—' : `${ageDays}d`}
       </span>
       <div
-        className="h-1 w-16 shrink-0 overflow-hidden rounded-full bg-muted"
+        className="relative h-1.5 w-20 shrink-0 overflow-hidden rounded-full bg-muted"
         role="img"
         aria-label={`${ageDays} days old, ${pct >= 100 ? 'past' : 'within'} the ${rotationDays} day window`}
       >
-        <div className={cn('h-full rounded-full', state.fill)} style={{ width: `${Math.max(4, pct)}%` }} />
+        <div
+          className={cn('h-full rounded-full', state.fill)}
+          style={{ width: `${Math.max(6, pct)}%`, minWidth: '5px' }}
+        />
+        {/* Where "due soon" begins, so distance from the deadline is visible. */}
+        <span
+          aria-hidden="true"
+          className="absolute inset-y-0 w-px bg-border"
+          style={{ left: '75%' }}
+        />
       </div>
     </div>
   )
@@ -151,8 +168,13 @@ export function AccessKeyLedger({
 
       <div className="divide-y divide-border/60">
         {keys.map((k) => {
-          const stateId = keyState(k, rotationDays)
+          const stateId = displayKeyState(k, rotationDays)
+          const meterStateId = keyState(k, rotationDays)
           const flags = keyFlags(k, rotationDays)
+          // A note only earns a status colour when the key actually needs
+          // action. "not used yet" on a three-day-old key is context, not a
+          // warning, and colouring it made calm rows look alarming.
+          const flagIsConcern = needsAttention(k, rotationDays)
           const rotateBy = rotateByDate(k, rotationDays)
           const busy = busyKeyId === k.accessKeyId
 
@@ -170,7 +192,13 @@ export function AccessKeyLedger({
                   {k.userName}
                 </p>
                 {flags.length > 0 && (
-                  <p className={cn('mt-0.5 truncate text-[11px]', KEY_STATES[stateId].text)} title={flags.join(' · ')}>
+                  <p
+                    className={cn(
+                      'mt-0.5 truncate text-[11px]',
+                      flagIsConcern ? KEY_STATES[stateId].text : 'text-muted-foreground',
+                    )}
+                    title={flags.join(' · ')}
+                  >
                     {flags[0]}
                   </p>
                 )}
@@ -182,7 +210,7 @@ export function AccessKeyLedger({
               </div>
 
               <div role="cell">
-                <AgeMeter ageDays={k.ageDays} rotationDays={rotationDays} stateId={stateId} />
+                <AgeMeter ageDays={k.ageDays} rotationDays={rotationDays} stateId={meterStateId} />
               </div>
 
               <div role="cell" className="whitespace-nowrap">

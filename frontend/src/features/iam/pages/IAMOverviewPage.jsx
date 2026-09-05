@@ -33,9 +33,9 @@ import { AccessKeyLedger } from '../components/AccessKeyLedger'
 import { PermissionsPanel } from '../components/PermissionsPanel'
 import {
   DEFAULT_ROTATION_DAYS,
+  attentionSummary,
   keyState,
   needsAttention,
-  rotationWindowLabel,
   summarize,
 } from '../lib/rotation'
 import { cn } from '@/lib/utils'
@@ -232,6 +232,7 @@ export function IAMOverviewPage() {
         onRotationDaysChange={setRotationDays}
         activeState={stateFilter}
         onStateChange={setStateFilter}
+        loading={keysLoading}
       />
 
       {/* Only shown when there is something to act on, so it never becomes
@@ -239,7 +240,7 @@ export function IAMOverviewPage() {
       {!keysLoading && attention.length > 0 && (
         <Panel
           title="Needs attention"
-          description={`${attention.length} active ${attention.length === 1 ? 'key is' : 'keys are'} past the ${rotationWindowLabel(rotationDays)} window or appear unused.`}
+          description={attentionSummary(accessKeys, rotationDays)}
         >
           <AccessKeyLedger
             keys={attention.slice(0, 6)}
@@ -300,6 +301,7 @@ export function IAMOverviewPage() {
           users={users}
           keysByUser={keysByUser}
           loading={usersLoading}
+          keysLoading={keysLoading}
           onInspect={setFocusedUser}
           onCreateKey={openCreateKey}
         />

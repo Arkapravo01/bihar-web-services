@@ -48,6 +48,15 @@ export const toolDefinitions = [
       },
     },
   },
+  {
+    type: 'function',
+    function: {
+      name: 'list_all_rules',
+      description:
+        'List every rule on every event bus in the account, each with its state, trigger and target count. Use this for fleet-wide questions ("which rules are disabled?", "which rules have no targets?", "what fires on a schedule?") instead of calling list_rules once per bus.',
+      parameters: { type: 'object', properties: {}, required: [] },
+    },
+  },
 
   // ── inspect ──
   {
@@ -95,6 +104,20 @@ export const toolDefinitions = [
 ]
 
 // ─── implementations ────────────────────────────────────────────────────────
+
+/** Bounded fan-out — EventBridge throttles low, so six requests at a time. */
+async function mapWithConcurrency(items, limit, fn) {
+  const results = new Array(items.length)
+  let cursor = 0
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (cursor < items.length) {
+      const index = cursor++
+      results[index] = await fn(items[index], index)
+    }
+  })
+  await Promise.all(workers)
+  return results
+}
 
 async function getCallerIdentity() {
   try {
@@ -148,6 +171,40 @@ async function listRules(eventBusName = 'default') {
         scheduleExpression: r.ScheduleExpression,
       })),
     }
+  } catch (e) {
+    return { error: e.message }
+  }
+}
+
+/**
+ * The fleet in one call: every rule on every bus, with target counts.
+ *
+ * Target counts come from one ListTargetsByRule per rule, six at a time — enough
+ * to answer "which rules drop the events they match" without the model having to
+ * walk each rule itself and burn its tool-call budget on discovery.
+ */
+async function listAllRules() {
+  try {
+    const busList = await listEventBuses()
+    if (busList.error) return busList
+
+    const names = busList.buses.map((b) => b.name)
+    const perBus = await mapWithConcurrency(names, 6, async (name) => {
+      const out = await listRules(name)
+      return (out.rules ?? []).map((r) => ({ ...r, eventBusName: name }))
+    })
+    const rules = perBus.flat()
+
+    const withCounts = await mapWithConcurrency(rules, 6, async (rule) => {
+      const out = await listTargets(rule.name, rule.eventBusName)
+      return {
+        ...rule,
+        targetCount: out.targets ? out.targets.length : null,
+        targetArns: out.targets ? out.targets.map((t) => t.arn) : null,
+      }
+    })
+
+    return { ruleCount: withCounts.length, busCount: names.length, rules: withCounts }
   } catch (e) {
     return { error: e.message }
   }
@@ -235,6 +292,8 @@ export async function executeTool(name, args) {
       return listEventBuses()
     case 'list_rules':
       return listRules(args.eventBusName)
+    case 'list_all_rules':
+      return listAllRules()
     case 'describe_event_bus':
       return describeEventBus(args.eventBusName)
     case 'describe_rule':

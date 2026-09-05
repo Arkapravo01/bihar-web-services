@@ -98,7 +98,7 @@ export async function getUser(userName) {
       accessKeys,
     }
   } catch (e) {
-    if (e.name === 'NoSuchEntity') return null
+    if (e.name === 'NoSuchEntityException' || e.name === 'NoSuchEntity') return null
     throw e
   }
 }
@@ -114,7 +114,7 @@ export async function getRole(roleName) {
       attachedPolicies: policiesCmd.AttachedPolicies ?? [],
     }
   } catch (e) {
-    if (e.name === 'NoSuchEntity') return null
+    if (e.name === 'NoSuchEntityException' || e.name === 'NoSuchEntity') return null
     throw e
   }
 }
