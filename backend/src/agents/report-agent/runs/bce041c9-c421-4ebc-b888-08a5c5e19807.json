@@ -1,0 +1,23 @@
+{
+  "id": "bce041c9-c421-4ebc-b888-08a5c5e19807",
+  "env": "qa",
+  "timeRange": "24h",
+  "status": "collecting",
+  "startedAt": "2026-09-05T14:58:47.052Z",
+  "completedAt": null,
+  "logGroupsDiscovered": 69,
+  "workersSpawned": 69,
+  "workersCompleted": 45,
+  "workersFailed": 0,
+  "findingCount": 0,
+  "findings": [],
+  "logGroupAnalyses": [],
+  "workers": [],
+  "specialists": [],
+  "correlations": [],
+  "kpis": null,
+  "coverage": null,
+  "rootCause": null,
+  "executiveSummary": null,
+  "error": null
+}

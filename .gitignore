@@ -30,3 +30,8 @@ npm-debug.log*
 
 # Claude / Bob agent settings
 **/.claude/
+
+# Local planning / design notes (not part of the app)
+report-final-plan.md
+report-runtime_log_analysis_subagents.md
+reporting.md

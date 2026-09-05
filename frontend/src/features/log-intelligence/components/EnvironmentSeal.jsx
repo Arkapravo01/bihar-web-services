@@ -10,22 +10,15 @@ export function EnvironmentSeal({ env, className }) {
   return (
     <div
       className={cn(
-        'relative inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-widest',
-        'ring-1 ring-inset ring-offset-1 ring-offset-background',
+        'relative inline-flex h-8 items-center gap-1.5 rounded-xl px-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em]',
+        'ring-1 ring-inset',
         isProd
           ? 'bg-destructive/10 text-destructive ring-destructive/40'
           : 'bg-positive/10 text-positive ring-positive/40',
         className
       )}
     >
-      <span
-        className={cn(
-          'absolute inset-[2px] rounded-full border border-dashed',
-          isProd ? 'border-destructive/30' : 'border-positive/30'
-        )}
-        aria-hidden
-      />
-      <span className="relative">◈</span>
+      <span className={cn('relative size-1.5 rounded-full', isProd ? 'bg-destructive' : 'bg-positive')} />
       <span className="relative">{env}</span>
     </div>
   )

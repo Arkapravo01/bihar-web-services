@@ -17,9 +17,12 @@ export function LogGroupTable({ logGroupAnalyses }) {
   if (!logGroupAnalyses?.length) return null
 
   return (
-    <Card>
+    <Card className="h-full border border-border/70 bg-card/80 shadow-[0_8px_30px_-24px_rgba(0,0,0,0.4)]">
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Log Group Analysis</CardTitle>
+        <div className="flex items-center justify-between gap-3">
+          <CardTitle className="text-sm font-semibold tracking-[-0.01em] text-foreground">Log group coverage</CardTitle>
+          <span className="rounded-full bg-muted px-2 py-1 font-mono text-[10px] text-muted-foreground">{logGroupAnalyses.length} groups</span>
+        </div>
       </CardHeader>
       <CardContent className="p-0">
         <Table>
@@ -35,7 +38,7 @@ export function LogGroupTable({ logGroupAnalyses }) {
           </TableHeader>
           <TableBody>
             {logGroupAnalyses.map((lg) => (
-              <TableRow key={lg.logGroupName}>
+              <TableRow key={lg.logGroupName} className="transition-colors hover:bg-primary/[0.035]">
                 <TableCell className="font-mono text-xs">
                   <Link to={logGroupPath(lg.logGroupName)} className="text-primary hover:underline">
                     {lg.logGroupName}

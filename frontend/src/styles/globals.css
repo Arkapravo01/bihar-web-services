@@ -15,7 +15,15 @@
 
   Palette (named): ink (dark base/surface), sandstone (warm light base),
   marigold (primary accent — deliberately not AWS orange, not generic
-  vermilion/neon), teal (secondary/positive status), rose (destructive).
+  vermilion/neon), teal (secondary/positive status), rose (destructive),
+  amber (warning — the middle state between positive and destructive, e.g. a
+  credential aging toward its rotation date). Each theme's amber step is picked
+  against that theme's own surface and checked for colour-vision separation
+  from its positive and destructive steps; it is not one hex flipped four ways.
+
+  Status colour is never the only signal: green and red sit at a colour-vision
+  separation of ~2 in the light theme, so any status must also carry an icon
+  and a text label.
 
   Type: Geist Variable for UI/headings, JetBrains Mono Variable for anything
   that IS data — sizes, timestamps, keys, request IDs, stat numbers. Mono-for-
@@ -64,6 +72,8 @@
     --color-background: var(--background);
     --color-positive: var(--positive);
     --color-positive-foreground: var(--positive-foreground);
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
     --radius-sm: calc(var(--radius) * 0.6);
     --radius-md: calc(var(--radius) * 0.8);
     --radius-lg: var(--radius);
@@ -93,6 +103,8 @@
     --destructive: #C0392B;
     --positive: #166534;
     --positive-foreground: #FFFFFF;
+    --warning: #CA8A04;
+    --warning-foreground: #FFFFFF;
     --border: #C8C3BA;
     --input: #C8C3BA;
     --ring: #0057A8;
@@ -131,6 +143,8 @@
     --destructive: #E05252;
     --positive: #4CAF7D;
     --positive-foreground: #0A1F13;
+    --warning: #EAB308;
+    --warning-foreground: #1F1400;
     --border: #383838;
     --input: #383838;
     --ring: #ECECEC;
@@ -168,6 +182,8 @@
     --destructive: #F87171;
     --positive: #34D399;
     --positive-foreground: #022C22;
+    --warning: #FBBF24;
+    --warning-foreground: #231A02;
     --border: #252D45;
     --input: #252D45;
     --ring: #7C6AF7;
@@ -204,6 +220,8 @@
     --destructive: #FF3B3B;
     --positive: #22C55E;
     --positive-foreground: #04120F;
+    --warning: #FBBF24;
+    --warning-foreground: #231A02;
     --border: #262020;
     --input: #262020;
     --ring: #E30613;

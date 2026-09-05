@@ -10,6 +10,10 @@ export const MODEL = 'claude-haiku-4-5'
 export async function icaChat(messages, tools = [], opts = {}) {
   const ICA_KEY = process.env.ICA_API_KEY
   const body = { model: MODEL, max_tokens: opts.max_tokens ?? 1024, messages }
+  // Passed through only when supplied, so existing callers are unaffected.
+  // The report agent's narrative stage sets temperature 0 so the same run
+  // data produces the same prose instead of a differently-worded report.
+  if (opts.temperature != null) body.temperature = opts.temperature
   if (tools.length) body.tools = tools
   const res = await fetch(`${ICA_BASE}/chat/completions`, {
     method:  'POST',

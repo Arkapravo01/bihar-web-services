@@ -1,6 +1,3 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-
 const CATEGORY_LABELS = {
   timeout: 'Timeout', access_denied: 'Access Denied', throttling: 'Throttling',
   resource_not_found: 'Not Found', memory: 'Memory', runtime: 'Runtime',
@@ -15,28 +12,26 @@ export function ErrorCategoryExplorer({ kpis, activeCategory, onCategoryClick })
   if (!entries.length) return null
 
   return (
-    <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Error Categories</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="flex flex-wrap gap-2">
+    <div className="flex items-center gap-3 overflow-x-auto rounded-2xl border border-border/70 bg-card/55 p-2.5 shadow-sm">
+      <span className="shrink-0 px-1 text-[9px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Categories</span>
+      <div className="h-5 w-px shrink-0 bg-border/70" />
+      <div className="flex gap-1.5">
           {entries.map(([cat, count]) => (
             <button
               key={cat}
               onClick={() => onCategoryClick?.(activeCategory === cat ? null : cat)}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs border transition-colors ${
+              aria-pressed={activeCategory === cat}
+              className={`inline-flex shrink-0 items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] transition-all duration-200 ${
                 activeCategory === cat
-                  ? 'bg-primary text-primary-foreground border-primary'
-                  : 'bg-muted text-muted-foreground border-border hover:bg-accent hover:text-accent-foreground'
+                  ? 'border-primary bg-primary text-primary-foreground shadow-sm'
+                  : 'border-transparent bg-muted/60 text-muted-foreground hover:border-border hover:bg-accent hover:text-accent-foreground'
               }`}
             >
               {CATEGORY_LABELS[cat] ?? cat}
               <span className="font-mono font-semibold tabular-nums">{count}</span>
             </button>
           ))}
-        </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }

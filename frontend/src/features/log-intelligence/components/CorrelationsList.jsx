@@ -48,15 +48,16 @@ export function CorrelationsList({ correlations, findings }) {
   const visible = expanded ? ranked : ranked.slice(0, VISIBLE_CAP)
 
   return (
-    <Card>
+    <Card className="h-full border border-border/70 bg-card/80 shadow-[0_8px_30px_-24px_rgba(0,0,0,0.4)]">
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-          Correlations ({ranked.length})
-        </CardTitle>
+        <div className="flex items-center justify-between gap-3">
+          <CardTitle className="text-sm font-semibold tracking-[-0.01em] text-foreground">Correlations</CardTitle>
+          <span className="rounded-full bg-muted px-2 py-1 font-mono text-[10px] text-muted-foreground">{ranked.length} links</span>
+        </div>
       </CardHeader>
       <CardContent className="space-y-3">
         {visible.map((c) => (
-          <div key={c.id} className="flex items-start gap-3 text-sm">
+          <div key={c.id} className="flex items-start gap-3 rounded-xl border border-transparent p-2 text-sm transition-colors hover:border-border/60 hover:bg-muted/30">
             <Badge variant={RELATIONSHIP_VARIANT[c.relationship] ?? 'outline'} className="shrink-0 text-[10px] uppercase mt-0.5">
               {c.relationship}
             </Badge>
@@ -72,7 +73,7 @@ export function CorrelationsList({ correlations, findings }) {
         {ranked.length > VISIBLE_CAP && (
           <button
             onClick={() => setExpanded((v) => !v)}
-            className="text-xs text-primary hover:underline"
+            className="rounded-lg px-2 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/10"
           >
             {expanded ? 'Show fewer' : `Show ${ranked.length - VISIBLE_CAP} more`}
           </button>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { ArrowUpRight, ChevronsUpDown } from 'lucide-react'
 import { logGroupPath } from '../lib/cloudwatchNav'
 
 const SEVERITY_VARIANT = {
@@ -46,11 +47,12 @@ export function FindingsTable({ findings, sampledLogGroups, onSelect }) {
   }
 
   return (
-    <Card>
+    <Card className="border border-border/70 bg-card/80 shadow-[0_12px_36px_-28px_rgba(0,0,0,0.45)]">
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-          Findings ({findings.length})
-        </CardTitle>
+        <div className="flex items-center justify-between gap-3">
+          <CardTitle className="text-sm font-semibold tracking-[-0.01em] text-foreground">Detected findings</CardTitle>
+          <span className="rounded-full bg-muted px-2 py-1 font-mono text-[10px] text-muted-foreground">{findings.length} results</span>
+        </div>
       </CardHeader>
       <CardContent className="p-0">
         <div className="max-h-[520px] overflow-y-auto">
@@ -61,9 +63,9 @@ export function FindingsTable({ findings, sampledLogGroups, onSelect }) {
                   <TableHead
                     key={col.key}
                     onClick={() => toggleSort(col.key)}
-                    className={`cursor-pointer select-none hover:text-foreground ${col.align === 'right' ? 'text-right' : ''}`}
+                    className={`h-10 cursor-pointer select-none bg-muted/25 text-[10px] font-semibold uppercase tracking-[0.1em] hover:text-foreground ${col.align === 'right' ? 'text-right' : ''}`}
                   >
-                    {col.label}{sortKey === col.key ? (sortDir === 'asc' ? ' ↑' : ' ↓') : ''}
+                    <span className="inline-flex items-center gap-1">{col.label}<ChevronsUpDown className={`size-3 ${sortKey === col.key ? 'text-primary' : 'opacity-35'}`} /></span>
                   </TableHead>
                 ))}
                 <TableHead className="w-10" />
@@ -71,7 +73,7 @@ export function FindingsTable({ findings, sampledLogGroups, onSelect }) {
             </TableHeader>
             <TableBody>
               {sorted.map((f) => (
-                <TableRow key={f.id} className="cursor-pointer" onClick={() => onSelect?.(f)}>
+                <TableRow key={f.id} className="group cursor-pointer transition-colors hover:bg-primary/[0.035]" onClick={() => onSelect?.(f)}>
                   <TableCell>
                     <Badge variant={SEVERITY_VARIANT[f.severity] ?? 'outline'} className="text-[10px] px-1.5 py-0 capitalize">
                       {f.severity}
@@ -97,8 +99,8 @@ export function FindingsTable({ findings, sampledLogGroups, onSelect }) {
                     {new Date(f.lastSeen).toLocaleString()}
                   </TableCell>
                   <TableCell onClick={(e) => e.stopPropagation()}>
-                    <Link to={logGroupPath(f.logGroupName)} className="text-xs text-primary hover:underline" title="Open in CloudWatch">
-                      Open
+                    <Link to={logGroupPath(f.logGroupName)} className="inline-flex size-7 items-center justify-center rounded-lg text-primary opacity-60 transition-all hover:bg-primary/10 group-hover:opacity-100" title="Open in CloudWatch" aria-label="Open log group">
+                      <ArrowUpRight className="size-3.5" />
                     </Link>
                   </TableCell>
                 </TableRow>

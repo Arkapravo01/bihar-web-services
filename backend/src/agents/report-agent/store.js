@@ -67,6 +67,10 @@ export function createReportRun({ timeRange, env }) {
     specialists: [],   // Phase 2: named specialist agents
     correlations: [],
     kpis: null,
+    // Collection accounting: how many events were scanned, suppressed as
+    // benign, and left unclassified. Present so a quiet report can be
+    // distinguished from an unexamined one.
+    coverage: null,
     rootCause: null,
     executiveSummary: null,
     error: null,

@@ -1,0 +1,22 @@
+{
+  "id": "c5f5a664-0bcc-4473-8c46-a5171b488f7a",
+  "env": "qa",
+  "timeRange": "24h",
+  "status": "failed",
+  "startedAt": "2026-09-05T12:41:58.887Z",
+  "completedAt": "2026-09-05T12:42:32.029Z",
+  "logGroupsDiscovered": 69,
+  "workersSpawned": 69,
+  "workersCompleted": 45,
+  "workersFailed": 0,
+  "findingCount": 0,
+  "findings": [],
+  "logGroupAnalyses": [],
+  "workers": [],
+  "specialists": [],
+  "correlations": [],
+  "kpis": null,
+  "rootCause": null,
+  "executiveSummary": null,
+  "error": "Run was interrupted by a server restart before it could finish. Start a new analysis."
+}

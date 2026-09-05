@@ -12,3 +12,7 @@ iamRouter.get('/users/:userName', iamController.getUser)
 iamRouter.get('/roles/:roleName', iamController.getRole)
 iamRouter.post('/users', iamController.createUser)
 iamRouter.delete('/users/:userName', iamController.deleteUser)
+
+iamRouter.post('/users/:userName/access-keys', iamController.createAccessKey)
+iamRouter.patch('/users/:userName/access-keys/:accessKeyId', iamController.updateAccessKeyStatus)
+iamRouter.delete('/users/:userName/access-keys/:accessKeyId', iamController.deleteAccessKey)

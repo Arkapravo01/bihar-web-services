@@ -1,5 +1,10 @@
 import * as iamService from '../services/iam.service.js'
-import { assertCreateUserInput } from '../validators/iam.validator.js'
+import {
+  assertCreateUserInput,
+  assertUserName,
+  assertAccessKeyId,
+  assertAccessKeyStatus,
+} from '../validators/iam.validator.js'
 
 export async function listAccessKeys(req, res) {
   try {
@@ -100,5 +105,37 @@ export async function deleteUser(req, res) {
   iamService.setClientForEnv(env)
   const { userName } = req.params
   const result = await iamService.deleteUser(userName)
+  res.json({ success: true, data: result })
+}
+
+export async function createAccessKey(req, res) {
+  const env = resolveEnv(req)
+  iamService.setClientForEnv(env)
+  const { userName } = req.params
+  assertUserName(userName)
+  // Carries the one and only copy of the secret.
+  const accessKey = await iamService.createAccessKey(userName)
+  res.json({ success: true, data: { accessKey } })
+}
+
+export async function updateAccessKeyStatus(req, res) {
+  const env = resolveEnv(req)
+  iamService.setClientForEnv(env)
+  const { userName, accessKeyId } = req.params
+  const { status } = req.body ?? {}
+  assertUserName(userName)
+  assertAccessKeyId(accessKeyId)
+  assertAccessKeyStatus(status)
+  const result = await iamService.updateAccessKeyStatus(userName, accessKeyId, status)
+  res.json({ success: true, data: result })
+}
+
+export async function deleteAccessKey(req, res) {
+  const env = resolveEnv(req)
+  iamService.setClientForEnv(env)
+  const { userName, accessKeyId } = req.params
+  assertUserName(userName)
+  assertAccessKeyId(accessKeyId)
+  const result = await iamService.deleteAccessKey(userName, accessKeyId)
   res.json({ success: true, data: result })
 }
